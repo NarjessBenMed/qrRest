@@ -51,7 +51,9 @@ router.post(
       });
 
       const createdRestaurant = await restaurant.save();
-      const menu = new Menu({ restaurant: createdRestaurant._id });
+      const menu = new Menu({
+        restaurant: createdRestaurant._id,
+      });
       await menu.save();
       req.io.of("/owner-space").emit("restaurants", { action: "create" });
       res.status(201).json({

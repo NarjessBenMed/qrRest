@@ -8,16 +8,6 @@ const Order = require("../models/order");
 router.post("/create-order", isAuth, async (req, res, next) => {
   try {
     const { restId, tableNumber, items, total } = req.body;
-
-    // let existedOrder;
-    // if (orderId) {
-    //   existedOrder = await Order.findOneAndUpdate(
-    //     { _id: orderId },
-    //     // { total: Number(total) + Number(prix)
-    //     { $push: { items: items }, $inc: { total: total } },
-    //     { upsert: true, new: true, setDefaultsOnInsert: true }
-    //   );
-    // } else {
     const newOrder = new Order({
       items,
       total,
@@ -41,7 +31,6 @@ router.post("/create-order", isAuth, async (req, res, next) => {
 router.put("/update-order", isAuth, async (req, res, next) => {
   try {
     const { items, total, orderId } = req.body;
-    console.log(orderId);
     const updatedOrder = await Order.findByIdAndUpdate(
       { _id: orderId },
       { $push: { items: items }, $inc: { total: total } }
@@ -51,7 +40,7 @@ router.put("/update-order", isAuth, async (req, res, next) => {
       .of("/restaurant-space")
       .to(updatedOrder.restId.toString())
       .emit("message", {
-        msg: "a new order passed",
+        msg: "oreder updated",
       });
 
     res.status(201).json({ order: updatedOrder });

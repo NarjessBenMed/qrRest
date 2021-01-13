@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./WorkerSection.css";
 import { getAllOrders, checkoutOrder } from "../../features/orderSlice";
+import { getTables } from "../../features/tableSlice";
 import openSocket from "socket.io-client";
 import moment from "moment";
 
@@ -37,6 +38,7 @@ const WorkerSection = () => {
   }, [dispatch, user]);
   useEffect(() => {
     if (isAuthenticated) {
+      dispatch();
       dispatch(getAllOrders(user.restaurantId));
     }
   }, [isAuthenticated, dispatch]);

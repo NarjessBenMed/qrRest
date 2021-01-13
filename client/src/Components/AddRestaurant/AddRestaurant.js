@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ImSpinner9 } from "react-icons/im";
 import { IconContext } from "react-icons";
 import { createRestaurant } from "../../features/ownerSlice";
+import { generateBase64FromImage } from "../../utils/image";
 import "./AddRestaurant.css";
 
 const AddRestaurant = () => {
@@ -14,18 +15,24 @@ const AddRestaurant = () => {
   });
   const { name, logo, address, preview } = values;
   const dispatch = useDispatch();
-  useEffect(() => {}, [dispatch]);
+  const { status, errors } = useSelector((state) => state.owner);
+  useEffect(() => {
+    if (status === "succeded")
+      setValues({ name: "", address: "", logo: "", preview: "" });
+  }, [status]);
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const { status, errors } = useSelector((state) => state.owner);
   const fileHandler = (e) => {
-    setValues({
-      ...values,
-      logo: e.target.files[0],
-      preview: URL.createObjectURL(e.target.files[0]),
-    });
-    URL.revokeObjectURL(e.target.file);
+    const file = e.target.files[0];
+    if (file)
+      generateBase64FromImage(file)
+        .then((b64) => {
+          setValues({ ...values, logo: file, preview: b64 });
+        })
+        .catch((e) => {
+          setValues({ ...values, preview: null });
+        });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
