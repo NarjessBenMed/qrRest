@@ -1,0 +1,21 @@
+delete restaurant : front  et  back ===> done
+edit restaurant : front mm  done 
+edt item in the menu : front   et   back  ==> done 
+add table :  front ==> done
+delete table : front   et   back ==> done
+edit  tabe : maybe 
+
+commander= create command :  front  et  back  ==> done
+edit commande : back  front back == affiche ok page commande  =>>> done
+get command by id : back front  jawna bahi =>>>> done
+get all commands : front  et back =>>>> done offf
+create client ==> done
+create server ou compte personnel : pour server et cuisine : consultation ==> done
+
+validation des champs + error handling in front 
+realtima ==> done 
+
+css  :  theme : ideas
+
+
+ 

@@ -1,0 +1,39 @@
+.owner {
+  /* border: 2px solid green;
+  background-color: paleturquoise; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 40px;
+  width: 100%;
+}
+.logo-img {
+  height: 50px;
+  width: 50px;
+}
+@media (min-width: 480px) {
+  .owner {
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .owner {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .owner {
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .owner {
+    /* background-color: orange; */
+  }
+}

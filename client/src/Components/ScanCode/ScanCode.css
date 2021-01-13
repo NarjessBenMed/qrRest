@@ -1,0 +1,35 @@
+.code {
+  /* border: 1px solid red; */
+  /* background-color: #ff5029; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.reader {
+  /* border: 1px solid red; */
+}
+
+@media (min-width: 480px) {
+  .code {
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .code {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .code {
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .code {
+    /* background-color: orange; */
+  }
+}

@@ -1,0 +1,31 @@
+.table-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+}
+
+@media (min-width: 480px) {
+  .table-list {
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .table-list {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .table-list {
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .table-list {
+    /* background-color: orange; */
+  }
+}

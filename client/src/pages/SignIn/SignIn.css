@@ -1,0 +1,126 @@
+.signin {
+  background: url('./bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-color: lightblue; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin__container {
+  background-color: white;
+  /* border: none; */
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+
+  padding: 40px;
+}
+
+.signin__container > h1 {
+  color: #1b2431;
+  font-weight: 400;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.signin__form__group {
+  position: relative;
+}
+.signin__form__group > h5 {
+  font-weight: 400;
+  margin-bottom: 5px;
+  /* font-weight: 200; */
+  color: #1b2431;
+}
+.signin__form__group > span {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  color: #ff5029;
+  font-size: 0.8rem;
+}
+
+.signin__container__form__input {
+  height: 30px;
+  margin-bottom: 20px;
+  width: 98%;
+  border: none;
+  outline: none;
+}
+.valid__input {
+  border-bottom: 1px solid #1b2431;
+  background-color: white;
+}
+.error__input {
+  border-bottom: 1px solid #ff5029;
+}
+
+.signin__container > p {
+  margin-top: 25px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.signin__signInButton {
+  background: #ff5029;
+  width: 100%;
+  height: 40px;
+  font-size: 0.9rem;
+  border: none;
+  margin-top: 40px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Spinner */
+.spinner {
+  font-size: 1rem;
+  color: white;
+  animation: rotation 0.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@media (min-width: 480px) {
+  .signin {
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .signin {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .signin {
+    background: url('./bg1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .signin {
+    background: url('./bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-color: orange; */
+  }
+}

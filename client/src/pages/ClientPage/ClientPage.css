@@ -1,0 +1,36 @@
+.client-section {
+  /* border: 2px solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 60px;
+}
+.client-section h2 {
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+@media (min-width: 480px) {
+  .client-section {
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .client-section {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .client-section {
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .client-section {
+    /* background-color: orange; */
+  }
+}

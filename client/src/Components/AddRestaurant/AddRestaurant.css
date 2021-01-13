@@ -1,0 +1,108 @@
+.addrestau {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid orange; */
+  padding: 40px;
+}
+
+.logo-preview {
+  height: 50px;
+  width: 50px;
+}
+
+.addrestau > h3 {
+  color: #1b2431;
+  font-weight: 400;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.addrestau__form__group {
+  position: relative;
+}
+.addrestau__form__group > h5 {
+  margin-bottom: 5px;
+  font-weight: 400;
+  color: #1b2431;
+}
+.addrestau__form__group > span {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  color: #ff5029;
+  font-size: 0.8rem;
+}
+
+.addrestau__container__form__input {
+  height: 30px;
+  margin-bottom: 20px;
+  width: 98%;
+  border: none;
+  outline: none;
+}
+.valid__input {
+  border-bottom: 1px solid #1b2431;
+  background-color: white;
+}
+.error__input {
+  border-bottom: 1px solid #ff5029;
+}
+
+.addrestau__container > p {
+  margin-top: 25px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.addrestau__addrestauButton {
+  background: #ff5029;
+  width: 100%;
+  height: 40px;
+  font-size: 0.9rem;
+  border: none;
+  margin-top: 10px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Spinner */
+.spinner {
+  font-size: 1rem;
+  color: white;
+  animation: rotation 0.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@media (min-width: 480px) {
+  .addrestau {
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .addrestau {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .addrestau {
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .addrestau {
+    /* background-color: orange; */
+  }
+}

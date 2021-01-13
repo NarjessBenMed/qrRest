@@ -1,0 +1,8 @@
+.menu > img {
+  height: 50px;
+  width: 50px;
+}
+.menu {
+  overflow: scroll;
+  height: 95vh;
+}
