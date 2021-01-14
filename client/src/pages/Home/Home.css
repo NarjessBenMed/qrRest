@@ -1,8 +1,8 @@
 .home {
-  background: url('./bg2.jpg');
+  /* background: url('./bg2.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
   min-width: 320px;
   height: 100vh;
   display: flex;
@@ -10,8 +10,15 @@
 
   align-items: center;
 }
+.scan {
+  height: 500px;
+}
 
 .home__content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #978047;
   margin-top: 100px;
   width: 100%;
   text-align: center;
@@ -29,7 +36,7 @@
 .home__content button {
   font-size: 1em;
   color: #fff;
-  background-color: #ff5029;
+  background-color: #b82200;
   display: inline-block;
   padding: 10px 30px;
   margin-top: 20px;
@@ -56,19 +63,19 @@
 }
 
 @media (min-width: 1024px) {
-  .home {
-    background: url('./bg1.jpg');
+  /* .home {
+    background: url("./bg1.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
+  } */
 }
 
 @media (min-width: 1280px) {
-  .home {
-    background: url('./bg.jpg');
+  /* .home {
+    background: url("./bg.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
+  } */
 }

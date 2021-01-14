@@ -105,6 +105,7 @@ const OrderList = () => {
                   </p>
                 </div>
               ))}
+              <p>Total : {order.total}</p>
             </div>
           ))}
     </div>

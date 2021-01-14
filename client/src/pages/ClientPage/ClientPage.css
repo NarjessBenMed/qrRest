@@ -6,11 +6,20 @@
   align-items: center;
   padding-top: 60px;
 }
-.client-section h2 {
-  margin-top: 10px;
+
+.client-section__info {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.client-section__info > h2 {
   font-weight: 400;
 }
-
+.client-section__info > img {
+  height: 50px;
+  width: 50px;
+}
 @media (min-width: 480px) {
   .client-section {
     /* background-color: green; */

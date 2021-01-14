@@ -31,11 +31,11 @@ const AddTable = ({ restId, handleAdd, tables }) => {
           <h5>Table Number</h5>
 
           <input
-            type="text"
+            type="number"
             name="tableNumber"
             value={tableNumber}
             onChange={handleChange}
-            disabled
+            min="1"
           />
         </div>
 

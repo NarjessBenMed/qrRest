@@ -15,6 +15,7 @@
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.514), 0 0px 20px 0 rgba(0, 0, 0, 0.548);
   /* background-color: #090a0b; */
   background-color: #020a15;
+  color: white;
 }
 .navbar__nav {
   /* border: 5px solid yellow; */
@@ -28,7 +29,8 @@
   font-weight: 500;
   padding: 10px;
   transition: 0.5s;
-  color: white;
+  color: black;
+  font-size: 0.8rem;
 }
 .navbar__nav__link:hover {
   color: #ff5029;
@@ -65,7 +67,7 @@
 
 @media (min-width: 1024px) {
   .navbar {
-    padding: 40px 80px 0;
+    padding: 20px 80px 0;
     /* background-color: purple; */
   }
   .bg-dark {

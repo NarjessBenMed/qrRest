@@ -151,8 +151,6 @@ const ClientMenu = ({ menu, restaurantId }) => {
     );
   return (
     <div className="client-menu">
-      {/* <h5>{menu.restaurant.name}</h5>
-      <img src={"/" + menu.restaurant.logo} /> */}
       <div className="client-menu__items">{menuItems}</div>
       <div className="client-menu__nav">
         {orderLink}

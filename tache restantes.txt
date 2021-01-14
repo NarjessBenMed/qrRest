@@ -23,12 +23,11 @@ apres ajout new rest , les champs ne se vident pas done
 affichage vaut miew yarja3 ll star mouch vertical  a faire sinn khaléhom akéka 
 ajout table, champs ne se vide pas, input locked cca wféha valeur a ajiouter bien a faire
 orders nzidouha num commande + total a faire fel partie owner??
-menu client nzidouha logo w ism resto mn fou9 a faire jarebha mba3Ed ok
-ki tzid tkmandi matokhrjch ll serveur  reel time ok a faire
+menu client nzidouha logo w ism resto mn fou9 a faire  done
+ki tzid tkmandi matokhrjch ll serveur  reel time ok a faire hadhi mouch tekhdem njareb?ok
 page el baraniya ?? kima adhika ok a faire
-add worker == ne9ssa temps reels, 
-order eli yraha owners normalment féha total , menu w order  kif kif sans temps reels
-w marra 3amleti bug hhh ... cannot read paid of null a faire
+add worker == ne9ssa temps reels, done
+order eli yraha owners normalment féha total , menu w order  kif kif sans temps reels  done 
 
 
  

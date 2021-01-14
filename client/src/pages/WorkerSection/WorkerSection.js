@@ -8,7 +8,6 @@ import moment from "moment";
 
 const WorkerSection = () => {
   const [filterBy, setFilterBy] = useState("");
-  const [tableList, setTableList] = useState([]);
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const { orders, status } = useSelector((state) => state.order);
   const dispatch = useDispatch();
@@ -38,19 +37,20 @@ const WorkerSection = () => {
   }, [dispatch, user]);
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch();
+      dispatch(getTables(user.restaurantId));
       dispatch(getAllOrders(user.restaurantId));
     }
   }, [isAuthenticated, dispatch]);
-  useEffect(() => {
-    if (orders) {
-      const list = Array.from(
-        new Set(orders.map((order) => order.tableNumber))
-      );
-      setTableList(list);
-      setFilterBy(list[0]);
-    }
-  }, [orders]);
+  const { listTable } = useSelector((state) => state.table);
+  // useEffect(() => {
+  //   if (orders) {
+  //     const list = Array.from(
+  //       new Set(orders.map((order) => order.tableNumber))
+  //     );
+  //     setTableList(list);
+  //     setFilterBy(list[0]);
+  //   }
+  // }, [orders]);
   const handleChange = (e) => {
     setFilterBy(e.target.value);
   };
@@ -64,10 +64,10 @@ const WorkerSection = () => {
       <div className="worker__tables">
         <p>Select Your Table</p>
         <select name="filterBy" onChange={handleChange}>
-          {tableList &&
-            tableList.map((tab) => (
-              <option key={tab} value={tab}>
-                table {tab}
+          {listTable &&
+            listTable.map((tab) => (
+              <option key={tab._id} value={tab.tableNumber}>
+                table {tab.tableNumber}
               </option>
             ))}
         </select>

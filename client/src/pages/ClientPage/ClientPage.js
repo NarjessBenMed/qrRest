@@ -45,7 +45,10 @@ const ClientPage = () => {
     <div className="client-section">
       <Switch>
         <Route exact path="/client-page">
-          <h2>The Menu</h2>
+          <div className="client-section__info">
+            <img src={"/" + (menu && menu.menu.restaurant.logo)} />
+            <h2>The Menu of {menu && menu.menu.restaurant.name}</h2>
+          </div>
           {clientMenu}
         </Route>
         <Route exact path="/client-page/order">

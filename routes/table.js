@@ -12,7 +12,7 @@ const { route } = require("./restaurant");
 router.get(
   "/my-tables/:restID",
   isAuth,
-  authRole(ROLE.OWNER),
+  // authRole(ROLE.OWNER),
   async (req, res, next) => {
     try {
       const { restID } = req.params;
