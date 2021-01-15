@@ -1,42 +1,59 @@
 .home {
-  /* background: url('./bg2.jpg');
+  background: url("./home.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   min-width: 320px;
   height: 100vh;
   display: flex;
   flex-direction: column;
-
   align-items: center;
 }
+.home__content__side {
+  flex: 1;
+}
 .scan {
-  height: 500px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.scan > img {
+  height: 400px;
+}
+.home__sante {
+  width: 100%;
+  background-color: rgb(185, 214, 214);
+  padding: 20px;
 }
 
 .home__content {
+  /* border: 1px solid red; */
+  height: 100vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-  background-color: #978047;
+  /* background-image: url ("backgournd.png"); */
+
   margin-top: 100px;
   width: 100%;
   text-align: center;
 }
 .home__content h2 {
   font-size: 3em;
-  color: #fff;
+  color: #c42012;
 }
 
 .home__content p {
   padding: 20px;
-  font-size: 1rem;
-  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c42012;
 }
 .home__content button {
   font-size: 1em;
   color: #fff;
-  background-color: #b82200;
+  background-color: #c42012;
   display: inline-block;
   padding: 10px 30px;
   margin-top: 20px;

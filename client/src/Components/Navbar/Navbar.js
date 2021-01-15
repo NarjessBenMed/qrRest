@@ -45,18 +45,20 @@ const Navbar = () => {
       <Link to="/">
         <span className="navbar__nav__link">Home</span>
       </Link>
-      <Link to="/">
-        <span className="navbar__nav__link">Le fonctionnement</span>
-      </Link>
-      <Link to="/">
-        <span className="navbar__nav__link">Les avantages</span>
-      </Link>
-      <Link to="/">
-        <span className="navbar__nav__link">Les adhérents</span>
-      </Link>
-      <Link to="/">
-        <span className="navbar__nav__link">Nous contacter</span>
-      </Link>
+      <div className="main-nav">
+        <Link to="/">
+          <span className="navbar__nav__link">Le fonctionnement</span>
+        </Link>
+        <Link to="/">
+          <span className="navbar__nav__link">Les avantages</span>
+        </Link>
+        <Link to="/">
+          <span className="navbar__nav__link">Les adhérents</span>
+        </Link>
+        <Link to="/">
+          <span className="navbar__nav__link">Nous contacter</span>
+        </Link>
+      </div>
       <Link to="/signin">
         <span className="navbar__nav__link">se connecter</span>
       </Link>
