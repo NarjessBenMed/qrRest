@@ -1,11 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../features/authSlice";
 import { useLocation } from "react-router-dom";
+import { HiMenuAlt3 } from "react-icons/hi";
+import { MdRestaurantMenu } from "react-icons/md";
+import { IconContext } from "react-icons";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const [click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -19,10 +25,10 @@ const Navbar = () => {
   const adminMenu = (
     <Fragment>
       <Link to="/admin-section">
-        <span className="navbar__nav__link active">Home</span>
+        <span className="navbar__link">Home</span>
       </Link>
       <Link to="/">
-        <span className="navbar__nav__link" onClick={handleLog}>
+        <span className="navbar__link" onClick={handleLog}>
           Déconnexion
         </span>
       </Link>
@@ -31,10 +37,10 @@ const Navbar = () => {
   const ownerMenu = (
     <Fragment>
       <Link to="/owner-section">
-        <span className="navbar__nav__link">Home</span>
+        <span className="navbar__link">Home</span>
       </Link>
       <Link to="/">
-        <span className="navbar__nav__link" onClick={handleLog}>
+        <span className="navbar__link" onClick={handleLog}>
           Déconnexion
         </span>
       </Link>
@@ -43,44 +49,66 @@ const Navbar = () => {
   const homeMenu = (
     <Fragment>
       <Link to="/">
-        <span className="navbar__nav__link">Home</span>
+        <span className="navbar__link" onClick={closeMobileMenu}>
+          Home
+        </span>
       </Link>
-      <div className="main-nav">
-        <Link to="/">
-          <span className="navbar__nav__link">Le fonctionnement</span>
+      <div
+        className={click ? "navbar__first-menu active" : "navbar__first-menu"}
+        onClick={closeMobileMenu}
+      >
+        <Link to="/" onClick={closeMobileMenu}>
+          <span className="navbar__link">fonctionnement</span>
         </Link>
-        <Link to="/">
-          <span className="navbar__nav__link">Les avantages</span>
+        <Link to="/" onClick={closeMobileMenu}>
+          <span className="navbar__link">avantages</span>
         </Link>
-        <Link to="/">
-          <span className="navbar__nav__link">Les adhérents</span>
+        <Link to="/" onClick={closeMobileMenu}>
+          <span className="navbar__link">adhérents</span>
         </Link>
-        <Link to="/">
-          <span className="navbar__nav__link">Nous contacter</span>
+        <Link to="/" onClick={closeMobileMenu}>
+          <span className="navbar__link">Nous contacter</span>
         </Link>
       </div>
-      <Link to="/signin">
-        <span className="navbar__nav__link">se connecter</span>
-      </Link>
+      <div className="navbar__second-menu">
+        <Link to="/signin" onClick={closeMobileMenu}>
+          <span className="navbar__link">se connecter</span>
+        </Link>
+        <div className="mobile-menu" onClick={handleClick}>
+          {click ? (
+            <IconContext.Provider value={{ className: "menu-icon" }}>
+              <div>
+                <MdRestaurantMenu />
+              </div>
+            </IconContext.Provider>
+          ) : (
+            <IconContext.Provider value={{ className: "menu-icon" }}>
+              <div>
+                <HiMenuAlt3 />
+              </div>
+            </IconContext.Provider>
+          )}
+        </div>
+      </div>
     </Fragment>
   );
   const clientMenu = (
     <Fragment>
       <Link to="/client-page">
-        <span className="navbar__nav__link">Menu</span>
+        <span className="navbar__link">Menu</span>
       </Link>
       <Link to="/">
-        <span className="navbar__nav__link">Deconnexion</span>
+        <span className="navbar__link">Deconnexion</span>
       </Link>
     </Fragment>
   );
   const workerMenu = (
     <Fragment>
       <Link to="/worker-section">
-        <span className="navbar__nav__link active">Home</span>
+        <span className="navbar__link active">Home</span>
       </Link>
       <Link to="/">
-        <span className="navbar__nav__link" onClick={handleLog}>
+        <span className="navbar__link" onClick={handleLog}>
           Déconnexion
         </span>
       </Link>
@@ -96,11 +124,7 @@ const Navbar = () => {
     ? clientMenu
     : homeMenu;
 
-  return (
-    <div className={location.pathname !== "/" ? "navbar bg-dark" : "navbar"}>
-      {navMenu}
-    </div>
-  );
+  return <div className="navbar">{navMenu}</div>;
 };
 
 export default Navbar;
