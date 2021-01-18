@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdRestaurantMenu } from "react-icons/md";
 import { IconContext } from "react-icons";
+import ScrollComponent from "../../utils/scroll";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -57,18 +58,19 @@ const Navbar = () => {
         className={click ? "navbar__first-menu active" : "navbar__first-menu"}
         onClick={closeMobileMenu}
       >
-        <Link to="/" onClick={closeMobileMenu}>
+        <ScrollComponent onClick={closeMobileMenu} section="sect1">
           <span className="navbar__link">fonctionnement</span>
-        </Link>
-        <Link to="/" onClick={closeMobileMenu}>
+        </ScrollComponent>
+
+        <ScrollComponent onClick={closeMobileMenu} section="sect2">
           <span className="navbar__link">avantages</span>
-        </Link>
-        <Link to="/" onClick={closeMobileMenu}>
+        </ScrollComponent>
+        <ScrollComponent onClick={closeMobileMenu} section="sect3">
           <span className="navbar__link">adhérents</span>
-        </Link>
-        <Link to="/" onClick={closeMobileMenu}>
+        </ScrollComponent>
+        <ScrollComponent onClick={closeMobileMenu} section="sect1">
           <span className="navbar__link">Nous contacter</span>
-        </Link>
+        </ScrollComponent>
       </div>
       <div className="navbar__second-menu">
         <Link to="/signin" onClick={closeMobileMenu}>

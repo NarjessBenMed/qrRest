@@ -82,7 +82,6 @@ io.on("connection", (socket) => {
 });
 const nsp = io.of("/admin-space");
 const ownernsp = io.of("/owner-space");
-const menunsp = io.of("/menu-space");
 const restnsp = io.of("/restaurant-space");
 
 restnsp.on("connection", (socket) => {
@@ -92,14 +91,14 @@ restnsp.on("connection", (socket) => {
   });
 
   console.log("client connected to restaurant");
-  restnsp.emit("hi", { msg: "restaurant namespace say hello" });
+
   socket.on("disconnect", () => {
     console.log("client disconnected from restaurant");
   });
 });
 nsp.on("connection", (socket) => {
   console.log("admin connected");
-  nsp.emit("hi", { msg: "admin namespace say hello" });
+
   socket.on("disconnect", () => {
     console.log("admin disconnected");
   });
@@ -110,15 +109,8 @@ ownernsp.on("connection", (socket) => {
     socket.join(restId);
   });
   console.log("owner connected");
-  ownernsp.emit("hi", { msg: "owner namespace say hello" });
+
   socket.on("disconnect", () => {
     console.log("owner disconnected");
-  });
-});
-menunsp.on("connection", (socket) => {
-  console.log("Menu connected hhhh");
-  menunsp.emit("hi", { msg: "menu namespace say hello" });
-  socket.on("disconnect", () => {
-    console.log("menu disconnected");
   });
 });

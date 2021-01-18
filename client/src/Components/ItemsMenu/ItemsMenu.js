@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import './ItemsMenu.css';
-import { deleteItemMenu, editItemMenu } from '../../features/menuSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { generateBase64FromImage } from '../../utils/image';
+import React, { useState, useEffect } from "react";
+import "./ItemsMenu.css";
+import { deleteItemMenu, editItemMenu } from "../../features/menuSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { generateBase64FromImage } from "../../utils/image";
 
 const ItemsMenu = ({ item }) => {
   const [values, setValues] = useState({
-    name: '',
-    price: '',
-    description: '',
-    image: '',
-    preview: '',
+    name: "",
+    price: "",
+    description: "",
+    image: "",
+    preview: "",
     edit: false,
   });
   const { name, price, description, edit, image, preview } = values;
   const { menu } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
-  useEffect(() => {}, [dispatch]);
+
   const handleClick = (id) => {
     dispatch(deleteItemMenu({ idMenu: menu.menu._id, id }));
   };
@@ -31,13 +31,13 @@ const ItemsMenu = ({ item }) => {
       });
     } else {
       let formData = new FormData();
-      formData.append('name', name);
-      formData.append('description', description);
-      formData.append('price', price);
-      formData.append('image', image);
-      formData.append('idMenu', menu.menu._id);
-      formData.append('idItem', item._id);
-      formData.append('lastImg', item.image);
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("image", image);
+      formData.append("idMenu", menu.menu._id);
+      formData.append("idItem", item._id);
+      formData.append("lastImg", item.image);
 
       dispatch(editItemMenu(formData));
     }
@@ -58,29 +58,34 @@ const ItemsMenu = ({ item }) => {
   };
 
   return (
-    <div className='menu-item'>
-      {preview && <img src={preview} alt='plat' />}
+    <div className="menu-item">
+      {preview && <img src={preview} alt="plat" />}
       {edit ? (
-        <input type='file' name='image' onChange={handleFile} />
+        <input type="file" name="image" onChange={handleFile} />
       ) : (
-        <img src={'/' + item.image} alt='food' />
+        <img src={"/" + item.image} alt="food" />
       )}
       {edit ? (
-        <input type='text' value={name} name='name' onChange={handleData} />
+        <input type="text" value={name} name="name" onChange={handleData} />
       ) : (
         <h4>Name :{item.name}</h4>
       )}
       {edit ? (
-        <input type='text' value={price} name='price' onChange={handleData} />
+        <input type="text" value={price} name="price" onChange={handleData} />
       ) : (
         <h4>Price : {item.price}</h4>
       )}
       {edit ? (
-        <input type='text' value={description} name='description' onChange={handleData} />
+        <input
+          type="text"
+          value={description}
+          name="description"
+          onChange={handleData}
+        />
       ) : (
         <h4>Description : {item.description}</h4>
       )}
-      <button className='btn' onClick={() => handleClick(item._id)}>
+      <button className="btn" onClick={() => handleClick(item._id)}>
         delete
       </button>
       <button onClick={handleEdit}>Edit</button>

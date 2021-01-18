@@ -37,7 +37,7 @@ const Home = () => {
         </p>
         <img src="images/Codiv-19.png" alt="" />
       </div>
-      <section className="home__fonct">
+      <section className="home__fonct" id="sect1">
         <h4>Utilisation simple et efficace sans installation :</h4>
         <div className="home__fonct__step">
           <IconContext.Provider value={{ className: "check-icon" }}>
@@ -75,7 +75,11 @@ const Home = () => {
           <img src="images/img3.png" alt="" />
         </div>
       </section>
-      <section className="home__avantages">
+      <div className="block">
+        <p>lkjkljjjjjjjjjjjjj</p>
+      </div>
+
+      <section className="home__avantages" id="sect2">
         <p>
           En plus du respect des gestes barrières et du nouveau mode de vie que
           nous devons adopter, le menu digital pour votre restaurant vous permet
@@ -102,6 +106,21 @@ const Home = () => {
           diminuez vos déchets pour vous inscrire dans une démarche
           écoresponsable.
         </p>
+      </section>
+      <section className="home__adher" id="sect3">
+        <h1> Les adhérents </h1>
+
+        <div className="home__adher__items">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6bMxzzhbJr9D94CZ-WUGbxptM9EAHmLmmnA&usqp=CAU"
+            alt=""
+          />
+
+          <img
+            src="https://scontent.ftun7-1.fna.fbcdn.net/v/t1.0-9/21752455_1605310829489573_1413294409926454312_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=hWNGwNDsNe4AX-2Qdii&_nc_ht=scontent.ftun7-1.fna&oh=3859edb4b4b56564621a835cb8839ba7&oe=602BA403"
+            alt=""
+          />
+        </div>
       </section>
     </div>
   );
