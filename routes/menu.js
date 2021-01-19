@@ -104,25 +104,6 @@ router.put(
   }
 );
 
-//-----------------------
-// router.get("/get-menu", async (req, res, next) => {
-//   try {
-//     const { menuId } = req.body;
-//     // prevent the access from non owner (handle permission)
-//     const menu = await Menu.findOne({
-//       _id: menuId,
-//     });
-//     if (!menu) {
-//       const error = new Error("No menu");
-//       error.statusCode = 404;
-//       throw error;
-//     }
-//     res.status(200).json(menu);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 router.put(
   "/edit-item",
   isAuth,
@@ -151,7 +132,12 @@ router.put(
       );
 
       const response = await foundFood.save();
-      req.io.of("/menu-space").emit("menu", { action: "edit" });
+      req.io
+        .of("/restaurant-space")
+        .to(foundFood.restaurant.toString())
+        .emit("newMenu", {
+          msg: "a new menu",
+        });
       res.status(200).json(response);
     } catch (error) {
       next(error);

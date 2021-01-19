@@ -49,6 +49,7 @@
   transition: 0.5s;
   color: white;
   font-size: 0.8rem;
+  cursor: pointer;
 }
 .navbar__link:hover {
   color: #c42012;

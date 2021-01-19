@@ -11,7 +11,7 @@
   background-color: white;
 }
 .client-menu-item button {
-  background: #ff5029;
+  background: #c42012;
   height: 30px;
   width: 30px;
   font-size: 1.3rem;
@@ -44,7 +44,7 @@
 }
 .client-menu-item__group {
   width: 100%;
-  color: #ff5029;
+  color: #c42012;
   margin: 10px 0;
   display: flex;
   align-items: center;

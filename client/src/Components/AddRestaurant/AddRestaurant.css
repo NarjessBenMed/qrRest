@@ -30,7 +30,7 @@
   position: absolute;
   right: 10px;
   bottom: 5px;
-  color: #ff5029;
+  color: #c42012;
   font-size: 0.8rem;
 }
 
@@ -46,7 +46,7 @@
   background-color: white;
 }
 .error__input {
-  border-bottom: 1px solid #ff5029;
+  border-bottom: 1px solid #c42012;
 }
 
 .addrestau__container > p {
@@ -56,7 +56,7 @@
 }
 
 .addrestau__addrestauButton {
-  background: #ff5029;
+  background: #c42012;
   width: 100%;
   height: 40px;
   font-size: 0.9rem;

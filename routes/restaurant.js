@@ -15,7 +15,10 @@ router.post(
   authRole(ROLE.OWNER),
   [
     body("name").trim().isLength({ min: 5 }),
-    body("address").trim().isLength({ min: 5 }),
+    body("address")
+      .trim()
+      .isLength({ min: 5 })
+      .matches(/^[0-9]+ rue [a-zA-Z0-9 ]+$/i),
   ],
   async (req, res, next) => {
     try {
@@ -35,18 +38,19 @@ router.post(
       const logo = req.file.path.replace("\\", "/");
       const { name, address } = req.body;
       const existedRestaurant = await Restaurant.findOne({
-        address,
+        address: address.toLowerCase().trim(),
         owner: req.user.userId,
       });
       if (existedRestaurant) {
         const error = new Error("Restaurant already exists");
         error.statusCode = 409;
+        error.data = [{ param: "address", msg: "adresse existante" }];
         throw error;
       }
       const restaurant = new Restaurant({
         name,
         logo,
-        address,
+        address: address.toLowerCase().trim(),
         owner: req.user.userId,
       });
 
@@ -72,7 +76,10 @@ router.put(
   isAuth,
   [
     body("name").trim().isLength({ min: 5 }),
-    body("address").trim().isLength({ min: 5 }),
+    body("address")
+      .trim()
+      .isLength({ min: 5 })
+      .matches(/^[0-9]+ rue [a-zA-Z0-9 ]+$/i),
   ],
   authRole(ROLE.OWNER),
   async (req, res, next) => {

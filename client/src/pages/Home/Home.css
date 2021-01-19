@@ -22,8 +22,9 @@
   height: 300px;
 }
 .home__sante {
+  margin-top: 50px;
   width: 100%;
-  background-color: #f1be41;
+  background-color: #ffbe19;
   /* color: #fff; */
   padding: 20px;
   display: flex;
@@ -37,7 +38,8 @@
 }
 .home__sante p {
   text-align: center;
-  color: #020a15;
+  /* color: #020a15; */
+  color: #fff;
 }
 .home__sante > img {
   margin-top: 20px;
@@ -45,7 +47,8 @@
 }
 
 .home__content {
-  background: url("./medium-bg.jpg");
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.514), 0 0px 20px 0 rgba(0, 0, 0, 0.548);
+  background: url('./medium-bg.jpg');
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -54,7 +57,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 70px;
+  margin-top: 100px;
   width: 100%;
   text-align: center;
 }
@@ -91,7 +94,10 @@
 }
 .home__fonct > h4 {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #c42012;
 }
 .home__fonct__step {
   display: flex;
@@ -141,14 +147,14 @@
   align-items: center;
   color: white;
   width: 100%;
-  background-color: tomato;
+  background-color: #c42012;
   height: 150px;
   margin: 20px 0;
 }
 
 .home__avant_begin {
   margin-top: 30px;
-  background-color: #974413;
+  background-color: #c42012;
 }
 .home__avant_begin p {
   font-weight: 500px;
@@ -186,13 +192,14 @@
 
 @media (min-width: 480px) {
   .home__content {
-    background: url("./medium-bg.jpg");
+    margin-top: 100px;
+    background: url('./medium-bg.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
   }
   .home__fonct {
-    margin-top: 20px;
+    margin: 40px 0;
     padding: 0;
   }
   .home__fonct__step {
@@ -215,7 +222,7 @@
 
 @media (min-width: 768px) {
   .home__content {
-    background: url("./mlarge-bg.jpg");
+    background: url('./mlarge-bg.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -252,7 +259,7 @@
 
 @media (min-width: 1024px) {
   .home__content {
-    background: url("./large-bg.jpg");
+    background: url('./large-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -274,7 +281,7 @@
 
 @media (min-width: 1280px) {
   .home__content {
-    background: url("./xlarge-bg.jpg");
+    background: url('./xlarge-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

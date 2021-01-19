@@ -23,7 +23,7 @@
   padding: 10px 20px;
   outline: none;
   border: none;
-  border-bottom: 1px solid #ff5029;
+  border-bottom: 1px solid #c42012;
 }
 
 .worker__orders {
@@ -36,7 +36,7 @@
   flex-direction: column;
 }
 .worker__orders button {
-  background: #ff5029;
+  background: #c42012;
   width: 100%;
   height: 40px;
   font-size: 0.9rem;

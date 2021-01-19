@@ -9,7 +9,6 @@ import moment from "moment";
 const WorkerSection = () => {
   const [filterBy, setFilterBy] = useState("");
   const { user, isAuthenticated } = useSelector((state) => state.auth);
-  const { orders, status } = useSelector((state) => state.order);
   const dispatch = useDispatch();
   useEffect(() => {
     let socket = openSocket("http://localhost:5000/restaurant-space", {
@@ -42,15 +41,11 @@ const WorkerSection = () => {
     }
   }, [isAuthenticated, dispatch]);
   const { listTable } = useSelector((state) => state.table);
-  // useEffect(() => {
-  //   if (orders) {
-  //     const list = Array.from(
-  //       new Set(orders.map((order) => order.tableNumber))
-  //     );
-  //     setTableList(list);
-  //     setFilterBy(list[0]);
-  //   }
-  // }, [orders]);
+  useEffect(() => {
+    if (listTable) setFilterBy(listTable[0].tableNumber);
+  }, [listTable]);
+  const { orders, status } = useSelector((state) => state.order);
+
   const handleChange = (e) => {
     setFilterBy(e.target.value);
   };
@@ -65,8 +60,8 @@ const WorkerSection = () => {
         <p>Select Your Table</p>
         <select name="filterBy" onChange={handleChange}>
           {listTable &&
-            listTable.map((tab) => (
-              <option key={tab._id} value={tab.tableNumber}>
+            listTable.map((tab, i) => (
+              <option key={tab._id} defaultValue value={tab.tableNumber}>
                 table {tab.tableNumber}
               </option>
             ))}
