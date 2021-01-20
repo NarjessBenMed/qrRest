@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import openSocket from 'socket.io-client';
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import openSocket from "socket.io-client";
 
-import AddWorker from '../AddWorker/AddWorker';
-import Workers from '../Workers/Workers';
-import { getAllWorkers } from '../../features/staffSlice';
-import './StaffList.css';
+import AddWorker from "../AddWorker/AddWorker";
+import Workers from "../Workers/Workers";
+import { getAllWorkers } from "../../features/staffSlice";
+import "./StaffList.css";
 
-const StaffList = () => {
+const StaffList = ({ channel }) => {
   const location = useLocation();
   const { restId } = location.state;
   const dispatch = useDispatch();
@@ -17,28 +17,16 @@ const StaffList = () => {
   }, [dispatch]);
   const { workers } = useSelector((state) => state.staff);
   useEffect(() => {
-    let socket = openSocket('http://localhost:5000/owner-space', {
-      transports: ['websocket', 'polling'],
-    });
-
-    socket.on('connect', () => {
-      console.log(socket.id);
-    });
-
-    socket.emit('joinRoom', { restId });
-
-    socket.on('workers', (data) => {
-      console.log(data.msg);
-
-      dispatch(getAllWorkers(restId));
-    });
-    return () => {
-      socket.disconnect();
-    };
-  }, [dispatch]);
+    if (channel) {
+      channel.on("workers", (data) => {
+        console.log("workers", data.action);
+        dispatch(getAllWorkers(restId));
+      });
+    }
+  }, [channel]);
 
   return (
-    <div className='staff'>
+    <div className="staff">
       <AddWorker restId={restId} />
       <Workers list={workers} />
     </div>

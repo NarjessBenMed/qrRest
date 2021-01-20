@@ -6,6 +6,9 @@
   align-items: center;
   height: 100vh;
 }
+.test {
+  padding: 10px 30px;
+}
 .reader {
   /* border: 1px solid red; */
 }

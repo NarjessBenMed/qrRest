@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import openSocket from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { getRestList } from "../../features/ownerSlice";
@@ -13,8 +13,10 @@ import "./OwnerSection.css";
 import { Route, Switch } from "react-router-dom";
 
 import MyRestaurant from "../MyRestaurant/MyRestaurant";
+import { set } from "mongoose";
 
 const OwnerSection = () => {
+  const [channel, setChannel] = useState(null);
   const { isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,6 +28,7 @@ const OwnerSection = () => {
     let socket = openSocket("http://localhost:5000/owner-space", {
       transports: ["websocket", "polling"],
     });
+    setChannel(socket);
     socket.on("connect", () => {
       console.log(socket.id);
     });
@@ -59,10 +62,10 @@ const OwnerSection = () => {
           <MyRestaurant />
         </Route>
         <Route exact path="/owner-section/tables">
-          <TableList />
+          <TableList channel={channel} />
         </Route>
         <Route exact path="/owner-section/staff">
-          <StaffList />
+          <StaffList channel={channel} />
         </Route>
         <Route exact path="/owner-section/orders">
           <OrderList />

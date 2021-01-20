@@ -21,6 +21,7 @@ const orderSchema = new Schema(
           quantity: { type: Number },
           price: { type: Number },
           createdAt: { type: String },
+          comment: { type: String },
         },
       ],
       required: true,

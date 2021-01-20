@@ -6,7 +6,6 @@ const ROLE = require("../utils/roles");
 const authRole = require("../utils/authRole");
 const Table = require("../models/table");
 const createCode = require("../utils/qrCode");
-const { route } = require("./restaurant");
 
 // get tables
 router.get(
@@ -39,6 +38,7 @@ router.post(
       if (existedTable) {
         const error = new Error("Table already exists in this restaurant");
         error.statusCode = 409;
+        error.data = [{ param: "tableNumber", msg: "table existante" }];
         throw error;
       }
       const codeImg = await createCode(restaurant + "+" + tableNumber);
@@ -49,7 +49,7 @@ router.post(
         codeImg,
       });
       const createdTable = await table.save();
-
+      req.io.of("/owner-space").emit("tables", { action: "create" });
       res.status(201).json({
         message: "Table created",
         TableId: createdTable._id,
@@ -73,7 +73,7 @@ router.delete(
         error.statusCode = 404;
         throw error;
       }
-
+      req.io.of("/owner-space").emit("tables", { action: "delete" });
       res.status(200).json(response);
     } catch (error) {
       next(error);

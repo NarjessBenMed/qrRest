@@ -10,7 +10,7 @@
   transition: 0.5s;
   background-color: white;
 }
-.client-menu-item button {
+.client-menu-item__button {
   background: #c42012;
   height: 30px;
   width: 30px;
@@ -59,6 +59,21 @@
   overflow-wrap: break-word;
   margin-bottom: 5px;
   padding: 5px;
+}
+.client-menu-item__comment {
+  width: 100%;
+  padding: 10px;
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.comment__button {
+  border: none;
+  background-color: #020a15;
+  color: white;
+  font-size: 0.8rem;
+  padding: 10px 20px;
 }
 
 @media (min-width: 480px) {

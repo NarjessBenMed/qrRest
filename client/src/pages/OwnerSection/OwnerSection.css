@@ -1,6 +1,6 @@
 .owner {
-  /* border: 2px solid green;
-  background-color: paleturquoise; */
+  /* border: 2px solid green; */
+  /* background-color: paleturquoise; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,6 +28,7 @@
   .owner {
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: flex-start;
     /* background-color: purple; */
   }
 }

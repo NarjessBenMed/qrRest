@@ -82,6 +82,7 @@ const WorkerSection = () => {
                       <p>{item.name}</p>
                       <p>{item.quantity}</p>
                     </div>
+                    <span className="comment">{item.comment}</span>
                     <span className="timeline">
                       {/* {moment(item.updatedAt).startOf('minute').fromNow()} */}
                       {moment(item.createdAt).fromNow()}

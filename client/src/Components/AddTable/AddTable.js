@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addTable } from "../../features/tableSlice";
 import "./AddTable.css";
 
-const AddTable = ({ restId, handleAdd, tables }) => {
+const AddTable = ({ restId }) => {
   const [values, setValues] = useState({
     tableNumber: "",
     tableCode: "",
@@ -19,9 +19,7 @@ const AddTable = ({ restId, handleAdd, tables }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(addTable({ tableNumber, tableCode, restaurant: restId }));
-    handleAdd();
   };
   return (
     <div className="add-table">
@@ -29,7 +27,6 @@ const AddTable = ({ restId, handleAdd, tables }) => {
       <form className="add-table__form">
         <div className="add-table__form__group">
           <h5>Table Number</h5>
-
           <input
             type="number"
             name="tableNumber"
@@ -38,7 +35,6 @@ const AddTable = ({ restId, handleAdd, tables }) => {
             min="1"
           />
         </div>
-
         <button type="submit" onClick={handleSubmit}>
           Add table
         </button>

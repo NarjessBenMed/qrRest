@@ -3,14 +3,16 @@ import "./ClientMenuItem.css";
 const moment = require("moment");
 
 const ClientMenuItem = ({ item, addToCommand }) => {
+  const [showInput, setShowInput] = useState(false);
   const [food, setFood] = useState({
     price: 0,
     quantity: 0,
+    comment: "",
   });
-  const { price, quantity } = food;
+  const { price, quantity, comment } = food;
   useEffect(() => {
     let createdAt = moment().format();
-    addToCommand(item.name, quantity, price, createdAt);
+    addToCommand(item.name, quantity, price, comment, createdAt);
   }, [price]);
   const handleAdd = (itemPrice) => {
     setFood({
@@ -18,6 +20,12 @@ const ClientMenuItem = ({ item, addToCommand }) => {
       quantity: Number(quantity) + 1,
       price: Number(price) + Number(itemPrice),
     });
+  };
+  const handleComment = (e) => {
+    setFood({ ...food, comment: e.target.value });
+  };
+  const handleShow = () => {
+    setShowInput(!showInput);
   };
   const handleRemove = (itemPrice) => {
     if (quantity > 0)
@@ -42,9 +50,27 @@ const ClientMenuItem = ({ item, addToCommand }) => {
       </span>
 
       <div className="client-menu-item__quantity">
-        <button onClick={() => handleRemove(item.price)}>-</button>
+        <button
+          className="client-menu-item__button"
+          onClick={() => handleRemove(item.price)}
+        >
+          -
+        </button>
         <span>{quantity}</span>
-        <button onClick={() => handleAdd(item.price)}>+</button>
+        <button
+          className="client-menu-item__button"
+          onClick={() => handleAdd(item.price)}
+        >
+          +
+        </button>
+      </div>
+      <div className="client-menu-item__comment">
+        {showInput && (
+          <input type="text" value={comment} onChange={handleComment} />
+        )}
+        <button className="comment__button" onClick={handleShow}>
+          ajouter un commentaire
+        </button>
       </div>
     </div>
   );

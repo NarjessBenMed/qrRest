@@ -44,13 +44,13 @@ const ClientMenu = ({ menu, restaurantId }) => {
   const tableNumber = localStorage.getItem("tableNumber");
 
   const dispatch = useDispatch();
-  const handleAdd = (name, quantity, price, createdAt) => {
+  const handleAdd = (name, quantity, price, comment, createdAt) => {
     const itemIndex = items.findIndex((item) => item.name === name);
     let newList = [...items];
     if (itemIndex === -1) {
       setValues({
         ...values,
-        items: [...items, { name, price, quantity, createdAt }],
+        items: [...items, { name, price, quantity, comment, createdAt }],
       });
     } else {
       if (quantity === 0) {
@@ -60,6 +60,7 @@ const ClientMenu = ({ menu, restaurantId }) => {
           ...newList[itemIndex],
           quantity,
           price,
+          comment,
           createdAt,
         };
       }

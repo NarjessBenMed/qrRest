@@ -57,7 +57,7 @@ const SignIn = () => {
             </span>
 
             <input
-              type="password"
+              type="text"
               className="signin__container__form__input valid__input"
               name="password"
               value={password}
