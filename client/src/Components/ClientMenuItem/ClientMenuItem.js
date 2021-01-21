@@ -37,19 +37,20 @@ const ClientMenuItem = ({ item, addToCommand }) => {
   };
   return (
     <div className="client-menu-item">
-      <img src={item.image} alt="food" />
       <div className="client-menu-item__group">
-        <p>{item.name}</p>
-        <p>{item.price} dt</p>
+        <img src={item.image} alt="food" />
+        <div className="client-menu-item__info">
+          <p>{item.name}</p>
+          <p>{item.price} dt</p>
+          <span className="client-menu-item__price">
+            Total: {price > 0 ? price : 0}
+          </span>
+        </div>
       </div>
 
       <p className="client-menu-item__desc">{item.description}</p>
 
-      <span className="client-menu-item__price">
-        Total: {price > 0 ? price : 0}
-      </span>
-
-      <div className="client-menu-item__quantity">
+      <div className="client-menu-item__buttons">
         <button
           className="client-menu-item__button"
           onClick={() => handleRemove(item.price)}
@@ -65,12 +66,14 @@ const ClientMenuItem = ({ item, addToCommand }) => {
         </button>
       </div>
       <div className="client-menu-item__comment">
-        {showInput && (
-          <input type="text" value={comment} onChange={handleComment} />
-        )}
         <button className="comment__button" onClick={handleShow}>
           ajouter un commentaire
         </button>
+        {showInput && (
+          <textarea value={comment} onChange={handleComment} rows="3" cols="20">
+            commentaire..
+          </textarea>
+        )}
       </div>
     </div>
   );

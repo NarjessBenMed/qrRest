@@ -84,11 +84,21 @@
 @media (min-width: 1024px) {
   .menu {
     /* background-color: purple; */
+    padding: 0;
+    flex-direction: row;
+    /* width: 300px; */
   }
 }
 
 @media (min-width: 1280px) {
-  .menu {
-    /* background-color: orange; */
+  .menu__cat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .menu__cat__list {
+    display: flex;
+    flex-wrap: wrap;
   }
 }

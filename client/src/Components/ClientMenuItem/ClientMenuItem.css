@@ -1,85 +1,98 @@
 .client-menu-item {
+  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
   margin: 10px;
-  padding: 20px;
-  width: 300px;
+  padding: 0 10px;
+  width: 270px;
   transition: 0.5s;
   background-color: white;
 }
 .client-menu-item__button {
   background: #c42012;
-  height: 30px;
-  width: 30px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  height: 35px;
+  width: 35px;
   font-size: 1.3rem;
   border: none;
-  margin-top: 20px;
-
-  /* padding: 10px; */
   color: white;
-  border-radius: 50%;
   outline: none;
   cursor: pointer;
 }
-.client-menu-item__quantity {
+
+.client-menu-item__buttons {
   width: 100%;
   display: flex;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  padding: 0 10px 5px;
   justify-content: space-between;
-  align-items: baseline;
-}
-.client-menu-item__quantity span {
-  font-size: 1.3rem;
-}
-.client-menu-item img {
-  height: 180px;
-  width: 240px;
+  align-items: center;
+  /* border-bottom: 1px solid #c42012; */
 }
 
-.client-menu-item__price {
-  font-size: 1rem;
-  color: black;
-}
 .client-menu-item__group {
   width: 100%;
-  color: #c42012;
+
   margin: 10px 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* font-weight: 600; */
+
+  width: 100%;
   text-transform: capitalize;
   font-size: 1.1rem;
+}
+.client-menu-item__price {
+  color: black;
+}
+.client-menu-item__info {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #c42012;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+.client-menu-item__group > img {
+  width: 120px;
+  height: 80px;
 }
 .client-menu-item__desc {
   display: inline-block;
   width: 100%;
   overflow-wrap: break-word;
-  margin-bottom: 5px;
-  padding: 5px;
+  padding: 0 10px;
+  /* margin: 5px 20px; */
 }
+
 .client-menu-item__comment {
   width: 100%;
   padding: 10px;
   /* background-color: aqua; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-.comment__button {
-  border: none;
-  background-color: #020a15;
-  color: white;
-  font-size: 0.8rem;
-  padding: 10px 20px;
+  justify-content: space-between;
+  /* height: 100px; */
 }
 
-@media (min-width: 480px) {
-  .client-menu-item {
-    /* background-color: green; */
-  }
+.client-menu-item__comment > textarea {
+}
+.comment__button {
+  background-color: rgb(219, 219, 219);
+  border: none;
+  color: black;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 0;
+}
+
+.client-menu-item {
+  /* background-color: green; */
 }
 
 @media (min-width: 768px) {

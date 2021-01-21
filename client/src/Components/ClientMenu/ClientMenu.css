@@ -2,11 +2,13 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 100px;
+  /* justify-content: center; */
+  align-items: center;
   width: 100%;
 }
 
 .client-menu__nav > button {
-  background: #34373a;
+  background: #020a15;
   padding: 10px 20px;
   font-size: 0.9rem;
   border: none;
@@ -26,23 +28,21 @@
 
 .client-menu__link {
   text-decoration: none;
-  background: #34373a;
+  background: #020a15;
   padding: 10px 20px;
   font-size: 0.9rem;
   color: white;
 }
+
 .client-menu__categorie {
   font-size: 1rem;
-  background-color: #c42012;
+  background-color: rgb(87, 85, 85);
   color: white;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: inline-block;
   padding: 10px;
   text-align: center;
-  display: inline-block;
-  width: 300px;
+  /* display: inline-block; */
   /* border-radius: 30px; */
+  width: 100%;
   border: none;
 }
 .client-menu__items {

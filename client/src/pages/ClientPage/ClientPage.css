@@ -8,21 +8,28 @@
 }
 
 .client-section__info {
-  margin-top: 20px;
+  margin: 30px 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 250px;
+  border-bottom: 1px solid #020a15;
   align-items: center;
 }
 .client-section__info > h2 {
+  text-transform: uppercase;
   font-weight: 400;
+  font-size: 1.5rem;
 }
+
 .client-section__info > img {
   height: 50px;
   width: 50px;
+  border-radius: 50%;
 }
 @media (min-width: 480px) {
-  .client-section {
-    /* background-color: green; */
+  .client-section__info {
+    width: 400px;
+    border-bottom: 1px solid #020a15;
   }
 }
 

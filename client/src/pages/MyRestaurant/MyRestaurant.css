@@ -14,15 +14,13 @@
 }
 
 @media (min-width: 768px) {
-  .my-rest {
-    /* background-color: blue; */
-  }
 }
 
 @media (min-width: 1024px) {
   .my-rest {
     flex-direction: row;
     justify-content: space-evenly;
+    padding-left: 30px;
     /* background-color: purple; */
   }
 }
