@@ -1,39 +1,53 @@
-.menu {
-  padding: 30px;
+.menu-add {
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.menu__info {
+  display: flex;
+  width: 280px;
+  justify-content: space-between;
+  margin: 20px 0;
 }
 .image-preview {
   height: 50px;
   width: 50px;
 }
-.menu > h2 {
+.menu__info > h2 {
   text-transform: uppercase;
   font-weight: 400;
-}
-.menu > h3 {
-  font-weight: 400;
-}
-.menu > img {
-  height: 50px;
-  width: 50px;
 }
 
 .menu__form__group {
   position: relative;
 }
-.menu__form__group > h5 {
+.menu__form__group-select {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.menu__form__group-select > select {
+  background-color: rgb(190, 190, 190);
+  color: black;
+  border: none;
+  outline: none;
+  display: inline-block;
+  width: 150px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.menu__form__group > input {
+  font-size: 1rem;
+}
+.menu__form__group > h5,
+.menu__form__group-select > h5 {
+  text-transform: uppercase;
   margin-bottom: 5px;
   font-weight: 400;
+  font-size: 1rem;
   color: #1b2431;
-}
-.menu__form__group > span {
-  position: absolute;
-  right: 10px;
-  bottom: 5px;
-  color: #c42012;
-  font-size: 0.8rem;
 }
 
 .menu__container__form__input {
@@ -43,6 +57,9 @@
   border: none;
   outline: none;
 }
+.menu__form__file {
+  margin: 10px 0;
+}
 .valid__input {
   border-bottom: 1px solid #1b2431;
   background-color: white;
@@ -51,54 +68,26 @@
   border-bottom: 1px solid #c42012;
 }
 
-.menu__container > p {
-  margin-top: 25px;
-  font-size: 12px;
-  text-align: center;
-}
-
 .menu__menuButton {
   background: #c42012;
   width: 100%;
   height: 40px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   border: none;
-  margin-top: 10px;
+
   color: white;
   outline: none;
   cursor: pointer;
 }
 
 @media (min-width: 480px) {
-  .menu {
-    /* background-color: green; */
-  }
 }
 
 @media (min-width: 768px) {
-  .menu {
-    /* background-color: blue; */
-  }
 }
 
 @media (min-width: 1024px) {
-  .menu {
-    /* background-color: purple; */
-    padding: 0;
-    flex-direction: row;
-    /* width: 300px; */
-  }
 }
 
 @media (min-width: 1280px) {
-  .menu__cat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  .menu__cat__list {
-    display: flex;
-    flex-wrap: wrap;
-  }
 }

@@ -1,6 +1,6 @@
 .code {
   /* border: 1px solid red; */
-  /* background-color: #ff5029; */
+  background-color: var(--bg-light);
   display: flex;
   justify-content: center;
   align-items: center;

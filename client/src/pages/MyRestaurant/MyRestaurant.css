@@ -1,8 +1,9 @@
 .my-rest {
+  background-color: var(--bg-light);
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding-top: 20px;
   width: 100%;
 }
@@ -17,12 +18,12 @@
 }
 
 @media (min-width: 1024px) {
-  .my-rest {
+  /* .my-rest {
     flex-direction: row;
     justify-content: space-evenly;
     padding-left: 30px;
-    /* background-color: purple; */
-  }
+    /* background-color: purple; 
+  } */
 }
 
 @media (min-width: 1280px) {

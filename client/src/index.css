@@ -2,10 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 a {
   text-decoration: none;
+}
+:root {
+  --bg-light: #f8f8f8;
+  --primary-color: #c42012;
+  --secondary-color: #020a15;
 }
 html,
 body {

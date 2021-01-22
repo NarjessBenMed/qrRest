@@ -1,36 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { ImSpinner9 } from 'react-icons/im';
-import { IconContext } from 'react-icons';
-import { addToMenu } from '../../features/ownerSlice';
-import openSocket from 'socket.io-client';
-import { generateBase64FromImage } from '../../utils/image';
-import './AddMenu.css';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { ImSpinner9 } from "react-icons/im";
+import { IconContext } from "react-icons";
+import { addToMenu } from "../../features/ownerSlice";
+import openSocket from "socket.io-client";
+import { generateBase64FromImage } from "../../utils/image";
+import "./AddMenu.css";
 
 const AddMenu = (props) => {
+  const ref = React.useRef();
+  const clearImag = () => {
+    ref.current.value = "";
+  };
   const [values, setValues] = useState({
-    name: '',
-    price: '',
-    image: '',
-    preview: '',
-    description: '',
-    categorie: 'entree',
+    name: "",
+    price: "",
+    image: "",
+    preview: "",
+    description: "",
+    categorie: "entree",
   });
   const location = useLocation();
   const { restId, logo, restName } = location.state;
   useEffect(() => {
-    let socket = openSocket('http://localhost:5000/restaurant-space', {
-      transports: ['websocket', 'polling'],
+    let socket = openSocket("http://localhost:5000/restaurant-space", {
+      transports: ["websocket", "polling"],
     });
-    socket.on('connect', () => {});
+    socket.on("connect", () => {});
     if (restId) {
-      console.log('restid', restId);
-      socket.emit('joinRoom', { restId });
+      console.log("restid", restId);
+      socket.emit("joinRoom", { restId });
     }
 
-    socket.on('hi', (data) => {
-      console.log('from server', data);
+    socket.on("hi", (data) => {
+      console.log("from server", data);
     });
     return () => {
       socket.disconnect();
@@ -58,91 +62,105 @@ const AddMenu = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append('restaurant', restId);
-    formData.append('name', name);
-    formData.append('price', price);
-    formData.append('image', image);
-    formData.append('description', description);
-    formData.append('categorie', categorie);
+    formData.append("restaurant", restId);
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("image", image);
+    formData.append("description", description);
+    formData.append("categorie", categorie);
 
     dispatch(addToMenu(formData));
     setValues({
-      name: '',
-      price: '',
-      image: '',
-      preview: '',
-      description: '',
-      categorie: 'entree',
+      name: "",
+      price: "",
+      image: "",
+      preview: "",
+      description: "",
+      categorie: "entree",
     });
+    clearImag();
   };
   return (
-    <div className='menu'>
-      <h2>{restName}</h2>
-      <img src={'/' + logo} alt='logo' />
-      <h3>Create Menu </h3>
-      <form>
-        <div className='menu__form__group'>
+    <div className="menu-add">
+      <div className="menu__info">
+        <h2>Create Menu </h2>
+        <h2>{restName}</h2>
+        {/* <img src={'/' + logo} alt='logo' /> */}
+      </div>
+      <form className="menu-add__form">
+        <div className="menu__form__group">
           <h5> name de plat </h5>
 
           <input
-            type='text'
-            className='menu__container__form__input valid__input'
-            name='name'
+            type="text"
+            className="menu__container__form__input valid__input"
+            name="name"
             value={name}
             onChange={handleChange}
           />
         </div>
 
-        <div className='menu__form__group'>
+        <div className="menu__form__group">
           <h5>description</h5>
 
           <input
-            type='text'
-            className='menu__container__form__input valid__input'
-            name='description'
+            type="text"
+            className="menu__container__form__input valid__input"
+            name="description"
             value={description}
             onChange={handleChange}
           />
         </div>
 
-        <div className='menu__form__group'>
+        <div className="menu__form__group">
           <h5>price</h5>
 
           <input
-            type='text'
-            className='menu__container__form__input valid__input'
-            name='price'
+            type="text"
+            className="menu__container__form__input valid__input"
+            name="price"
             value={price}
             onChange={handleChange}
           />
         </div>
 
-        <div className='menu__form__group'>
+        <div className="menu__form__group-select">
           <h5>categorie</h5>
-          <select name='categorie' onChange={handleChange}>
-            <option defaultValue value='entree'>
+          <select name="categorie" value={categorie} onChange={handleChange}>
+            <option key="entree" value="entree">
               Entree
             </option>
-            <option value='boisson'>Boisson</option>
-            <option value='plat'>plat</option>
-            <option value='Dessert'>Dessert </option>
+            <option key="boisson" value="boisson">
+              Boisson
+            </option>
+            <option key="plat" value="plat">
+              plat
+            </option>
+            <option key="Dessert" value="Dessert">
+              Dessert{" "}
+            </option>
           </select>
         </div>
-        <div className='menu__form__group'>
-          <h5>logo</h5>
+        <div className="menu__form__group">
+          <h5>photo du plat </h5>
 
           <input
-            type='file'
-            className='menu__container__form__input valid__input'
-            name='image'
+            ref={ref}
+            type="file"
+            className="menu__form__file"
+            name="image"
             onChange={fileHandler}
           />
-          {preview && <img className='image-preview' src={preview} alt='d' />}
+          {preview && <img className="image-preview" src={preview} alt="d" />}
         </div>
 
-        <button type='submit' className='menu__menuButton' onClick={handleSubmit}>
-          {status === 'loading' ? (
-            <IconContext.Provider value={{ className: 'spinner' }}>
+        <button
+          type="submit"
+          className="menu__menuButton"
+          onClick={handleSubmit}
+        >
+          {status === "loading" ? (
+            <IconContext.Provider value={{ className: "spinner" }}>
               <div>
                 <ImSpinner9 />
               </div>

@@ -60,6 +60,7 @@ const ItemsMenu = ({ item }) => {
   return (
     <div className="menu-item">
       {preview && <img src={preview} alt="plat" />}
+
       {edit ? (
         <input type="file" name="image" onChange={handleFile} />
       ) : (
@@ -85,10 +86,10 @@ const ItemsMenu = ({ item }) => {
       ) : (
         <h4>Description : {item.description}</h4>
       )}
-      <button className="btn" onClick={() => handleClick(item._id)}>
-        delete
-      </button>
-      <button onClick={handleEdit}>Edit</button>
+      <div className="menu-item__buttons">
+        <button onClick={() => handleClick(item._id)}>delete</button>
+        <button onClick={handleEdit}>Edit</button>
+      </div>
     </div>
   );
 };
