@@ -1,37 +1,61 @@
 const express = require("express");
 const router = express.Router();
-
+const { body, validationResult } = require("express-validator");
+const clearImage = require("../utils/clearImage");
 const isAuth = require("../middleware/is-auth");
 const ROLE = require("../utils/roles");
 const authRole = require("../utils/authRole");
 const Menu = require("../models/menu");
 
-router.get("/get-rest-menu/:restId", async (req, res, next) => {
-  try {
-    const { restId } = req.params;
+router.get(
+  "/get-rest-menu/:restId",
 
-    // prevent the access from non owner (handle permission)
-    const menu = await Menu.findOne({
-      restaurant: restId,
-    }).populate("restaurant", ["name", "logo"]);
+  async (req, res, next) => {
+    try {
+      const { restId } = req.params;
 
-    if (!menu) {
-      const error = new Error("No menu");
-      error.statusCode = 404;
-      throw error;
+      // prevent the access from non owner (handle permission)
+      const menu = await Menu.findOne({
+        restaurant: restId,
+      }).populate("restaurant", ["name", "logo"]);
+
+      if (!menu) {
+        const error = new Error("No menu");
+        error.statusCode = 404;
+        throw error;
+      }
+      res.status(200).json({ menu });
+    } catch (err) {
+      next(err);
     }
-    res.status(200).json({ menu });
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 router.put(
   "/update-menu",
   isAuth,
   authRole(ROLE.OWNER),
+  [
+    body("name").trim().isLength({ min: 5 }),
+    body("price").trim().isNumeric(),
+    body("description").trim().isLength({ min: 5 }),
+  ],
   async (req, res, next) => {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation failed");
+        error.statusCode = 422;
+        error.data = errors.array();
+        throw error;
+      }
+      if (!req.file) {
+        const error = new Error("No image provided");
+        error.statusCode = 422;
+        error.data = [{ param: "logo", msg: "No image provided" }];
+        throw error;
+      }
+      const image = req.file.path.replace("\\", "/");
       const {
         restaurant,
         name,
@@ -41,12 +65,6 @@ router.put(
         description,
         categorie,
       } = req.body;
-      if (!req.file) {
-        const error = new Error("No image provided");
-        error.statusCode = 422;
-        throw error;
-      }
-      const image = req.file.path.replace("\\", "/");
       const newMenu = {
         name,
         nameRest,
@@ -80,6 +98,9 @@ router.put(
     try {
       const { idMenu, id } = req.body;
       const foundFood = await Menu.findOne({ _id: idMenu });
+      const imgPath = foundFood.items.filter(
+        (item) => item._id.toString() === id.toString()
+      )[0].image;
       foundFood.items = foundFood.items.filter(
         (item) => item._id.toString() !== id.toString()
       );
@@ -90,6 +111,7 @@ router.put(
         error.statusCode = 404;
         throw error;
       }
+      clearImage(imgPath);
       req.io
         .of("/restaurant-space")
         .to(foundFood.restaurant.toString())
@@ -107,9 +129,21 @@ router.put(
 router.put(
   "/edit-item",
   isAuth,
+  [
+    body("name").trim().isLength({ min: 5 }),
+    body("price").trim().isNumeric(),
+    body("description").trim().isLength({ min: 5 }),
+  ],
   authRole(ROLE.OWNER),
   async (req, res, next) => {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation failed");
+        error.statusCode = 422;
+        error.data = errors.array();
+        throw error;
+      }
       let image;
       const { idMenu, idItem, price, name, description, lastImg } = req.body;
 
@@ -130,7 +164,7 @@ router.put(
         },
         { arrayFilters: [{ "el._id": idItem }], new: true }
       );
-
+      clearImage(lastImg);
       const response = await foundFood.save();
       req.io
         .of("/restaurant-space")

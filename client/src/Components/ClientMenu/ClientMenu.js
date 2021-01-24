@@ -1,25 +1,21 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
+import { createOrder, updateOrder, getOrderById } from '../../features/orderSlice';
+import ClientMenuItem from '../../Components/ClientMenuItem/ClientMenuItem';
+import './ClientMenu.css';
 
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link, useLocation } from "react-router-dom";
-import {
-  createOrder,
-  updateOrder,
-  getOrderById,
-} from "../../features/orderSlice";
-import ClientMenuItem from "../../Components/ClientMenuItem/ClientMenuItem";
-import "./ClientMenu.css";
-
-const ClientMenu = ({ menu, restaurantId }) => {
+const ClientMenu = ({ menu }) => {
   const [values, setValues] = useState({
     orderId: null,
     items: [],
     total: 0,
   });
-  const { items, total, orderId } = values;
+  const { items, total } = values;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
+    const id = localStorage.getItem('id');
     if (id) {
       dispatch(getOrderById(id));
       setValues({ ...values, orderId: id });
@@ -27,23 +23,18 @@ const ClientMenu = ({ menu, restaurantId }) => {
   }, []);
   useEffect(() => {
     if (items.length > 0) {
-      let totalCost = items.reduce(
-        (acc, curv) => Number(acc) + Number(curv.price),
-        0
-      );
+      let totalCost = items.reduce((acc, curv) => Number(acc) + Number(curv.price), 0);
       console.log(totalCost);
       setValues({ ...values, total: totalCost });
     } else {
       setValues({ ...values, total: 0 });
     }
   }, [items]);
-  const { order, status } = useSelector((state) => state.order);
+  const { order } = useSelector((state) => state.order);
   const history = useHistory();
-  const location = useLocation();
-  const restId = localStorage.getItem("restId");
-  const tableNumber = localStorage.getItem("tableNumber");
+  const restId = localStorage.getItem('restId');
+  const tableNumber = localStorage.getItem('tableNumber');
 
-  const dispatch = useDispatch();
   const handleAdd = (name, quantity, price, comment, createdAt) => {
     const itemIndex = items.findIndex((item) => item.name === name);
     let newList = [...items];
@@ -69,14 +60,12 @@ const ClientMenu = ({ menu, restaurantId }) => {
   };
 
   const handleButton = () => {
-    const orderId = localStorage.getItem("id");
+    const orderId = localStorage.getItem('id');
     if (items.length > 0) {
       if (orderId && order && !order.order.paid) {
         dispatch(updateOrder({ data: { items, total, orderId }, history }));
       } else {
-        dispatch(
-          createOrder({ data: { items, total, restId, tableNumber }, history })
-        );
+        dispatch(createOrder({ data: { items, total, restId, tableNumber }, history }));
       }
     }
   };
@@ -84,63 +73,46 @@ const ClientMenu = ({ menu, restaurantId }) => {
   const orderLink = order && !order.order.paid && (
     <Link
       to={{
-        pathname: "/client-page/order",
+        pathname: '/client-page/order',
 
         state: { orderId: order.order._id },
-      }}
-    >
-      <span className="client-menu__link">My order</span>
+      }}>
+      <span className='client-menu__link'>My order</span>
     </Link>
   );
   const menuItems =
     menu && menu.menu.items ? (
       <Fragment>
-        <p className="client-menu__categorie">Entree</p>
-        <div className="client-menu__sub">
+        <p className='client-menu__categorie'>Entree</p>
+        <div className='client-menu__sub'>
           {menu.menu.items
-            .filter((item) => item.categorie === "entree")
+            .filter((item) => item.categorie === 'entree')
             .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
+              <ClientMenuItem key={item._id} item={item} addToCommand={handleAdd} />
             ))}
         </div>
-        <p className="client-menu__categorie">Plat</p>
-        <div className="client-menu__sub">
+        <p className='client-menu__categorie'>Plat</p>
+        <div className='client-menu__sub'>
           {menu.menu.items
-            .filter((item) => item.categorie === "plat")
+            .filter((item) => item.categorie === 'plat')
             .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
+              <ClientMenuItem key={item._id} item={item} addToCommand={handleAdd} />
             ))}
         </div>
-        <p className="client-menu__categorie">Boisson</p>
-        <div className="client-menu__sub">
+        <p className='client-menu__categorie'>Boisson</p>
+        <div className='client-menu__sub'>
           {menu.menu.items
-            .filter((item) => item.categorie === "boisson")
+            .filter((item) => item.categorie === 'boisson')
             .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
+              <ClientMenuItem key={item._id} item={item} addToCommand={handleAdd} />
             ))}
         </div>
-        <p className="client-menu__categorie">Dessert</p>
-        <div className="client-menu__sub">
+        <p className='client-menu__categorie'>Dessert</p>
+        <div className='client-menu__sub'>
           {menu.menu.items
-            .filter((item) => item.categorie === "Dessert")
+            .filter((item) => item.categorie === 'Dessert')
             .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
+              <ClientMenuItem key={item._id} item={item} addToCommand={handleAdd} />
             ))}
         </div>
       </Fragment>
@@ -151,9 +123,9 @@ const ClientMenu = ({ menu, restaurantId }) => {
       <h5>Loading...</h5>
     );
   return (
-    <div className="client-menu">
-      <div className="client-menu__items">{menuItems}</div>
-      <div className="client-menu__nav">
+    <div className='client-menu'>
+      <div className='client-menu__items'>{menuItems}</div>
+      <div className='client-menu__nav'>
         {orderLink}
         <button onClick={() => handleButton()}>Order Now</button>
       </div>

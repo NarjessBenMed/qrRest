@@ -1,31 +1,58 @@
 .menu-add {
-  padding: 10px 30px;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 300px;
+  height: auto;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .menu__info {
   display: flex;
-  width: 280px;
-  justify-content: space-between;
-  margin: 20px 0;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid blue; */
+  line-height: 1.3rem;
+  margin-bottom: 10px;
 }
 .image-preview {
   height: 50px;
   width: 50px;
 }
-.menu__info > h2 {
+.menu__info > h3 {
   text-transform: uppercase;
   font-weight: 400;
 }
-
+.menu-add__form {
+  width: 100%;
+}
 .menu__form__group {
   position: relative;
+  width: 100%;
+}
+.menu__form__group > span,
+.img-section > span {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  color: #c42012;
+  font-size: 0.8rem;
+}
+.menu__container__form__input {
+  height: 30px;
+  margin-bottom: 20px;
+  width: 98%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #1b2431;
+  background-color: white;
 }
 .menu__form__group-select {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  padding-right: 10px;
 }
 
 .menu__form__group-select > select {
@@ -34,38 +61,35 @@
   border: none;
   outline: none;
   display: inline-block;
-  width: 150px;
+  margin-top: 10px;
+  width: 100%;
   height: 30px;
   margin-bottom: 10px;
 }
-.menu__form__group > input {
-  font-size: 1rem;
+.img-section {
+  /* border: 1px solid red; */
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid #1b2431;
 }
+
 .menu__form__group > h5,
 .menu__form__group-select > h5 {
   text-transform: uppercase;
-  margin-bottom: 5px;
   font-weight: 400;
-  font-size: 1rem;
   color: #1b2431;
 }
 
-.menu__container__form__input {
-  height: 30px;
-  margin-bottom: 20px;
-  width: 98%;
-  border: none;
-  outline: none;
-}
 .menu__form__file {
+  width: 100%;
   margin: 10px 0;
-}
-.valid__input {
-  border-bottom: 1px solid #1b2431;
-  background-color: white;
-}
-.error__input {
-  border-bottom: 1px solid #c42012;
 }
 
 .menu__menuButton {
@@ -81,6 +105,16 @@
 }
 
 @media (min-width: 480px) {
+  .menu-add {
+    width: 400px;
+  }
+  .menu__form__group-select {
+    flex-direction: row;
+    align-items: center;
+  }
+  .menu__form__group-select > select {
+    width: 180px;
+  }
 }
 
 @media (min-width: 768px) {

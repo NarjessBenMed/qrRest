@@ -1,16 +1,15 @@
-import React from "react";
-import { Link, animateScroll as scroll } from "react-scroll";
+import React from 'react';
+import { Link } from 'react-scroll';
 
 const ScrollComponent = (props) => {
   return (
     <Link
-      activeClass="active"
+      activeClass='active'
       to={props.section}
       spy={true}
       smooth={true}
       offset={-70}
-      duration={500}
-    >
+      duration={900}>
       {props.children}
     </Link>
   );

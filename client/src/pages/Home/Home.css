@@ -48,7 +48,7 @@
 
 .home__content {
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.514), 0 0px 20px 0 rgba(0, 0, 0, 0.548);
-  background: url("./medium-bg.jpg");
+  background: url('./medium-bg.jpg');
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -57,7 +57,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 60px;
   width: 100%;
   text-align: center;
 }
@@ -193,7 +193,7 @@
 @media (min-width: 480px) {
   .home__content {
     margin-top: 100px;
-    background: url("./medium-bg.jpg");
+    background: url('./medium-bg.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -222,7 +222,7 @@
 
 @media (min-width: 768px) {
   .home__content {
-    background: url("./mlarge-bg.jpg");
+    background: url('./mlarge-bg.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -259,7 +259,7 @@
 
 @media (min-width: 1024px) {
   .home__content {
-    background: url("./large-bg.jpg");
+    background: url('./large-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -281,7 +281,7 @@
 
 @media (min-width: 1280px) {
   .home__content {
-    background: url("./xlarge-bg.jpg");
+    background: url('./xlarge-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

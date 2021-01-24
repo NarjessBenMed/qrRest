@@ -11,7 +11,7 @@ const MyOrder = () => {
   useEffect(() => {
     console.log('orederid', orderId);
     dispatch(getOrderById(orderId));
-  }, [dispatch, orderId]);
+  }, [orderId]);
   const { order, status } = useSelector((state) => state.order);
   return (
     <div className='order'>

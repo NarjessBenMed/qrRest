@@ -1,5 +1,5 @@
 .client-section {
-  /* border: 2px solid green; */
+  background-color: var(--bg-light);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -8,7 +8,7 @@
 }
 
 .client-section__info {
-  margin: 30px 0;
+  margin: 30px 0 20px;
   display: flex;
   justify-content: space-between;
   width: 250px;

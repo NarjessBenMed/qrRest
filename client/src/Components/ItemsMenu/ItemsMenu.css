@@ -1,16 +1,17 @@
 .menu-item {
   width: 300px;
-  /* border: 1px solid red; */
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   display: flex;
   flex-direction: column;
   padding: 20px;
+  margin: 10px 0 20px;
 }
 .menu-item > img {
   height: 70px;
   width: 70px;
 }
-.menu-item input {
+.menu-item__edit-group input {
   border: none;
   border-bottom: 1px solid var(--secondary-color);
   margin: 5px 0;
@@ -18,7 +19,7 @@
   height: 30px;
   padding: 5px;
 }
-.menu-item h4 {
+.menu-item__edit-group h4 {
   text-transform: uppercase;
   font-weight: 400;
   overflow-wrap: break-word;
@@ -37,4 +38,14 @@
   color: white;
   outline: none;
   cursor: pointer;
+}
+.menu-item__edit-group {
+  position: relative;
+}
+.menu-item__edit-group > span {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  color: #c42012;
+  font-size: 0.8rem;
 }

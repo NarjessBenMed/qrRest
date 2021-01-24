@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { ImSpinner9 } from "react-icons/im";
-import { IconContext } from "react-icons";
-import { createRestaurant } from "../../features/ownerSlice";
-import { generateBase64FromImage } from "../../utils/image";
-import "./AddRestaurant.css";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { ImSpinner9 } from 'react-icons/im';
+import { IconContext } from 'react-icons';
+import { createRestaurant } from '../../features/ownerSlice';
+import { generateBase64FromImage } from '../../utils/image';
+import './AddRestaurant.css';
 
 const AddRestaurant = () => {
   const [values, setValues] = useState({
-    name: "",
-    address: "",
-    logo: "",
-    preview: "",
+    name: '',
+    address: '',
+    logo: '',
+    preview: '',
   });
   const { name, logo, address, preview } = values;
   const dispatch = useDispatch();
-  const { status, errors } = useSelector((state) => state.owner);
+  const { ownerStatus, ownerErrors } = useSelector((state) => state.owner);
   useEffect(() => {
-    if (status === "succeded")
-      setValues({ name: "", address: "", logo: "", preview: "" });
-  }, [status]);
+    if (ownerStatus.create === 'succeded')
+      setValues({ name: '', address: '', logo: '', preview: '' });
+  }, [ownerStatus]);
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -37,72 +37,72 @@ const AddRestaurant = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("name", name);
-    formData.append("address", address);
-    formData.append("image", logo);
+    formData.append('name', name);
+    formData.append('address', address);
+    formData.append('image', logo);
     dispatch(createRestaurant(formData));
   };
   return (
-    <div className="addrestau">
+    <div className='addrestau'>
       <h3>Create new Restaurant</h3>
       <form>
-        <div className="addrestau__form__group">
-          <h5>Restaurant's name</h5>
+        <div className='addrestau__form__group'>
+          <h5>name</h5>
           <span>
-            {errors &&
-              errors.data.filter((err) => err.param === "name")[0] &&
-              errors.data.filter((err) => err.param === "name")[0].msg}
+            {ownerStatus.create === 'failed' &&
+              ownerErrors.create.data.filter((err) => err.param === 'name')[0] &&
+              ownerErrors.create.data.filter((err) => err.param === 'name')[0].msg}
           </span>
 
           <input
-            type="text"
-            className="addrestau__container__form__input valid__input"
-            name="name"
+            type='text'
+            className='addrestau__container__form__input valid__input'
+            name='name'
             value={name}
             onChange={handleChange}
           />
         </div>
 
-        <div className="addrestau__form__group">
+        <div className='addrestau__form__group'>
           <h5>address</h5>
           <span>
-            {errors &&
-              errors.data.filter((err) => err.param === "address")[0] &&
-              errors.data.filter((err) => err.param === "address")[0].msg}
+            {ownerStatus.create === 'failed' &&
+              ownerErrors.create.data.filter((err) => err.param === 'address')[0] &&
+              ownerErrors.create.data.filter((err) => err.param === 'address')[0].msg}
           </span>
 
           <input
-            type="text"
-            className="addrestau__container__form__input valid__input"
-            name="address"
+            type='text'
+            className='addrestau__container__form__input valid__input'
+            name='address'
             value={address}
             onChange={handleChange}
           />
         </div>
-        <div className="addrestau__form__group">
+        <div className='addrestau__form__group'>
           <h5>logo</h5>
           <span>
-            {errors &&
-              errors.data.filter((err) => err.param === "logo")[0] &&
-              errors.data.filter((err) => err.param === "logo")[0].msg}
+            {ownerStatus.create === 'failed' &&
+              ownerErrors.create.data.filter((err) => err.param === 'logo')[0] &&
+              ownerErrors.create.data.filter((err) => err.param === 'logo')[0].msg}
           </span>
-
-          <input
-            type="file"
-            className="addrestau__container__form__input valid__input"
-            name="logo"
-            onChange={fileHandler}
-          />
-          {preview && <img className="logo-preview" src={preview} alt="d" />}
+          <div className='img-section'>
+            <input
+              type='file'
+              className='addrestau__container__form__input valid__input'
+              name='logo'
+              onChange={fileHandler}
+            />
+            {preview && <img className='logo-preview' src={preview} alt='d' />}
+          </div>
         </div>
 
         <button
-          type="submit"
-          className="addrestau__addrestauButton"
-          onClick={handleSubmit}
-        >
-          {status === "loading" ? (
-            <IconContext.Provider value={{ className: "spinner" }}>
+          type='submit'
+          className='addrestau__addrestauButton'
+          onClick={handleSubmit}>
+          {ownerStatus.create === 'loading' ? (
+            <IconContext.Provider value={{ className: 'spinner' }}>
               <div>
                 <ImSpinner9 />
               </div>

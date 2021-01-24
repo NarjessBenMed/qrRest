@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ClientMenuItem.css";
-const moment = require("moment");
+import moment from "moment";
 
 const ClientMenuItem = ({ item, addToCommand }) => {
   const [showInput, setShowInput] = useState(false);

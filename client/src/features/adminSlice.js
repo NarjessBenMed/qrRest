@@ -59,6 +59,7 @@ export const adminSlice = createSlice({
       return {
         ...state,
         status: 'succeded',
+        errors: null,
         owner: action.payload,
       };
     },
@@ -75,6 +76,7 @@ export const adminSlice = createSlice({
         ...state,
         listStatus: 'succeded',
         owners: action.payload,
+        errors: null,
       };
     },
     [getAllOwners.rejected]: (state, action) => ({
@@ -90,6 +92,7 @@ export const adminSlice = createSlice({
         ...state,
         listStatus: 'succeded',
         owner: action.payload,
+        errors: null,
       };
     },
     [deleteOwner.rejected]: (state, action) => ({

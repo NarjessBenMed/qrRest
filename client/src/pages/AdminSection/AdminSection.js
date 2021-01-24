@@ -14,7 +14,7 @@ const AdminSection = () => {
     if (isAuth) {
       dispatch(getAllOwners());
     }
-  }, [isAuth, dispatch]);
+  }, [isAuth]);
   useEffect(() => {
     let socket = openSocket('http://localhost:5000/admin-space', {
       transports: ['websocket', 'polling'],
@@ -33,7 +33,7 @@ const AdminSection = () => {
     return () => {
       socket.disconnect();
     };
-  }, [dispatch]);
+  }, []);
 
   const { owners } = useSelector((state) => state.admin);
 

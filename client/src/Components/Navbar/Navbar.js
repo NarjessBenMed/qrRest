@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../../features/authSlice';
-import { useLocation } from 'react-router-dom';
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { MdRestaurantMenu } from 'react-icons/md';
 import { IconContext } from 'react-icons';
@@ -14,7 +13,6 @@ const Navbar = () => {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const isClient = useSelector((state) => state.auth.isClient);

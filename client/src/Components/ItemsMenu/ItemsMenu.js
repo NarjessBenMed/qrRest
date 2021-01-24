@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./ItemsMenu.css";
 import { deleteItemMenu, editItemMenu } from "../../features/menuSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const ItemsMenu = ({ item }) => {
     edit: false,
   });
   const { name, price, description, edit, image, preview } = values;
-  const { menu } = useSelector((state) => state.menu);
+  const { menu, menuStatus, menuErrors } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
 
   const handleClick = (id) => {
@@ -66,26 +66,53 @@ const ItemsMenu = ({ item }) => {
       ) : (
         <img src={"/" + item.image} alt="food" />
       )}
-      {edit ? (
-        <input type="text" value={name} name="name" onChange={handleData} />
-      ) : (
-        <h4>Name :{item.name}</h4>
-      )}
-      {edit ? (
-        <input type="text" value={price} name="price" onChange={handleData} />
-      ) : (
-        <h4>Price : {item.price}</h4>
-      )}
-      {edit ? (
-        <input
-          type="text"
-          value={description}
-          name="description"
-          onChange={handleData}
-        />
-      ) : (
-        <h4>Description : {item.description}</h4>
-      )}
+      <div className="menu-item__edit-group">
+        <span>
+          {edit &&
+            menuStatus.edit === "failed" &&
+            menuErrors.edit.data.filter((err) => err.param === "name")[0] &&
+            menuErrors.edit.data.filter((err) => err.param === "name")[0].msg}
+        </span>
+        {edit ? (
+          <input type="text" value={name} name="name" onChange={handleData} />
+        ) : (
+          <h4>Name :{item.name}</h4>
+        )}
+      </div>
+      <div className="menu-item__edit-group">
+        <span>
+          {edit &&
+            menuStatus.edit === "failed" &&
+            menuErrors.edit.data.filter((err) => err.param === "price")[0] &&
+            menuErrors.edit.data.filter((err) => err.param === "price")[0].msg}
+        </span>
+        {edit ? (
+          <input type="text" value={price} name="price" onChange={handleData} />
+        ) : (
+          <h4>Price : {item.price}</h4>
+        )}
+      </div>
+      <div className="menu-item__edit-group">
+        <span>
+          {edit &&
+            menuStatus.edit === "failed" &&
+            menuErrors.edit.data.filter(
+              (err) => err.param === "description"
+            )[0] &&
+            menuErrors.edit.data.filter((err) => err.param === "description")[0]
+              .msg}
+        </span>
+        {edit ? (
+          <input
+            type="text"
+            value={description}
+            name="description"
+            onChange={handleData}
+          />
+        ) : (
+          <h4>Description : {item.description}</h4>
+        )}
+      </div>
       <div className="menu-item__buttons">
         <button onClick={() => handleClick(item._id)}>delete</button>
         <button onClick={handleEdit}>Edit</button>

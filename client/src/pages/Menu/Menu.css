@@ -17,8 +17,21 @@
   /* border: 1px solid blue; */
   /* text-align: center; */
 }
+.menu__cat {
+  font-size: 1rem;
+  color: var(--primary-color);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  text-align: center;
+  background-color: white;
+  margin: 10px 0 20px;
+  width: 250px;
+  border: none;
+}
 
 @media (min-width: 480px) {
+  .menu__cat {
+    width: 400px;
+  }
 }
 
 @media (min-width: 768px) {

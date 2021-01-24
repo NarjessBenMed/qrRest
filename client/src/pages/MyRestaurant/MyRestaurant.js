@@ -11,12 +11,11 @@ import "./MyRestaurant.css";
 const MyRestaurant = () => {
   const location = useLocation();
   const { restId, logo } = location.state;
-  console.log("restId", restId);
   const dispatch = useDispatch();
-  const { menu, status, updateStatus } = useSelector((state) => state.menu);
+  const { menu } = useSelector((state) => state.menu);
   useEffect(() => {
     dispatch(getMenuByRest(restId));
-  }, [dispatch, restId]);
+  }, [restId]);
   useEffect(() => {
     let socket = openSocket("http://localhost:5000/restaurant-space", {
       transports: ["websocket", "polling"],
@@ -32,15 +31,11 @@ const MyRestaurant = () => {
     return () => {
       socket.disconnect();
     };
-  }, [dispatch, restId]);
+  }, [restId]);
   return (
     <div className="my-rest">
       <AddMenu />
-      {updateStatus !== "loading" && status !== "loading" ? (
-        <Menu menu={menu} logo={logo} />
-      ) : (
-        <h1>Loading </h1>
-      )}
+      <Menu menu={menu} logo={logo} />
     </div>
   );
 };

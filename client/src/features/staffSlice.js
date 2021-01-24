@@ -1,11 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const createWorker = createAsyncThunk(
-  "staff/create-worker",
+  'staff/create-worker',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/worker/create-worker", data);
+      const response = await axios.post('/worker/create-worker', data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -13,10 +13,10 @@ export const createWorker = createAsyncThunk(
   }
 );
 export const getAllWorkers = createAsyncThunk(
-  "staff/get-all",
+  'staff/get-all',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/worker/workers");
+      const response = await axios.get('/worker/workers');
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -24,10 +24,10 @@ export const getAllWorkers = createAsyncThunk(
   }
 );
 export const deleteWorker = createAsyncThunk(
-  "staff/delete-worker",
+  'staff/delete-worker',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/worker/del-worker", data);
+      const response = await axios.put('/worker/del-worker', data);
 
       return response.data;
     } catch (err) {
@@ -37,58 +37,61 @@ export const deleteWorker = createAsyncThunk(
 );
 
 export const staffSlice = createSlice({
-  name: "staff",
+  name: 'staff',
   initialState: {
-    status: "idle",
-    worker: "",
+    status: 'idle',
+    worker: '',
     workers: null,
     errors: null,
   },
   reducers: {},
   extraReducers: {
     [createWorker.pending]: (state, action) => {
-      state.status = "loading";
+      state.status = 'loading';
     },
     [createWorker.fulfilled]: (state, action) => {
       return {
         ...state,
-        status: "succeded",
+        status: 'succeded',
         worker: action.payload,
+        errors: null,
       };
     },
     [createWorker.rejected]: (state, action) => ({
       ...state,
-      status: "failed",
+      status: 'failed',
       errors: action.payload,
     }),
     [getAllWorkers.pending]: (state, action) => {
-      state.listStatus = "loading";
+      state.listStatus = 'loading';
     },
     [getAllWorkers.fulfilled]: (state, action) => {
       return {
         ...state,
-        status: "succeded",
+        status: 'succeded',
         workers: action.payload,
+        errors: null,
       };
     },
     [getAllWorkers.rejected]: (state, action) => ({
       ...state,
-      status: "failed",
+      status: 'failed',
       errors: action.payload,
     }),
     [deleteWorker.pending]: (state, action) => {
-      state.listStatus = "loading";
+      state.listStatus = 'loading';
     },
     [deleteWorker.fulfilled]: (state, action) => {
       return {
         ...state,
-        listStatus: "succeded",
+        listStatus: 'succeded',
         worker: action.payload,
+        errors: null,
       };
     },
     [deleteWorker.rejected]: (state, action) => ({
       ...state,
-      listStatus: "failed",
+      listStatus: 'failed',
       errors: action.payload,
     }),
   },

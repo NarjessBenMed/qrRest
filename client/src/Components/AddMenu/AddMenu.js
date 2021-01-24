@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { ImSpinner9 } from "react-icons/im";
 import { IconContext } from "react-icons";
-import { addToMenu } from "../../features/ownerSlice";
+import { addToMenu } from "../../features/menuSlice";
 import openSocket from "socket.io-client";
 import { generateBase64FromImage } from "../../utils/image";
 import "./AddMenu.css";
 
-const AddMenu = (props) => {
+const AddMenu = () => {
   const ref = React.useRef();
   const clearImag = () => {
     ref.current.value = "";
@@ -22,7 +22,7 @@ const AddMenu = (props) => {
     categorie: "entree",
   });
   const location = useLocation();
-  const { restId, logo, restName } = location.state;
+  const { restId, restName } = location.state;
   useEffect(() => {
     let socket = openSocket("http://localhost:5000/restaurant-space", {
       transports: ["websocket", "polling"],
@@ -39,15 +39,28 @@ const AddMenu = (props) => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [restId]);
 
   const { name, price, image, description, categorie, preview } = values;
   const dispatch = useDispatch();
-  useEffect(() => {}, [dispatch]);
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const { status } = useSelector((state) => state.owner);
+  const { menuStatus, menuErrors } = useSelector((state) => state.menu);
+  useEffect(() => {
+    if (menuStatus.create === "succeded") {
+      setValues({
+        name: "",
+        price: "",
+        image: "",
+        preview: "",
+        description: "",
+        categorie: "entree",
+      });
+      clearImag();
+    }
+  }, [menuStatus]);
   const fileHandler = (e) => {
     const file = e.target.files[0];
     if (file)
@@ -70,30 +83,26 @@ const AddMenu = (props) => {
     formData.append("categorie", categorie);
 
     dispatch(addToMenu(formData));
-    setValues({
-      name: "",
-      price: "",
-      image: "",
-      preview: "",
-      description: "",
-      categorie: "entree",
-    });
-    clearImag();
   };
   return (
     <div className="menu-add">
       <div className="menu__info">
-        <h2>Create Menu </h2>
-        <h2>{restName}</h2>
+        <h3>Create Menu </h3>
+        <h3>{restName}</h3>
         {/* <img src={'/' + logo} alt='logo' /> */}
       </div>
       <form className="menu-add__form">
         <div className="menu__form__group">
-          <h5> name de plat </h5>
-
+          <h5> nom de plat </h5>
+          <span>
+            {menuStatus.create === "failed" &&
+              menuErrors.create.data.filter((err) => err.param === "name")[0] &&
+              menuErrors.create.data.filter((err) => err.param === "name")[0]
+                .msg}
+          </span>
           <input
             type="text"
-            className="menu__container__form__input valid__input"
+            className="menu__container__form__input"
             name="name"
             value={name}
             onChange={handleChange}
@@ -102,10 +111,18 @@ const AddMenu = (props) => {
 
         <div className="menu__form__group">
           <h5>description</h5>
-
+          <span>
+            {menuStatus.create === "failed" &&
+              menuErrors.create.data.filter(
+                (err) => err.param === "description"
+              )[0] &&
+              menuErrors.create.data.filter(
+                (err) => err.param === "description"
+              )[0].msg}
+          </span>
           <input
             type="text"
-            className="menu__container__form__input valid__input"
+            className="menu__container__form__input"
             name="description"
             value={description}
             onChange={handleChange}
@@ -114,10 +131,17 @@ const AddMenu = (props) => {
 
         <div className="menu__form__group">
           <h5>price</h5>
-
+          <span>
+            {menuStatus.create === "failed" &&
+              menuErrors.create.data.filter(
+                (err) => err.param === "price"
+              )[0] &&
+              menuErrors.create.data.filter((err) => err.param === "price")[0]
+                .msg}
+          </span>
           <input
             type="text"
-            className="menu__container__form__input valid__input"
+            className="menu__container__form__input"
             name="price"
             value={price}
             onChange={handleChange}
@@ -126,6 +150,7 @@ const AddMenu = (props) => {
 
         <div className="menu__form__group-select">
           <h5>categorie</h5>
+
           <select name="categorie" value={categorie} onChange={handleChange}>
             <option key="entree" value="entree">
               Entree
@@ -143,15 +168,24 @@ const AddMenu = (props) => {
         </div>
         <div className="menu__form__group">
           <h5>photo du plat </h5>
-
-          <input
-            ref={ref}
-            type="file"
-            className="menu__form__file"
-            name="image"
-            onChange={fileHandler}
-          />
-          {preview && <img className="image-preview" src={preview} alt="d" />}
+          <div className="img-section">
+            <span>
+              {menuStatus.create === "failed" &&
+                menuErrors.create.data.filter(
+                  (err) => err.param === "logo"
+                )[0] &&
+                menuErrors.create.data.filter((err) => err.param === "logo")[0]
+                  .msg}
+            </span>
+            <input
+              ref={ref}
+              type="file"
+              className="menu__form__file"
+              name="image"
+              onChange={fileHandler}
+            />
+            {preview && <img className="image-preview" src={preview} alt="d" />}
+          </div>
         </div>
 
         <button
@@ -159,7 +193,7 @@ const AddMenu = (props) => {
           className="menu__menuButton"
           onClick={handleSubmit}
         >
-          {status === "loading" ? (
+          {menuStatus.create === "loading" ? (
             <IconContext.Provider value={{ className: "spinner" }}>
               <div>
                 <ImSpinner9 />

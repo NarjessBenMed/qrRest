@@ -36,13 +36,12 @@
 
 .client-menu__categorie {
   font-size: 1rem;
-  background-color: rgb(87, 85, 85);
-  color: white;
-  padding: 10px;
+  color: var(--primary-color);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   text-align: center;
-  /* display: inline-block; */
-  /* border-radius: 30px; */
-  width: 100%;
+  background-color: white;
+  margin: 10px 0 20px;
+  width: 250px;
   border: none;
 }
 .client-menu__items {
@@ -53,8 +52,8 @@
 }
 
 @media (min-width: 480px) {
-  .client-menu {
-    /* background-color: green; */
+  .client-menu__categorie {
+    width: 400px;
   }
 }
 

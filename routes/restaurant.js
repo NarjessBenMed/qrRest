@@ -88,10 +88,7 @@ router.put(
       if (!errors.isEmpty()) {
         const error = new Error("Validation failed");
         error.statusCode = 422;
-        error.data = errors.array().map((err) => {
-          err.param = err.param + "edit";
-          return err;
-        });
+        error.data = errors.array();
         throw error;
       }
       let logo;

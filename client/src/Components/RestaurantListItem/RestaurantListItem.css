@@ -1,0 +1,109 @@
+.restlist__item__form {
+  display: flex;
+  flex-direction: column;
+}
+.restlist__item__form__button {
+  display: flex;
+
+  justify-content: space-between;
+}
+.restlist__item__form__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid green; */
+  margin-top: 10px;
+  height: 200px;
+  padding: 0 20px;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.restlist__item__form__links span {
+  background: var(--secondary-color);
+  font-size: 0.9rem;
+  display: inline-block;
+  width: 200px;
+  padding: 10px 0;
+  text-align: center;
+  border: none;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+.restlist__item__form__button button {
+  background: #c42012;
+  padding: 10px 30px;
+  font-size: 0.9rem;
+  border: none;
+  margin-top: 20px;
+  margin: 20px 0 10px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+.restlist__item__form__group {
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+.restlist__item__form__group h5 {
+  font-weight: 400;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+.restlist__item__form__group p {
+  flex: 1;
+  font-weight: 400;
+  text-transform: capitalize;
+  color: #c42012;
+  font-size: 0.9rem;
+}
+.restlist__item__form__group > input {
+  height: 30px;
+  width: 60%;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+.error-message {
+  color: var(--primary-color);
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  font-size: 0.8rem;
+}
+.image-prev {
+  margin-right: 20px;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+
+.restlist__item {
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 20px;
+  width: 300px;
+  margin: 10px 0;
+}
+
+@media (min-width: 480px) {
+  .restlist__item {
+    width: auto;
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
+}
+
+@media (min-width: 1280px) {
+}
