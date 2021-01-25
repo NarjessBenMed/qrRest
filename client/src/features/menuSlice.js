@@ -76,11 +76,13 @@ export const menuSlice = createSlice({
         menu: action.payload,
       };
     },
-    [getMenuByRest.rejected]: (state, action) => ({
-      ...state,
-      menuStatus: { ...state.menuStatus, getMenu: "failed" },
-      menuErrors: { ...state.menuErrors, getMenu: action.payload },
-    }),
+    [getMenuByRest.rejected]: (state, action) => {
+      return {
+        ...state,
+        menuStatus: { ...state.menuStatus, getMenu: "failed" },
+        menuErrors: { ...state.menuErrors, getMenu: action.payload },
+      };
+    },
     [addToMenu.pending]: (state, action) => {
       return {
         ...state,
@@ -95,11 +97,13 @@ export const menuSlice = createSlice({
         menu: action.payload,
       };
     },
-    [addToMenu.rejected]: (state, action) => ({
-      ...state,
-      menuStatus: { ...state.menuStatus, create: "failed" },
-      menuErrors: { ...state.menuErrors, create: action.payload },
-    }),
+    [addToMenu.rejected]: (state, action) => {
+      return {
+        ...state,
+        menuStatus: { ...state.menuStatus, create: "failed" },
+        menuErrors: { ...state.menuErrors, create: action.payload },
+      };
+    },
 
     [deleteItemMenu.pending]: (state, action) => {
       return {
@@ -115,11 +119,13 @@ export const menuSlice = createSlice({
         menu: action.payload,
       };
     },
-    [deleteItemMenu.rejected]: (state, action) => ({
-      ...state,
-      menuStatus: { ...state.menuStatus, delete: "failed" },
-      menuErrors: { ...state.menuErrors, delete: action.payload },
-    }),
+    [deleteItemMenu.rejected]: (state, action) => {
+      return {
+        ...state,
+        menuStatus: { ...state.menuStatus, delete: "failed" },
+        menuErrors: { ...state.menuErrors, delete: action.payload },
+      };
+    },
     [editItemMenu.pending]: (state, action) => {
       return {
         ...state,
@@ -134,11 +140,13 @@ export const menuSlice = createSlice({
         menu: action.payload,
       };
     },
-    [editItemMenu.rejected]: (state, action) => ({
-      ...state,
-      menuStatus: { ...state.menuStatus, edit: "failed" },
-      menuErrors: { ...state.menuErrors, edit: action.payload },
-    }),
+    [editItemMenu.rejected]: (state, action) => {
+      return {
+        ...state,
+        menuStatus: { ...state.menuStatus, edit: "failed" },
+        menuErrors: { ...state.menuErrors, edit: action.payload },
+      };
+    },
   },
 });
 

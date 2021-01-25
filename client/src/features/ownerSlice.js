@@ -83,11 +83,13 @@ export const ownerSlice = createSlice({
         owner: action.payload,
       };
     },
-    [createRestaurant.rejected]: (state, action) => ({
-      ...state,
-      ownerStatus: { ...state.ownerStatus, create: "failed" },
-      ownerErrors: { ...state.ownerErrors, create: action.payload },
-    }),
+    [createRestaurant.rejected]: (state, action) => {
+      return {
+        ...state,
+        ownerStatus: { ...state.ownerStatus, create: "failed" },
+        ownerErrors: { ...state.ownerErrors, create: action.payload },
+      };
+    },
     [getRestList.pending]: (state, action) => {
       return {
         ...state,
@@ -102,11 +104,13 @@ export const ownerSlice = createSlice({
         restList: action.payload,
       };
     },
-    [getRestList.rejected]: (state, action) => ({
-      ...state,
-      ownerStatus: { ...state.ownerStatus, getList: "failed" },
-      ownerErrors: { ...state.ownerErrors, getList: action.payload },
-    }),
+    [getRestList.rejected]: (state, action) => {
+      return {
+        ...state,
+        ownerStatus: { ...state.ownerStatus, getList: "failed" },
+        ownerErrors: { ...state.ownerErrors, getList: action.payload },
+      };
+    },
     [deleteRestaurant.pending]: (state, action) => {
       return {
         ...state,
@@ -120,16 +124,20 @@ export const ownerSlice = createSlice({
         ownerErrors: { ...state.ownerErrors, delete: null },
       };
     },
-    [deleteRestaurant.rejected]: (state, action) => ({
-      ...state,
-      ownerStatus: { ...state.ownerStatus, delete: "failed" },
-      ownerErrors: { ...state.ownerErrors, delete: action.payload },
-    }),
-    [editRestaurant.rejected]: (state, action) => ({
-      ...state,
-      ownerStatus: { ...state.ownerStatus, edit: "failed" },
-      ownerErrors: { ...state.ownerErrors, edit: action.payload },
-    }),
+    [deleteRestaurant.rejected]: (state, action) => {
+      return {
+        ...state,
+        ownerStatus: { ...state.ownerStatus, delete: "failed" },
+        ownerErrors: { ...state.ownerErrors, delete: action.payload },
+      };
+    },
+    [editRestaurant.rejected]: (state, action) => {
+      return {
+        ...state,
+        ownerStatus: { ...state.ownerStatus, edit: "failed" },
+        ownerErrors: { ...state.ownerErrors, edit: action.payload },
+      };
+    },
 
     [editRestaurant.pending]: (state, action) => {
       return {
