@@ -103,7 +103,13 @@ const WorkerSection = () => {
                       <p>{item.name}</p>
                       <p>{item.quantity}</p>
                     </div>
-                    <span className="comment">{item.comment}</span>
+                    {item.comment && (
+                      <p className="comment">
+                        <span>preferences: </span>
+                        {item.comment}
+                      </p>
+                    )}
+
                     <span className="timeline">
                       {moment(item.createdAt).fromNow()}
                     </span>

@@ -4,7 +4,8 @@ const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
 const bcrypt = require("bcrypt");
-
+const Restaurant = require("../models/restaurant");
+const Table = require("../models/table");
 const User = require("../models/user");
 const isAuth = require("../middleware/is-auth");
 
@@ -65,12 +66,21 @@ router.post(
 router.post("/auth-client", async (req, res, next) => {
   try {
     const { restId, tableNumber } = req.body;
+
+    const table = await Table.findOne({ restaurant: restId, tableNumber });
+    if (!table) {
+      const error = new Error("Validation failed");
+      error.statusCode = 422;
+      error.data = { msg: "no tabe with this code" };
+      throw error;
+    }
+
     const token = jwt.sign({ restId, tableNumber, role: "client" }, jwtSecret, {
       expiresIn: "30m",
     });
     res.status(200).json({ token });
   } catch (error) {
-    next(err);
+    next(error);
   }
 });
 

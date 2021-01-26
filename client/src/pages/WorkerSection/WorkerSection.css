@@ -67,7 +67,12 @@
   text-transform: lowercase;
   align-self: flex-start;
   font-size: small;
-  color: #48b9a0;
+  color: var(--primary-color);
+  display: none;
+}
+.comment > span {
+  text-transform: uppercase;
+  color: var(--primary-color);
 }
 .worker__orders__items__info {
   display: flex;
@@ -83,6 +88,9 @@
 @media (min-width: 768px) {
   .worker__orders {
     min-width: 700px;
+  }
+  .comment {
+    display: block;
   }
 }
 

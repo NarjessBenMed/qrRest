@@ -19,7 +19,7 @@ realtima ==> done
 css  :  theme : ideas
 
 
-adresse resto doit avoir un forma bien déterminé  a faire
+adresse resto doit avoir un forma bien déterminé  done
 apres ajout new rest , les champs ne se vident pas done
 affichage vaut miew yarja3 ll star mouch vertical  a faire sinn khaléhom akéka 
 ajout table, champs ne se vide pas, input locked cca wféha valeur a ajiouter bien a faire

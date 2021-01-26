@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import setAuthToken from "../../utils/setAuthToken";
 const PrivateRoute = ({ children, path, ...rest }) => {
-  const { isClient, status } = useSelector((state) => state.auth);
+  const { isClient, authStatus } = useSelector((state) => state.auth);
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -12,7 +12,11 @@ const PrivateRoute = ({ children, path, ...rest }) => {
     <Route
       {...rest}
       render={() =>
-        !isClient && status !== "loading" ? <Redirect to="/" /> : children
+        !isClient && authStatus.authClient !== "loading" ? (
+          <Redirect to="/" />
+        ) : (
+          children
+        )
       }
     />
   );

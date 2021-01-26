@@ -41,7 +41,11 @@ const ClientPage = () => {
         </div>
       </IconContext.Provider>
     ) : menuStatus.getMenu === "succeded" && menu ? (
-      <ClientMenu menu={menu} restaurantId={restId} />
+      menu.menu.items.length === 0 ? (
+        <p> Ce menu n'est pas encore disponible</p>
+      ) : (
+        <ClientMenu menu={menu} restaurantId={restId} />
+      )
     ) : (
       <h5>Something went wrong...</h5>
     );
