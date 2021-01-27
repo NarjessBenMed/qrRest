@@ -1,11 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const Menu = require("./menu");
+const User = require("./user");
+const Table = require("./table");
+const clearImage = require("../utils/clearImage");
 const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema(
   {
     owner: {
       type: mongoose.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
     name: {
       type: String,
@@ -25,4 +29,18 @@ const restaurantSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('Restaurant', restaurantSchema);
+restaurantSchema.pre("findOneAndDelete", async function (next) {
+  console.log(this._conditions._id);
+  const deletedMenu = await Menu.findOneAndDelete({
+    restaurant: this._conditions._id,
+  });
+
+  deletedMenu.items.map((item) => {
+    clearImage(item.image);
+  });
+  await User.deleteMany({ restaurantId: this._conditions._id });
+  await Table.deleteMany({ restaurant: this._conditions._id });
+  next();
+});
+
+module.exports = mongoose.model("Restaurant", restaurantSchema);

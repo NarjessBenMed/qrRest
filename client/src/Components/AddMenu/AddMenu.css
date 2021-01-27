@@ -77,7 +77,7 @@
   margin-bottom: 10px;
   padding: 10px 0;
   border: none;
-  border-bottom: 1px solid #1b2431;
+  /* border-bottom: 1px solid #1b2431; */
 }
 
 .menu__form__group > h5,
