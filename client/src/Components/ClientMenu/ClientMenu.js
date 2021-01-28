@@ -14,8 +14,9 @@ const ClientMenu = ({ menu }) => {
     orderId: null,
     items: [],
     total: 0,
+    categorie: "entree",
   });
-  const { items, total } = values;
+  const { items, total, categorie } = values;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -87,73 +88,76 @@ const ClientMenu = ({ menu }) => {
         state: { orderId: order.order._id },
       }}
     >
-      <span className="client-menu__link">My order</span>
+      <span className="client-menu__link">Mes choix</span>
     </Link>
   );
   const menuItems =
     menu && menu.menu.items ? (
       <Fragment>
-        <p className="client-menu__categorie">Entree</p>
-        <div className="client-menu__sub">
-          {menu.menu.items
-            .filter((item) => item.categorie === "entree")
-            .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
-            ))}
-        </div>
-        <p className="client-menu__categorie">Plat</p>
-        <div className="client-menu__sub">
-          {menu.menu.items
-            .filter((item) => item.categorie === "plat")
-            .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
-            ))}
-        </div>
-        <p className="client-menu__categorie">Boisson</p>
-        <div className="client-menu__sub">
-          {menu.menu.items
-            .filter((item) => item.categorie === "boisson")
-            .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
-            ))}
-        </div>
-        <p className="client-menu__categorie">Dessert</p>
-        <div className="client-menu__sub">
-          {menu.menu.items
-            .filter((item) => item.categorie === "Dessert")
-            .map((item) => (
-              <ClientMenuItem
-                key={item._id}
-                item={item}
-                addToCommand={handleAdd}
-              />
-            ))}
-        </div>
+        {menu.menu.items.filter((item) => item.categorie === categorie).length >
+          0 && (
+          <Fragment>
+            <p className="client-menu__categorie">{categorie}</p>
+            <div className="client-menu__sub">
+              {menu.menu.items
+                .filter((item) => item.categorie === categorie)
+                .map((item) => (
+                  <ClientMenuItem
+                    key={item._id}
+                    item={item}
+                    addToCommand={handleAdd}
+                  />
+                ))}
+            </div>
+          </Fragment>
+        )}
       </Fragment>
     ) : (
-      // menu.menu.items.map((item) => (
-      //   <ClientMenuItem key={item._id} item={item} addToCommand={handleAdd} />
-      // ))
       <h5>Loading...</h5>
     );
+  const handleChoice = (choice) => {
+    setValues({ ...values, categorie: choice });
+  };
   return (
     <div className="client-menu">
+      <div className="client-menu__menu">
+        <button
+          className={
+            categorie === "entree" ? "active-categorie" : "inactive-categorie"
+          }
+          onClick={() => handleChoice("entree")}
+        >
+          entrée
+        </button>
+        <button
+          className={
+            categorie === "plat" ? "active-categorie" : "inactive-categorie"
+          }
+          onClick={() => handleChoice("plat")}
+        >
+          plat
+        </button>
+        <button
+          className={
+            categorie === "boisson" ? "active-categorie" : "inactive-categorie"
+          }
+          onClick={() => handleChoice("boisson")}
+        >
+          boisson
+        </button>
+        <button
+          className={
+            categorie === "Dessert" ? "active-categorie" : "inactive-categorie"
+          }
+          onClick={() => handleChoice("Dessert")}
+        >
+          dessert
+        </button>
+      </div>
       <div className="client-menu__items">{menuItems}</div>
       <div className="client-menu__nav">
         {orderLink}
-        <button onClick={() => handleButton()}>Order Now</button>
+        <button onClick={() => handleButton()}>Commander</button>
       </div>
     </div>
   );

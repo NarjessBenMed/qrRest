@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTable } from "../../features/tableSlice";
 import "./AddTable.css";
 
@@ -10,6 +10,7 @@ const AddTable = ({ restId }) => {
   });
   const { tableNumber, tableCode } = values;
   const dispatch = useDispatch();
+  const { tableStatus, tableErrors } = useSelector((state) => state.table);
 
   const handleChange = (e) => {
     setValues({
@@ -34,6 +35,13 @@ const AddTable = ({ restId }) => {
             onChange={handleChange}
             min="1"
           />
+
+          {tableStatus.create === "failed" && (
+            <span className="add-table-error">
+              {" "}
+              {tableErrors.create.data[0].msg}
+            </span>
+          )}
         </div>
         <button type="submit" onClick={handleSubmit}>
           Add table

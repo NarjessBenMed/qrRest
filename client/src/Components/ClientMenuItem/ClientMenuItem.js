@@ -66,10 +66,17 @@ const ClientMenuItem = ({ item, addToCommand }) => {
         </button>
       </div>
       <div className="client-menu-item__comment">
-        <button className="comment__button" onClick={handleShow}>
-          ajouter un commentaire
-        </button>
-        {showInput && (
+        {quantity > 0 ? (
+          <button className="comment__button" onClick={handleShow}>
+            ajouter un commentaire
+          </button>
+        ) : (
+          <button className="comment__button" onClick={handleShow} disabled>
+            ajouter un commentaire
+          </button>
+        )}
+
+        {showInput && quantity > 0 && (
           <textarea value={comment} onChange={handleComment} rows="3" cols="20">
             commentaire..
           </textarea>

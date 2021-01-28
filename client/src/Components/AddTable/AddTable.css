@@ -13,9 +13,17 @@
   /* border: 1px solid red; */
 }
 .add-table__form__group {
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.add-table-error {
+  position: absolute;
+  color: var(--primary-color);
+  bottom: -20px;
+  right: 0;
+  font-size: 0.8rem;
 }
 
 .add-table__form__group h5 {
@@ -41,6 +49,7 @@
   width: 100%;
   /* border: none; */
   outline: none;
+  padding: 5px;
 }
 
 @media (min-width: 480px) {

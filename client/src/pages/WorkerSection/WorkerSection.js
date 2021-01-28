@@ -95,31 +95,41 @@ const WorkerSection = () => {
               if (!order.paid && order.tableNumber === Number(filterBy))
                 return order;
             })
-            .map((order) => (
-              <div className="worker__orders" key={order._id}>
-                {order.items.map((item) => (
-                  <div className="worker__orders__items" key={item._id}>
-                    <div className="worker__orders__items__info">
-                      <p>{item.name}</p>
-                      <p>{item.quantity}</p>
-                    </div>
-                    {item.comment && (
-                      <p className="comment">
-                        <span>preferences: </span>
-                        {item.comment}
-                      </p>
-                    )}
+            .slice(0)
+            .reverse()
+            .map((order) => {
+              // for (var i = order.items.length - 1; i >= 0; i--) {
+              //   reversedTable.push(order.items[i]);
+              // }
+              return (
+                <div className="worker__orders" key={order._id}>
+                  {order.items
+                    .slice(0)
+                    .reverse()
+                    .map((item) => (
+                      <div className="worker__orders__items" key={item._id}>
+                        <div className="worker__orders__items__info">
+                          <p>{item.name}</p>
+                          <p>{item.quantity}</p>
+                        </div>
+                        {item.comment && (
+                          <p className="comment">
+                            <span>preferences: </span>
+                            {item.comment}
+                          </p>
+                        )}
 
-                    <span className="timeline">
-                      {moment(item.createdAt).fromNow()}
-                    </span>
-                  </div>
-                ))}
-                <button onClick={() => handleClick(order._id)}>
-                  Checkout order
-                </button>
-              </div>
-            ))
+                        <span className="timeline">
+                          {moment(item.createdAt).fromNow()}
+                        </span>
+                      </div>
+                    ))}
+                  <button onClick={() => handleClick(order._id)}>
+                    Checkout order
+                  </button>
+                </div>
+              );
+            })
         ) : (
           <h5>something went wrong..</h5>
         )}

@@ -12,6 +12,7 @@
   transition: 0.5s;
   background-color: white;
 }
+
 .client-menu-item__button {
   background: #c42012;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
@@ -81,6 +82,9 @@
 }
 
 .client-menu-item__comment > textarea {
+  margin: 5px;
+  outline: none;
+  padding: 5px;
 }
 .comment__button {
   background-color: rgb(219, 219, 219);
@@ -89,6 +93,10 @@
   cursor: pointer;
   outline: none;
   padding: 10px 0;
+}
+.comment__button:disabled {
+  background-color: var(--bg-light);
+  color: gray;
 }
 
 .client-menu-item {
