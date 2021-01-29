@@ -22,9 +22,9 @@
   height: 300px;
 }
 .home__sante {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   width: 100%;
-  background-color: #ffbe19ba;
+  background-color: #faec70;
   /* color: #fff; */
   padding: 20px;
   display: flex;
@@ -35,6 +35,7 @@
 .home__sante p:first-child {
   font-weight: 500;
   font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 .home__sante p {
   text-align: center;
@@ -48,7 +49,7 @@
 
 .home__content {
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.514), 0 0px 20px 0 rgba(0, 0, 0, 0.548);
-  background: url('./medium-bg.jpg');
+  background: url("./medium-bg.jpg");
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -141,7 +142,7 @@
 
 .block {
   font-size: 1.2rem;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -150,6 +151,9 @@
   background-color: #c42012;
   height: 150px;
   margin: 20px 0;
+}
+.block p:last-child {
+  margin-left: 10px;
 }
 
 .home__avant_begin {
@@ -190,10 +194,32 @@
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
+.footer {
+  height: 300px;
+  width: 100%;
+  background-color: #faec70;
+}
+.contact__us__border {
+  margin-top: 10px;
+  border-right: 1px solid #c42012;
+}
+
+.contact__us__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 200px;
+  height: 280px;
+}
+.contact__us__left p {
+  font-size: 1.2rem;
+  color: #c42012;
+}
 @media (min-width: 480px) {
   .home__content {
     margin-top: 100px;
-    background: url('./medium-bg.jpg');
+    background: url("./medium-bg.jpg");
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -222,7 +248,7 @@
 
 @media (min-width: 768px) {
   .home__content {
-    background: url('./mlarge-bg.jpg');
+    background: url("./mlarge-bg.jpg");
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -259,7 +285,7 @@
 
 @media (min-width: 1024px) {
   .home__content {
-    background: url('./large-bg.jpg');
+    background: url("./large-bg.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -281,7 +307,7 @@
 
 @media (min-width: 1280px) {
   .home__content {
-    background: url('./xlarge-bg.jpg');
+    background: url("./xlarge-bg.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

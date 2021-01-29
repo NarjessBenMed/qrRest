@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { deleteRestaurant, editRestaurant } from "../../features/ownerSlice";
 import { generateBase64FromImage } from "../../utils/image";
 import { ImSpinner9 } from "react-icons/im";
-import { IconContext } from "react-icons";
+
 import "./RestaurantListItem.css";
+import { FaUsersCog } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 const RestaurantListIem = ({ rest }) => {
   const [values, setValues] = useState({
@@ -143,7 +145,14 @@ const RestaurantListIem = ({ rest }) => {
               },
             }}
           >
-            <span>Staff</span>
+            <span>
+              <div className="staff__bouton">
+                <IconContext.Provider value={{ className: "staff-icon" }}>
+                  <FaUsersCog />
+                </IconContext.Provider>
+                <span> Staff</span>
+              </div>
+            </span>
           </Link>
           <Link
             to={{

@@ -59,11 +59,11 @@ const ScanCode = () => {
         <Fragment>
           <div className="reader">
             {/* <QrReader
-          delay={delay}
-          style={previewStyle}
-          onError={handleError}
-          onScan={handleScan}
-        // /> */}
+              delay={delay}
+              style={previewStyle}
+              onError={handleError}
+              onScan={handleScan}
+            /> */}
           </div>
           <input
             size="50"
