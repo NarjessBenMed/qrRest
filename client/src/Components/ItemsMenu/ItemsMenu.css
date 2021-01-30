@@ -11,6 +11,22 @@
   height: 70px;
   width: 70px;
 }
+.icon_bouton {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+}
+.icon_bouton button {
+  flex: 1;
+}
+.icon__Food {
+  flex: 1;
+  color: white;
+  height: 30px;
+  margin-right: 5px;
+}
 .menu-item__edit-group input {
   border: none;
   border-bottom: 1px solid var(--secondary-color);

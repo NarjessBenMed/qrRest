@@ -3,6 +3,9 @@ import "./ItemsMenu.css";
 import { deleteItemMenu, editItemMenu } from "../../features/menuSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { generateBase64FromImage } from "../../utils/image";
+import { MdDelete } from "react-icons/md";
+import { IconContext } from "react-icons";
+import { RiEdit2Fill } from "react-icons/ri";
 
 const ItemsMenu = ({ item }) => {
   const [values, setValues] = useState({
@@ -114,8 +117,27 @@ const ItemsMenu = ({ item }) => {
         )}
       </div>
       <div className="menu-item__buttons">
-        <button onClick={() => handleClick(item._id)}>delete</button>
-        <button onClick={handleEdit}>Edit</button>
+        <div>
+          <button className="icon_bouton" onClick={() => handleClick(item._id)}>
+            <IconContext.Provider value={{ className: "icon__Food" }}>
+              <div>
+                <MdDelete />
+              </div>
+            </IconContext.Provider>
+            Supprimer
+          </button>
+        </div>
+
+        <div>
+          <button className="icon_bouton" onClick={() => handleEdit(item._id)}>
+            <IconContext.Provider value={{ className: "icon__Food" }}>
+              <div>
+                <RiEdit2Fill />
+              </div>
+            </IconContext.Provider>
+            Modifier
+          </button>
+        </div>
       </div>
     </div>
   );

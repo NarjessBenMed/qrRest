@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { deleteRestaurant, editRestaurant } from "../../features/ownerSlice";
 import { generateBase64FromImage } from "../../utils/image";
 import { ImSpinner9 } from "react-icons/im";
+import { MdRestaurantMenu } from "react-icons/md";
 
 import "./RestaurantListItem.css";
 import { FaUsersCog } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import { GoListUnordered } from "react-icons/go";
+import { GiTable } from "react-icons/gi";
 
 const RestaurantListIem = ({ rest }) => {
   const [values, setValues] = useState({
@@ -135,7 +138,14 @@ const RestaurantListIem = ({ rest }) => {
               },
             }}
           >
-            <span>Menu</span>
+            <span>
+              <div className="staff__bouton">
+                <IconContext.Provider value={{ className: "staff-icon" }}>
+                  <MdRestaurantMenu />
+                </IconContext.Provider>
+                <span>Menu</span>
+              </div>
+            </span>
           </Link>
           <Link
             to={{
@@ -162,7 +172,14 @@ const RestaurantListIem = ({ rest }) => {
               },
             }}
           >
-            <span>Orders</span>
+            <span>
+              <div className="staff__bouton">
+                <IconContext.Provider value={{ className: "staff-icon" }}>
+                  <GoListUnordered />
+                </IconContext.Provider>
+                <span>Orders</span>
+              </div>
+            </span>
           </Link>
           <Link
             to={{
@@ -172,7 +189,14 @@ const RestaurantListIem = ({ rest }) => {
               },
             }}
           >
-            <span>Tables</span>
+            <span>
+              <div className="staff__bouton">
+                <IconContext.Provider value={{ className: "staff-icon" }}>
+                  <GiTable />
+                </IconContext.Provider>
+                <span>Tables</span>
+              </div>
+            </span>
           </Link>
         </div>
       </div>

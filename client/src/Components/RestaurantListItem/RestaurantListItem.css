@@ -11,9 +11,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid green;
+
   margin-top: 10px;
-  height: 200px;
+  height: 300px;
 
   padding: 0 20px;
   justify-content: space-evenly;
@@ -23,7 +23,7 @@
   background: var(--secondary-color);
   font-size: 0.9rem;
   display: inline-block;
-  width: 200px;
+  width: 300px;
   padding: 10px 0;
   text-align: center;
   border: none;
@@ -36,8 +36,8 @@
   padding: 10px 30px;
   font-size: 0.9rem;
   border: none;
-  margin-top: 20px;
-  margin: 20px 0 10px;
+
+  margin: 20px 10px;
   color: white;
   outline: none;
   cursor: pointer;
@@ -82,9 +82,6 @@
   height: 80px;
   width: 80px;
   border-radius: 50%;
-}
-.restlist__list {
-  width: 100%;
 }
 
 .restlist__item {
