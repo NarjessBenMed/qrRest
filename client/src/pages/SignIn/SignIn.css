@@ -13,7 +13,7 @@
   /* height: 400px; */
   display: flex;
   flex-direction: column;
-  padding: 20px 40px 30px;
+  padding: 20px 50px 30px;
 }
 
 .signin__container > h1 {
@@ -81,8 +81,9 @@
 }
 
 @media (min-width: 480px) {
-  .signin {
-    /* background-color: green; */
+  .signin__container {
+    width: 400px;
+    padding: 20px 50px 30px;
   }
 }
 

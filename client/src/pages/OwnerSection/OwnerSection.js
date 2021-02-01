@@ -16,7 +16,7 @@ import MyRestaurant from "../MyRestaurant/MyRestaurant";
 const socketURL =
   process.env.NODE_ENV === "production"
     ? window.location.hostname
-    : "https://localhost:5000";
+    : "http://localhost:5000";
 
 const OwnerSection = () => {
   const [channel, setChannel] = useState(null);
@@ -31,7 +31,7 @@ const OwnerSection = () => {
   useEffect(() => {
     let socket = openSocket(`${socketURL}/owner-space`, {
       transports: ["websocket", "polling"],
-      secure: true,
+      // secure: true,
     });
     setChannel(socket);
     socket.on("connect", () => {
@@ -41,9 +41,9 @@ const OwnerSection = () => {
       console.log("from server", data.action);
       dispatch(getRestList());
     });
-    return () => {
-      socket.disconnect();
-    };
+    // return () => {
+    //   socket.disconnect();
+    // };
   }, []);
 
   const { restList } = useSelector((state) => state.owner);

@@ -13,18 +13,22 @@
 }
 .icon_bouton {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100px;
-  height: 50px;
+  justify-content: space-evenly;
+
+  width: 120px;
+  /* height: 50px; */
+  background: #c42012;
+  padding: 10px 10px;
+  font-size: 0.9rem;
+  border: none;
+  color: white;
+  outline: none;
+  cursor: pointer;
 }
 
 .icon__Food {
-  flex: 1;
-  align-self: flex-end;
   color: white;
-  height: 30px;
-  margin-right: 5px;
+  font-size: 1.1rem;
 }
 .menu-item__edit-group input {
   border: none;
@@ -40,21 +44,12 @@
   overflow-wrap: break-word;
 }
 .menu-item__buttons {
-  margin-top: 10px;
+  margin-top: 30px;
   display: flex;
   /* border: 1px solid purple; */
   justify-content: space-between;
 }
-.menu-item__buttons button {
-  background: #c42012;
-  /* padding: 10px 20px; */
-  font-size: 0.9rem;
-  border: none;
-  color: white;
-  outline: none;
-  cursor: pointer;
-  /* border: 1px solid blue; */
-}
+
 .menu-item__edit-group {
   position: relative;
 }
