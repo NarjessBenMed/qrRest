@@ -18,11 +18,10 @@
   width: 100px;
   height: 50px;
 }
-.icon_bouton button {
-  flex: 1;
-}
+
 .icon__Food {
   flex: 1;
+  align-self: flex-end;
   color: white;
   height: 30px;
   margin-right: 5px;
@@ -48,12 +47,13 @@
 }
 .menu-item__buttons button {
   background: #c42012;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   font-size: 0.9rem;
   border: none;
   color: white;
   outline: none;
   cursor: pointer;
+  /* border: 1px solid blue; */
 }
 .menu-item__edit-group {
   position: relative;

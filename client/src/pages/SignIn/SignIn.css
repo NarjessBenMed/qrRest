@@ -9,12 +9,11 @@
 .signin__container {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  /* height: 400px; */
   display: flex;
   flex-direction: column;
-
-  padding: 40px;
+  padding: 20px 40px 30px;
 }
 
 .signin__container > h1 {

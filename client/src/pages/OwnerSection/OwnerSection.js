@@ -13,6 +13,10 @@ import Menu from "../Menu/Menu";
 import "./OwnerSection.css";
 import { Route, Switch } from "react-router-dom";
 import MyRestaurant from "../MyRestaurant/MyRestaurant";
+const socketURL =
+  process.env.NODE_ENV === "production"
+    ? window.location.hostname
+    : "https://localhost:5000";
 
 const OwnerSection = () => {
   const [channel, setChannel] = useState(null);
@@ -25,8 +29,9 @@ const OwnerSection = () => {
     }
   }, [isAuthenticated]);
   useEffect(() => {
-    let socket = openSocket("http://localhost:5000/owner-space", {
+    let socket = openSocket(`${socketURL}/owner-space`, {
       transports: ["websocket", "polling"],
+      secure: true,
     });
     setChannel(socket);
     socket.on("connect", () => {

@@ -40,65 +40,78 @@ export const deleteOwner = createAsyncThunk(
 export const adminSlice = createSlice({
   name: 'owner',
   initialState: {
-    status: 'idle',
-    listStatus: 'idle',
     owner: '',
     owners: null,
-    errors: null,
+    adminStatus: { create: 'idle', delete: 'idle', getAll: 'idle' },
+    adminErrors: { create: 'null', delete: 'null', getAll: 'null' },
   },
   reducers: {
     initErrors(state) {
-      return { ...state, errors: null };
+      return {
+        ...state,
+        adminErrors: { create: 'null', delete: 'null', getAll: 'null' },
+      };
     },
   },
   extraReducers: {
     [createOwner.pending]: (state, action) => {
-      state.status = 'loading';
+      return {
+        ...state,
+        adminStatus: { ...state.adminStatus, create: 'loading' },
+      };
     },
     [createOwner.fulfilled]: (state, action) => {
       return {
         ...state,
-        status: 'succeded',
-        errors: null,
+        adminStatus: { ...state.adminStatus, create: 'succeded' },
+        adminErrors: { ...state.adminErrors, create: 'null' },
         owner: action.payload,
       };
     },
     [createOwner.rejected]: (state, action) => ({
       ...state,
-      status: 'failed',
-      errors: action.payload,
+      adminStatus: { ...state.adminStatus, create: 'failed' },
+      adminErrors: { ...state.adminErrors, create: action.payload },
     }),
     [getAllOwners.pending]: (state, action) => {
-      state.listStatus = 'loading';
+      return {
+        ...state,
+        adminStatus: { ...state.adminStatus, getAll: 'loading' },
+      };
     },
     [getAllOwners.fulfilled]: (state, action) => {
       return {
         ...state,
-        listStatus: 'succeded',
         owners: action.payload,
-        errors: null,
+        adminStatus: { ...state.adminStatus, getAll: 'succeded' },
+        adminErrors: { ...state.adminErrors, getAll: 'null' },
       };
     },
-    [getAllOwners.rejected]: (state, action) => ({
-      ...state,
-      listStatus: 'failed',
-      errors: action.payload,
-    }),
+    [getAllOwners.rejected]: (state, action) => {
+      return {
+        ...state,
+        adminStatus: { ...state.adminStatus, getAll: 'failed' },
+        adminErrors: { ...state.adminErrors, getAll: action.payload },
+      };
+    },
     [deleteOwner.pending]: (state, action) => {
-      state.listStatus = 'loading';
+      return {
+        ...state,
+        adminStatus: { ...state.adminStatus, delete: 'loading' },
+      };
     },
     [deleteOwner.fulfilled]: (state, action) => {
       return {
         ...state,
-        listStatus: 'succeded',
         owner: action.payload,
-        errors: null,
+        adminStatus: { ...state.adminStatus, delete: 'succeded' },
+        adminErrors: { ...state.adminErrors, delete: 'null' },
       };
     },
     [deleteOwner.rejected]: (state, action) => ({
       ...state,
-      listStatus: 'failed',
-      errors: action.payload,
+      adminStatus: { ...state.adminStatus, delete: 'failed' },
+      adminErrors: { ...state.adminErrors, delete: action.payload },
     }),
   },
 });

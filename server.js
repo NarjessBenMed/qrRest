@@ -62,6 +62,15 @@ app.use("/table", tableRoutes);
 app.use("/menu", menuRoutes);
 app.use("/order", orderRoutes);
 app.use("/worker", workerRoutes);
+
+//serve static assets in productiion
+if (process.env.NODE_ENV === "production") {
+  // set static folder
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 // custom error handler
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
@@ -70,7 +79,7 @@ app.use((error, req, res, next) => {
   return res.status(statusCode).json({ message, data });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () => console.log(`server up on port ${PORT}`));
 const io = require("./socket").init(server);

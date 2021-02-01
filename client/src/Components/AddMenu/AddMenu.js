@@ -1,40 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { ImSpinner9 } from "react-icons/im";
-import { IconContext } from "react-icons";
-import { addToMenu } from "../../features/menuSlice";
-import openSocket from "socket.io-client";
-import { generateBase64FromImage } from "../../utils/image";
-import "./AddMenu.css";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { ImSpinner9 } from 'react-icons/im';
+import { IconContext } from 'react-icons';
+import { addToMenu } from '../../features/menuSlice';
+import openSocket from 'socket.io-client';
+import { generateBase64FromImage } from '../../utils/image';
+import './AddMenu.css';
+const socketURL =
+  process.env.NODE_ENV === 'production'
+    ? window.location.hostname
+    : 'https://localhost:5000';
 
 const AddMenu = () => {
   const ref = React.useRef();
   const clearImag = () => {
-    ref.current.value = "";
+    ref.current.value = '';
   };
   const [values, setValues] = useState({
-    name: "",
-    price: "",
-    image: "",
-    preview: "",
-    description: "",
-    categorie: "entree",
+    name: '',
+    price: '',
+    image: '',
+    preview: '',
+    description: '',
+    categorie: 'entree',
   });
   const location = useLocation();
   const { restId, restName } = location.state;
   useEffect(() => {
-    let socket = openSocket("http://localhost:5000/restaurant-space", {
-      transports: ["websocket", "polling"],
+    let socket = openSocket(`${socketURL}/restaurant-space`, {
+      transports: ['websocket', 'polling'],
+      secure: true,
     });
-    socket.on("connect", () => {});
+    socket.on('connect', () => {});
     if (restId) {
-      console.log("restid", restId);
-      socket.emit("joinRoom", { restId });
+      console.log('restid', restId);
+      socket.emit('joinRoom', { restId });
     }
 
-    socket.on("hi", (data) => {
-      console.log("from server", data);
+    socket.on('hi', (data) => {
+      console.log('from server', data);
     });
     return () => {
       socket.disconnect();
@@ -49,14 +54,14 @@ const AddMenu = () => {
   };
   const { menuStatus, menuErrors } = useSelector((state) => state.menu);
   useEffect(() => {
-    if (menuStatus.create === "succeded") {
+    if (menuStatus.create === 'succeded') {
       setValues({
-        name: "",
-        price: "",
-        image: "",
-        preview: "",
-        description: "",
-        categorie: "entree",
+        name: '',
+        price: '',
+        image: '',
+        preview: '',
+        description: '',
+        categorie: 'entree',
       });
       clearImag();
     }
@@ -75,126 +80,111 @@ const AddMenu = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("restaurant", restId);
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("image", image);
-    formData.append("description", description);
-    formData.append("categorie", categorie);
+    formData.append('restaurant', restId);
+    formData.append('name', name);
+    formData.append('price', price);
+    formData.append('image', image);
+    formData.append('description', description);
+    formData.append('categorie', categorie);
 
     dispatch(addToMenu(formData));
   };
   return (
-    <div className="menu-add">
-      <div className="menu__info">
+    <div className='menu-add'>
+      <div className='menu__info'>
         <h3>Create Menu </h3>
         <h3>{restName}</h3>
         {/* <img src={'/' + logo} alt='logo' /> */}
       </div>
-      <form className="menu-add__form">
-        <div className="menu__form__group">
+      <form className='menu-add__form'>
+        <div className='menu__form__group'>
           <h5> nom de plat </h5>
           <span>
-            {menuStatus.create === "failed" &&
-              menuErrors.create.data.filter((err) => err.param === "name")[0] &&
-              menuErrors.create.data.filter((err) => err.param === "name")[0]
-                .msg}
+            {menuStatus.create === 'failed' &&
+              menuErrors.create.data.filter((err) => err.param === 'name')[0] &&
+              menuErrors.create.data.filter((err) => err.param === 'name')[0].msg}
           </span>
           <input
-            type="text"
-            className="menu__container__form__input"
-            name="name"
+            type='text'
+            className='menu__container__form__input'
+            name='name'
             value={name}
             onChange={handleChange}
           />
         </div>
 
-        <div className="menu__form__group">
+        <div className='menu__form__group'>
           <h5>description</h5>
           <span>
-            {menuStatus.create === "failed" &&
-              menuErrors.create.data.filter(
-                (err) => err.param === "description"
-              )[0] &&
-              menuErrors.create.data.filter(
-                (err) => err.param === "description"
-              )[0].msg}
+            {menuStatus.create === 'failed' &&
+              menuErrors.create.data.filter((err) => err.param === 'description')[0] &&
+              menuErrors.create.data.filter((err) => err.param === 'description')[0].msg}
           </span>
           <input
-            type="text"
-            className="menu__container__form__input"
-            name="description"
+            type='text'
+            className='menu__container__form__input'
+            name='description'
             value={description}
             onChange={handleChange}
           />
         </div>
 
-        <div className="menu__form__group">
+        <div className='menu__form__group'>
           <h5>price</h5>
           <span>
-            {menuStatus.create === "failed" &&
-              menuErrors.create.data.filter(
-                (err) => err.param === "price"
-              )[0] &&
-              menuErrors.create.data.filter((err) => err.param === "price")[0]
-                .msg}
+            {menuStatus.create === 'failed' &&
+              menuErrors.create.data.filter((err) => err.param === 'price')[0] &&
+              menuErrors.create.data.filter((err) => err.param === 'price')[0].msg}
           </span>
           <input
-            type="text"
-            className="menu__container__form__input"
-            name="price"
+            type='text'
+            className='menu__container__form__input'
+            name='price'
             value={price}
             onChange={handleChange}
           />
         </div>
 
-        <div className="menu__form__group-select">
+        <div className='menu__form__group-select'>
           <h5>categorie</h5>
 
-          <select name="categorie" value={categorie} onChange={handleChange}>
-            <option key="entree" value="entree">
+          <select name='categorie' value={categorie} onChange={handleChange}>
+            <option key='entree' value='entree'>
               Entree
             </option>
-            <option key="boisson" value="boisson">
+            <option key='boisson' value='boisson'>
               Boisson
             </option>
-            <option key="plat" value="plat">
+            <option key='plat' value='plat'>
               plat
             </option>
-            <option key="Dessert" value="Dessert">
-              Dessert{" "}
+            <option key='Dessert' value='Dessert'>
+              Dessert{' '}
             </option>
           </select>
         </div>
-        <div className="menu__form__group">
+        <div className='menu__form__group'>
           <h5>photo du plat </h5>
-          <div className="img-section">
+          <div className='img-section'>
             <span>
-              {menuStatus.create === "failed" &&
-                menuErrors.create.data.filter(
-                  (err) => err.param === "logo"
-                )[0] &&
-                menuErrors.create.data.filter((err) => err.param === "logo")[0]
-                  .msg}
+              {menuStatus.create === 'failed' &&
+                menuErrors.create.data.filter((err) => err.param === 'logo')[0] &&
+                menuErrors.create.data.filter((err) => err.param === 'logo')[0].msg}
             </span>
             <input
               ref={ref}
-              type="file"
-              className="menu__form__file"
-              name="image"
+              type='file'
+              className='menu__form__file'
+              name='image'
               onChange={fileHandler}
             />
-            {preview && <img className="image-preview" src={preview} alt="d" />}
+            {preview && <img className='image-preview' src={preview} alt='d' />}
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="menu__menuButton"
-          onClick={handleSubmit}
-        >
-          {menuStatus.create === "loading" ? (
-            <IconContext.Provider value={{ className: "spinner" }}>
+        <button type='submit' className='menu__menuButton' onClick={handleSubmit}>
+          {menuStatus.create === 'loading' ? (
+            <IconContext.Provider value={{ className: 'spinner' }}>
               <div>
                 <ImSpinner9 />
               </div>

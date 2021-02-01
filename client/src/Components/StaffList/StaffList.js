@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ImSpinner9 } from 'react-icons/im';
+import { IconContext } from 'react-icons';
 import AddWorker from '../AddWorker/AddWorker';
 import Workers from '../Workers/Workers';
 import { getAllWorkers } from '../../features/staffSlice';
@@ -14,7 +16,7 @@ const StaffList = ({ channel }) => {
   useEffect(() => {
     dispatch(getAllWorkers(restId));
   }, []);
-  const { workers } = useSelector((state) => state.staff);
+  const { workers, workerStatus } = useSelector((state) => state.staff);
   useEffect(() => {
     if (channel) {
       channel.on('workers', (data) => {
@@ -27,7 +29,19 @@ const StaffList = ({ channel }) => {
   return (
     <div className='staff'>
       <AddWorker restId={restId} />
-      <Workers list={workers} />
+      {workerStatus.getAll === 'loading' ? (
+        <IconContext.Provider value={{ className: 'spinner--large' }}>
+          <div>
+            <ImSpinner9 />
+          </div>
+        </IconContext.Provider>
+      ) : workerStatus.getAll === 'failed' ? (
+        <h2>something went wrong</h2>
+      ) : workerStatus.getAll === 'succeded' && workers.length > 0 ? (
+        <Workers list={workers} />
+      ) : (
+        <h5>you have no workers</h5>
+      )}
     </div>
   );
 };

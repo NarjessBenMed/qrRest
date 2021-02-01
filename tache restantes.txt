@@ -1,3 +1,6 @@
+mongodb://localhost:27017/MenuPLZ
+
+
 hhh
 delete restaurant : front  et  back ===> done
 edit restaurant : front mm  done 
