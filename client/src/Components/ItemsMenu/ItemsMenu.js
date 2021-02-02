@@ -79,7 +79,7 @@ const ItemsMenu = ({ item }) => {
         {edit ? (
           <input type="text" value={name} name="name" onChange={handleData} />
         ) : (
-          <h4>Name :{item.name}</h4>
+          <h4>Nom :{item.name}</h4>
         )}
       </div>
       <div className="menu-item__edit-group">
@@ -92,7 +92,7 @@ const ItemsMenu = ({ item }) => {
         {edit ? (
           <input type="text" value={price} name="price" onChange={handleData} />
         ) : (
-          <h4>Price : {item.price}</h4>
+          <h4>prix : {item.price}</h4>
         )}
       </div>
       <div className="menu-item__edit-group">

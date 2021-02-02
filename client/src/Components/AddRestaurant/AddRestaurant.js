@@ -44,10 +44,10 @@ const AddRestaurant = () => {
   };
   return (
     <div className="addrestau">
-      <h3>Create new Restaurant</h3>
+      <h3>Ajouter un restaurant</h3>
       <form>
         <div className="addrestau__form__group">
-          <h5>name</h5>
+          <h5>Nom du Restaurant</h5>
           <span>
             {ownerStatus.create === "failed" &&
               ownerErrors.create.data.filter(
@@ -67,7 +67,7 @@ const AddRestaurant = () => {
         </div>
 
         <div className="addrestau__form__group">
-          <h5>address</h5>
+          <h5>adresse</h5>
           <span>
             {ownerStatus.create === "failed" &&
               ownerErrors.create.data.filter(
@@ -120,7 +120,7 @@ const AddRestaurant = () => {
               </div>
             </IconContext.Provider>
           ) : (
-            <span>Add</span>
+            <span>ajouter</span>
           )}
         </button>
       </form>

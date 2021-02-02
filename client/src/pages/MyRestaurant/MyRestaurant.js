@@ -12,7 +12,7 @@ import { IconContext } from "react-icons";
 const socketURL =
   process.env.NODE_ENV === "production"
     ? window.location.hostname
-    : "wss://localhost:5000";
+    : "http://localhost:5000";
 
 const MyRestaurant = () => {
   const location = useLocation();
@@ -49,11 +49,11 @@ const MyRestaurant = () => {
           </div>
         </IconContext.Provider>
       ) : menuStatus.getMenu === "failed" ? (
-        <h2>something went wrong</h2>
-      ) : menuStatus.getMenu === "succeded" && menu.length > 0 ? (
+        <h4>un probléme est survenvenu, merci de réessayer </h4>
+      ) : menuStatus.getMenu === "succeded" && menu.menu.items.length > 0 ? (
         <Menu menu={menu} logo={logo} />
       ) : (
-        <h5>you have no menu</h5>
+        <h5>aucun menu n'est enregistré</h5>
       )}
     </div>
   );

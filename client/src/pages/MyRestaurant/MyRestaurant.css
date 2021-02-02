@@ -5,6 +5,13 @@
   align-items: center;
   width: 100%;
 }
+.my-rest > h5,
+.my-rest > h4 {
+  margin: 30px 0;
+  font-weight: 400;
+  color: var(--primary-color);
+  text-align: center;
+}
 
 @media (min-width: 480px) {
   .my-rest {

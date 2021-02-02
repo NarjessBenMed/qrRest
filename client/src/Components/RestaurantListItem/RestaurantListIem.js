@@ -65,7 +65,15 @@ const RestaurantListIem = ({ rest }) => {
     <div className="restlist__item">
       <div className="restlist__item__form">
         <div className="restlist__item__form__group">
-          <h5>restaurant:</h5>
+          {edit ? (
+            <input type="file" name="image" onChange={handleFile} />
+          ) : (
+            <img className="image-prev" src={rest.logo} alt="" />
+          )}
+          {preview && <img className="image-prev" src={preview} alt=" " />}
+        </div>
+        <div className="restlist__item__form__group">
+          <h5>NOM : </h5>
           <span className="error-message">
             {edit &&
               ownerStatus.edit === "failed" &&
@@ -80,7 +88,7 @@ const RestaurantListIem = ({ rest }) => {
           )}
         </div>
         <div className="restlist__item__form__group">
-          <h5>Address:</h5>
+          <h5>Addresse : </h5>
           <span className="error-message">
             {edit &&
               ownerStatus.edit === "failed" &&
@@ -101,16 +109,7 @@ const RestaurantListIem = ({ rest }) => {
             <p>{rest.address}</p>
           )}
         </div>
-        <div className="restlist__item__form__group">
-          <h5>Logo</h5>
 
-          {edit ? (
-            <input type="file" name="image" onChange={handleFile} />
-          ) : (
-            <img className="image-prev" src={rest.logo} alt="" />
-          )}
-          {preview && <img className="image-prev" src={preview} alt=" " />}
-        </div>
         <div className="restlist__item__form__button">
           <button onClick={() => handleDelete(rest._id)}>
             {edit && ownerStatus.delete === "loading" ? (
@@ -120,11 +119,11 @@ const RestaurantListIem = ({ rest }) => {
                 </div>
               </IconContext.Provider>
             ) : (
-              <span>Delete</span>
+              <span>Supprimer</span>
             )}
           </button>
           <button onClick={() => handleEdit(rest)}>
-            <span>Edit</span>
+            <span>Modifier</span>
           </button>
         </div>
         <div className="restlist__item__form__links">
@@ -177,7 +176,7 @@ const RestaurantListIem = ({ rest }) => {
                 <IconContext.Provider value={{ className: "staff-icon" }}>
                   <GoListUnordered />
                 </IconContext.Provider>
-                <span>Orders</span>
+                <span>Commandes</span>
               </div>
             </span>
           </Link>

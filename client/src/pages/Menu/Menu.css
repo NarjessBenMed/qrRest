@@ -8,14 +8,13 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding-top: 20px;
 }
 .menu > h5 {
   font-size: 1.4rem;
   font-weight: 400;
   color: var(--primary-color);
   margin: 20px 0;
-  /* border: 1px solid blue; */
-  /* text-align: center; */
 }
 .menu__cat {
   font-size: 1rem;

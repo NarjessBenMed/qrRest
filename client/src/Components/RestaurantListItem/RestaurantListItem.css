@@ -3,18 +3,17 @@
   flex-direction: column;
 }
 .restlist__item__form__button {
+  margin-top: 20px;
   display: flex;
-
   justify-content: space-between;
+  width: 100%;
 }
 .restlist__item__form__links {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   margin-top: 10px;
   height: 300px;
-
   padding: 0 20px;
   justify-content: space-evenly;
   width: 100%;
@@ -23,7 +22,7 @@
   background: var(--secondary-color);
   font-size: 0.9rem;
   display: inline-block;
-  width: 300px;
+  width: 260px;
   padding: 10px 0;
   text-align: center;
   border: none;
@@ -33,11 +32,9 @@
 }
 .restlist__item__form__button button {
   background: #c42012;
-  padding: 10px 30px;
+  padding: 10px 20px;
   font-size: 0.9rem;
   border: none;
-
-  margin: 20px 10px;
   color: white;
   outline: none;
   cursor: pointer;
@@ -45,18 +42,18 @@
 .restlist__item__form__group {
   align-items: center;
   position: relative;
-  margin-bottom: 10px;
+  margin: 10px 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 }
 .restlist__item__form__group h5 {
   font-weight: 400;
-  margin-right: 10px;
   text-transform: uppercase;
 }
 .restlist__item__form__group p {
+  margin: 0 10px;
   flex: 1;
   font-weight: 400;
   text-transform: capitalize;
@@ -65,7 +62,8 @@
 }
 .restlist__item__form__group > input {
   height: 30px;
-  width: 60%;
+  width: 100%;
+  margin: 10px;
   border: none;
   border-bottom: 1px solid black;
   outline: none;
@@ -78,7 +76,6 @@
   font-size: 0.8rem;
 }
 .image-prev {
-  margin-right: 20px;
   height: 80px;
   width: 80px;
   border-radius: 50%;
@@ -107,8 +104,17 @@
 }
 @media (min-width: 480px) {
   .restlist__item {
-    width: auto;
-    /* background-color: green; */
+    width: 400px;
+    padding: 30px;
+  }
+  .restlist__item__form__links span {
+    width: 350px;
+  }
+  .restlist__item__form__button {
+    padding: 0 20px;
+  }
+  .restlist__item__form__group {
+    padding: 0 20px;
   }
 }
 

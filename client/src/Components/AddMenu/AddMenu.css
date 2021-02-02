@@ -1,5 +1,5 @@
 .menu-add {
-  padding: 20px 30px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,13 +25,20 @@
   text-transform: uppercase;
   font-weight: 400;
 }
+.menu__info > h5 {
+  text-transform: capitalize;
+  margin-top: 5px;
+  color: #c42012;
+}
 .menu-add__form {
   width: 100%;
 }
 .menu__form__group {
   position: relative;
   width: 100%;
+  margin-top: 15px;
 }
+
 .menu__form__group > span,
 .img-section > span {
   position: absolute;
@@ -107,6 +114,7 @@
 @media (min-width: 480px) {
   .menu-add {
     width: 400px;
+    padding: 40px;
   }
   .menu__form__group-select {
     flex-direction: row;

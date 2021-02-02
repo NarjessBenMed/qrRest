@@ -1,11 +1,11 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { authClient } from '../../features/authSlice';
-import { FaRegSmileWink } from 'react-icons/fa';
-import { IconContext } from 'react-icons';
-import QrReader from 'react-qr-scanner';
-import './ScanCode.css';
+import React, { useState, useEffect, Fragment } from "react";
+import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authClient } from "../../features/authSlice";
+import { FaRegSmileWink } from "react-icons/fa";
+import { IconContext } from "react-icons";
+import QrReader from "react-qr-scanner";
+import "./ScanCode.css";
 
 const ScanCode = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const ScanCode = () => {
   const [values, setValues] = useState({
     delay: 100,
     result: null,
-    code: '',
+    code: "",
   });
   const { delay, result, code } = values;
   const handleScan = (data) => {
@@ -27,28 +27,28 @@ const ScanCode = () => {
     height: 240,
     width: 320,
   };
-  // const handleInput = (e) => {
-  //   setValues({ ...values, code: e.target.value });
-  // };
-  // const handleSubmit = () => {
-  //   setValues({ ...values, result: code });
-  // };
+  const handleInput = (e) => {
+    setValues({ ...values, code: e.target.value });
+  };
+  const handleSubmit = () => {
+    setValues({ ...values, result: code });
+  };
   useEffect(() => {
     if (result)
       dispatch(
         authClient({
-          restId: result.split('+')[0],
-          tableNumber: result.split('+')[1],
+          restId: result.split("+")[0],
+          tableNumber: result.split("+")[1],
           history,
         })
       );
   }, [result]);
 
   return (
-    <div className='code'>
-      {authStatus.authClient === 'failed' ? (
-        <div className='message-client'>
-          <IconContext.Provider value={{ className: 'auth-failed' }}>
+    <div className="code">
+      {authStatus.authClient === "failed" ? (
+        <div className="message-client">
+          <IconContext.Provider value={{ className: "auth-failed" }}>
             <div>
               <FaRegSmileWink />
             </div>
@@ -57,16 +57,16 @@ const ScanCode = () => {
         </div>
       ) : (
         <Fragment>
-          <div className='reader'>
-            <QrReader
+          <div className="reader">
+            {/* <QrReader
               className='qr-reader'
               delay={delay}
               style={previewStyle}
               onError={handleError}
               onScan={handleScan}
-            />
+            /> */}
           </div>
-          {/* <input
+          <input
             size="50"
             className="test"
             type="text"
@@ -75,7 +75,7 @@ const ScanCode = () => {
             onChange={handleInput}
           />
           <button onClick={handleSubmit}>confirm</button>
-          <h1>{result}</h1> */}
+          <h1>{result}</h1>
         </Fragment>
       )}
     </div>

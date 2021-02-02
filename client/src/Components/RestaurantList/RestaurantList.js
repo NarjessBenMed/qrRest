@@ -10,7 +10,7 @@ const RestaurantList = ({ restaurants }) => {
   const { ownerStatus, ownerErrors } = useSelector((state) => state.owner);
   return (
     <div className="restlist">
-      <h3>List fo Restaurants</h3>
+      <h3>Liste des restaurants</h3>
       <div className="restlist__list">
         {ownerStatus.getList === "loading" ? (
           <IconContext.Provider value={{ className: "spinner--large" }}>
@@ -25,7 +25,7 @@ const RestaurantList = ({ restaurants }) => {
             <RestaurantListItem key={rest._id} rest={rest} />
           ))
         ) : (
-          <h5>you have no restaurants</h5>
+          <h5> aucun restaurant n'est enregistré </h5>
         )}
       </div>
     </div>

@@ -1,35 +1,35 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import openSocket from 'socket.io-client';
-import { Route, Switch } from 'react-router-dom';
-import { ImSpinner9 } from 'react-icons/im';
-import { IconContext } from 'react-icons';
-import ClientMenu from '../../Components/ClientMenu/ClientMenu';
-import MyOrder from '../MyOrder/MyOrder';
-import { getMenuByRest } from '../../features/menuSlice';
-import './ClientPage.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import openSocket from "socket.io-client";
+import { Route, Switch } from "react-router-dom";
+import { ImSpinner9 } from "react-icons/im";
+import { IconContext } from "react-icons";
+import ClientMenu from "../../Components/ClientMenu/ClientMenu";
+import MyOrder from "../MyOrder/MyOrder";
+import { getMenuByRest } from "../../features/menuSlice";
+import "./ClientPage.css";
 const socketURL =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === "production"
     ? window.location.hostname
-    : 'https://localhost:5000';
+    : "http://localhost:5000";
 
 const ClientPage = () => {
   const dispatch = useDispatch();
-  const restId = localStorage.getItem('restId');
+  const restId = localStorage.getItem("restId");
   useEffect(() => {
     dispatch(getMenuByRest(restId));
   }, []);
   useEffect(() => {
     let socket = openSocket(`${socketURL}/restaurant-space`, {
-      transports: ['websocket', 'polling'],
-      secure: true,
+      transports: ["websocket", "polling"],
+      // secure: true,
     });
-    socket.on('connect', () => {
+    socket.on("connect", () => {
       console.log(socket.id);
     });
-    if (restId) socket.emit('joinRoom', { restId });
-    socket.on('newMenu', (data) => {
-      console.log('newmenu', data);
+    if (restId) socket.emit("joinRoom", { restId });
+    socket.on("newMenu", (data) => {
+      console.log("newmenu", data);
       dispatch(getMenuByRest(restId));
     });
     // return () => {
@@ -39,13 +39,13 @@ const ClientPage = () => {
 
   const { menu, menuStatus } = useSelector((state) => state.menu);
   const clientMenu =
-    menuStatus.getMenu === 'loading' ? (
-      <IconContext.Provider value={{ className: 'spinner--large' }}>
+    menuStatus.getMenu === "loading" ? (
+      <IconContext.Provider value={{ className: "spinner--large" }}>
         <div>
           <ImSpinner9 />
         </div>
       </IconContext.Provider>
-    ) : menuStatus.getMenu === 'succeded' && menu ? (
+    ) : menuStatus.getMenu === "succeded" && menu ? (
       menu.menu.items.length === 0 ? (
         <p> Ce menu n'est pas encore disponible</p>
       ) : (
@@ -56,18 +56,18 @@ const ClientPage = () => {
     );
 
   return (
-    <div className='client-section'>
+    <div className="client-section">
       <Switch>
-        <Route exact path='/client-page'>
-          <div className='client-section__info'>
+        <Route exact path="/client-page">
+          <div className="client-section__info">
             <h2>Menu</h2>
 
-            <img src={'/' + (menu && menu.menu.restaurant.logo)} alt='logo' />
+            <img src={"/" + (menu && menu.menu.restaurant.logo)} alt="logo" />
             <h2>{menu && menu.menu.restaurant.name}</h2>
           </div>
           {clientMenu}
         </Route>
-        <Route exact path='/client-page/order'>
+        <Route exact path="/client-page/order">
           <MyOrder />
         </Route>
       </Switch>

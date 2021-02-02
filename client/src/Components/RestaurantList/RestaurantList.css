@@ -10,7 +10,11 @@
   font-weight: 400;
   margin: 20px 0 10px;
 }
-
+.restlist__list > h5 {
+  margin: 20px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
 @media (min-width: 480px) {
   .restlist__item {
     width: auto;
