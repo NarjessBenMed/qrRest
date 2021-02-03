@@ -3,7 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 60px;
+  padding-top: 50px;
+}
+.table-list > h4 {
+  color: var(--primary-color);
+  font-weight: 400;
+  margin: 20px 0;
 }
 
 @media (min-width: 480px) {

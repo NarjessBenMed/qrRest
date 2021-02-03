@@ -6,6 +6,7 @@ const ROLE = require("../utils/roles");
 const authRole = require("../utils/authRole");
 const Restaurant = require("../models/restaurant");
 const Menu = require("../models/menu");
+const clearImage = require("../utils/clearImage");
 
 // must be authenticated and owner
 // create new restaurant
@@ -95,6 +96,7 @@ router.put(
       const { restId, name, address, lastImg } = req.body;
       if (req.file) {
         logo = req.file.path.replace("\\", "/");
+        clearImage(lastImg, "..");
       } else {
         logo = lastImg;
       }

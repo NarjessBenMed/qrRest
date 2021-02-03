@@ -6,7 +6,11 @@
   padding-top: 20px;
   width: 100%;
 }
-
+.staff > h4 {
+  margin: 20px 0;
+  color: var(--primary-color);
+  font-weight: 400;
+}
 @media (min-width: 480px) {
   .staff {
     /* background-color: green; */

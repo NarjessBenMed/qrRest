@@ -92,13 +92,13 @@ const AddMenu = () => {
   return (
     <div className="menu-add">
       <div className="menu__info">
-        <h3> créer le Menu </h3>
+        <h3> Création de Menu</h3>
         <h5>{restName}</h5>
         {/* <img src={'/' + logo} alt='logo' /> */}
       </div>
       <form className="menu-add__form">
         <div className="menu__form__group">
-          <h5> nom de plat </h5>
+          <h5> nom </h5>
           <span>
             {menuStatus.create === "failed" &&
               menuErrors.create.data.filter((err) => err.param === "name")[0] &&

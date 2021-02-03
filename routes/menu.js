@@ -149,6 +149,7 @@ router.put(
 
       if (req.file) {
         image = req.file.path.replace("\\", "/");
+        clearImage(lastImg, "..");
       } else {
         image = lastImg;
       }
@@ -164,7 +165,7 @@ router.put(
         },
         { arrayFilters: [{ "el._id": idItem }], new: true }
       );
-      clearImage(lastImg);
+
       const response = await foundFood.save();
       req.io
         .of("/restaurant-space")

@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTable } from '../../features/tableSlice';
-import { ImSpinner9 } from 'react-icons/im';
-import { IconContext } from 'react-icons';
-import './AddTable.css';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTable } from "../../features/tableSlice";
+import { ImSpinner9 } from "react-icons/im";
+import { IconContext } from "react-icons";
+import "./AddTable.css";
 
 const AddTable = ({ restId }) => {
   const [values, setValues] = useState({
-    tableNumber: '',
-    tableCode: '',
+    tableNumber: "",
+    tableCode: "",
   });
   const { tableNumber, tableCode } = values;
   const dispatch = useDispatch();
   const { tableStatus, tableErrors } = useSelector((state) => state.table);
   useEffect(() => {
-    if (tableStatus.create === 'succeded')
-      setValues({ ...values, tableNumber: '', tableCode: '' });
+    if (tableStatus.create === "succeded")
+      setValues({ ...values, tableNumber: "", tableCode: "" });
   }, [tableStatus]);
 
   const handleChange = (e) => {
     setValues({
       tableNumber: e.target.value,
-      tableCode: restId + '+' + e.target.value,
+      tableCode: restId + "+" + e.target.value,
     });
   };
   const handleSubmit = (e) => {
@@ -29,32 +29,35 @@ const AddTable = ({ restId }) => {
     dispatch(addTable({ tableNumber, tableCode, restaurant: restId }));
   };
   return (
-    <div className='add-table'>
-      <h3>Table creation </h3>
-      <form className='add-table__form'>
-        <div className='add-table__form__group'>
-          <h5>Table Number</h5>
+    <div className="add-table">
+      <h3>Ajout des tables </h3>
+      <form className="add-table__form">
+        <div className="add-table__form__group">
+          <h5>Numéro de table</h5>
           <input
-            type='number'
-            name='tableNumber'
+            type="number"
+            name="tableNumber"
             value={tableNumber}
             onChange={handleChange}
-            min='1'
+            min="1"
           />
 
-          {tableStatus.create === 'failed' && (
-            <span className='add-table-error'> {tableErrors.create.data[0].msg}</span>
+          {tableStatus.create === "failed" && (
+            <span className="add-table-error">
+              {" "}
+              {tableErrors.create.data[0].msg}
+            </span>
           )}
         </div>
-        <button type='submit' onClick={handleSubmit}>
-          {tableStatus.create === 'loading' ? (
-            <IconContext.Provider value={{ className: 'spinner' }}>
+        <button type="submit" onClick={handleSubmit}>
+          {tableStatus.create === "loading" ? (
+            <IconContext.Provider value={{ className: "spinner" }}>
               <div>
                 <ImSpinner9 />
               </div>
             </IconContext.Provider>
           ) : (
-            <span>Add table</span>
+            <span>Ajouter</span>
           )}
         </button>
       </form>

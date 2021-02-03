@@ -8,8 +8,10 @@
   margin: 10px 0 20px;
 }
 .menu-item > img {
-  height: 70px;
-  width: 70px;
+  align-self: center;
+  margin-top: 10px;
+  height: 90px;
+  width: 90px;
 }
 .icon_bouton {
   display: flex;
@@ -33,15 +35,27 @@
 .menu-item__edit-group input {
   border: none;
   border-bottom: 1px solid var(--secondary-color);
-  margin: 5px 0;
+  margin: 10px;
   font-size: 0.9rem;
   height: 30px;
   padding: 5px;
+  width: 100%;
 }
-.menu-item__edit-group h4 {
+.menu-item__edit-group h5 {
+  width: 40%;
+  margin: 0 10px;
+  font-weight: 400;
   text-transform: uppercase;
+}
+.menu-item__edit-group p {
   font-weight: 400;
   overflow-wrap: break-word;
+  text-transform: capitalize;
+  color: #c42012;
+  font-size: 1rem;
+}
+.input-file {
+  padding: 10px;
 }
 .menu-item__buttons {
   margin-top: 30px;
@@ -51,7 +65,11 @@
 }
 
 .menu-item__edit-group {
+  display: flex;
+  width: 100%;
+  margin: 10px 0;
   position: relative;
+  align-items: center;
 }
 .menu-item__edit-group > span {
   position: absolute;
@@ -59,4 +77,17 @@
   bottom: 0;
   color: #c42012;
   font-size: 0.8rem;
+}
+
+@media (min-width: 480px) {
+  .menu-item {
+    width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+}
+@media (min-width: 1024px) {
+}
+@media (min-width: 1280px) {
 }

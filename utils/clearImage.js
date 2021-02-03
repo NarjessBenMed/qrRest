@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const clearImage = (filePath) => {
-  filePath = path.join(__dirname, '..', filePath);
+const fs = require("fs");
+const path = require("path");
+const clearImage = (filePath, folder) => {
+  filePath = path.join(__dirname, folder, filePath);
   fs.unlink(filePath, (err) => console.log(err));
 };
 

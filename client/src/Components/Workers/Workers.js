@@ -11,18 +11,20 @@ const Workers = ({ list }) => {
   };
   return (
     <div className="workerlist">
-      <h3>List of Workers</h3>
+      <h3>Liste des personnels</h3>
       {list &&
         list.length > 0 &&
         list.map((worker) => (
           <div className="workerlist__item" key={worker._id}>
-            <h5>The Worker :</h5>
-            <span>{worker.username}</span>
+            <div className="workerlist__item__info">
+              <h4>Login :</h4>
+              <span>{worker.username}</span>
+            </div>
             <button
               onClick={() => handleClick(worker._id)}
               className="worker__btn"
             >
-              delete
+              Supprimer
             </button>
           </div>
         ))}

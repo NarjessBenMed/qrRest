@@ -49,11 +49,11 @@ const MyRestaurant = () => {
           </div>
         </IconContext.Provider>
       ) : menuStatus.getMenu === "failed" ? (
-        <h4>un probléme est survenvenu, merci de réessayer </h4>
+        <h4>une erreur est survenue , veuillez réésayer SVP</h4>
       ) : menuStatus.getMenu === "succeded" && menu.menu.items.length > 0 ? (
         <Menu menu={menu} logo={logo} />
       ) : (
-        <h5>aucun menu n'est enregistré</h5>
+        <h5>aucun menu n'est enregistré pour ce restaurant</h5>
       )}
     </div>
   );

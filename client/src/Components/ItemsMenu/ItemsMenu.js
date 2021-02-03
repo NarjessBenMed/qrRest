@@ -62,14 +62,8 @@ const ItemsMenu = ({ item }) => {
 
   return (
     <div className="menu-item">
-      {preview && <img src={preview} alt="plat" />}
-
-      {edit ? (
-        <input type="file" name="image" onChange={handleFile} />
-      ) : (
-        <img src={"/" + item.image} alt="food" />
-      )}
       <div className="menu-item__edit-group">
+        <h5>NOM : </h5>
         <span>
           {edit &&
             menuStatus.edit === "failed" &&
@@ -79,10 +73,11 @@ const ItemsMenu = ({ item }) => {
         {edit ? (
           <input type="text" value={name} name="name" onChange={handleData} />
         ) : (
-          <h4>Nom :{item.name}</h4>
+          <p>{item.name}</p>
         )}
       </div>
       <div className="menu-item__edit-group">
+        <h5>prix : </h5>
         <span>
           {edit &&
             menuStatus.edit === "failed" &&
@@ -92,10 +87,11 @@ const ItemsMenu = ({ item }) => {
         {edit ? (
           <input type="text" value={price} name="price" onChange={handleData} />
         ) : (
-          <h4>prix : {item.price}</h4>
+          <p>{item.price}</p>
         )}
       </div>
       <div className="menu-item__edit-group">
+        <h5>description : </h5>
         <span>
           {edit &&
             menuStatus.edit === "failed" &&
@@ -113,9 +109,21 @@ const ItemsMenu = ({ item }) => {
             onChange={handleData}
           />
         ) : (
-          <h4>Description : {item.description}</h4>
+          <p>{item.description}</p>
         )}
       </div>
+
+      {edit ? (
+        <input
+          className="input-file"
+          type="file"
+          name="image"
+          onChange={handleFile}
+        />
+      ) : (
+        <img src={"/" + item.image} alt="food" />
+      )}
+      {preview && <img src={preview} alt="plat" />}
       <div className="menu-item__buttons">
         <div>
           <button className="icon_bouton" onClick={() => handleClick(item._id)}>
