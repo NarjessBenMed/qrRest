@@ -64,6 +64,7 @@ export const checkoutOrder = createAsyncThunk(
 export const orderSlice = createSlice({
   name: "order",
   initialState: {
+    preOrder: [],
     order: null,
     orderStatus: {
       create: "idle",
@@ -81,7 +82,51 @@ export const orderSlice = createSlice({
     },
     orders: null,
   },
-  reducers: {},
+  reducers: {
+    addToOrder: (state, action) => {
+      const { name, price, createdAt } = action.payload;
+      let itemIndex = state.preOrder.findIndex((item) => item.name === name);
+      let newList = [...state.preOrder];
+      if (itemIndex === -1) {
+        return {
+          ...state,
+          preOrder: [
+            ...state.preOrder,
+            { name, price, quantity: 1, createdAt },
+          ],
+        };
+      } else {
+        newList[itemIndex] = {
+          ...newList[itemIndex],
+          quantity: newList[itemIndex].quantity + 1,
+          price: Number(newList[itemIndex].price) + Number(price),
+          createdAt,
+        };
+        return { ...state, preOrder: newList };
+      }
+    },
+    removeFromOrder: (state, action) => {
+      const { name, price, createdAt } = action.payload;
+      let itemIndex = state.preOrder.findIndex((item) => item.name === name);
+      let newList = [...state.preOrder];
+      newList[itemIndex] = {
+        ...newList[itemIndex],
+        quantity: newList[itemIndex].quantity - 1,
+        price: Number(newList[itemIndex].price) - Number(price),
+        createdAt,
+      };
+
+      if (newList[itemIndex].quantity === 0) newList.splice(itemIndex, 1);
+      return { ...state, preOrder: newList };
+    },
+    addComment: (state, action) => {
+      const { name, comment } = action.payload;
+      let itemIndex = state.preOrder.findIndex((item) => item.name === name);
+      let newList = [...state.preOrder];
+      newList[itemIndex] = { ...newList[itemIndex], comment };
+      return { ...state, preOrder: newList };
+    },
+  },
   extraReducers: {
     [createOrder.pending]: (state, action) => {
       return {
@@ -199,4 +244,5 @@ export const orderSlice = createSlice({
   },
 });
 
+export const { addToOrder, removeFromOrder, addComment } = orderSlice.actions;
 export default orderSlice.reducer;
