@@ -4,8 +4,8 @@ import { useHistory, Link } from "react-router-dom";
 import {
   createOrder,
   updateOrder,
-  addToOrder,
   getOrderById,
+  deletePreOrder,
 } from "../../features/orderSlice";
 import ClientMenuItem from "../../Components/ClientMenuItem/ClientMenuItem";
 import "./ClientMenu.css";
@@ -15,11 +15,18 @@ const ClientMenu = ({ menu }) => {
     orderId: null,
     items: [],
     total: 0,
+    numberOfItems: 0,
     categorie: "entree",
   });
-  const { items, total, categorie } = values;
+  const { items, total, categorie, numberOfItems } = values;
   const dispatch = useDispatch();
-
+  const { preOrder, order, orderStatus } = useSelector((state) => state.order);
+  useEffect(() => {
+    dispatch(deletePreOrder());
+  }, []);
+  useEffect(() => {
+    setValues({ ...values, items: preOrder });
+  }, [preOrder]);
   useEffect(() => {
     const id = localStorage.getItem("id");
     if (id) {
@@ -33,40 +40,20 @@ const ClientMenu = ({ menu }) => {
         (acc, curv) => Number(acc) + Number(curv.price),
         0
       );
+      let totalNumber = items.reduce(
+        (acc, curv) => Number(acc) + Number(curv.quantity),
+        0
+      );
 
-      setValues({ ...values, total: totalCost });
+      setValues({ ...values, total: totalCost, numberOfItems: totalNumber });
     } else {
-      setValues({ ...values, total: 0 });
+      setValues({ ...values, total: 0, numberOfItems: 0 });
     }
   }, [items]);
-  const { order } = useSelector((state) => state.order);
+
   const history = useHistory();
   const restId = localStorage.getItem("restId");
   const tableNumber = localStorage.getItem("tableNumber");
-
-  const handleAdd = (name, quantity, price, comment, createdAt) => {
-    // const itemIndex = items.findIndex((item) => item.name === name);
-    // let newList = [...items];
-    // if (itemIndex === -1 && quantity > 0) {
-    //   setValues({
-    //     ...values,
-    //     items: [...items, { name, price, quantity, comment, createdAt }],
-    //   });
-    // } else {
-    //   if (quantity === 0) {
-    //     newList.splice(itemIndex, 1);
-    //   } else {
-    //     newList[itemIndex] = {
-    //       ...newList[itemIndex],
-    //       quantity,
-    //       price,
-    //       comment,
-    //       createdAt,
-    //     };
-    //   }
-    //   setValues({ ...values, items: newList });
-    // }
-  };
 
   const handleButton = () => {
     const orderId = localStorage.getItem("id");
@@ -103,11 +90,7 @@ const ClientMenu = ({ menu }) => {
               {menu.menu.items
                 .filter((item) => item.categorie === categorie)
                 .map((item) => (
-                  <ClientMenuItem
-                    key={item._id}
-                    item={item}
-                    addToCommand={handleAdd}
-                  />
+                  <ClientMenuItem key={item._id} item={item} />
                 ))}
             </div>
           </Fragment>
@@ -158,6 +141,10 @@ const ClientMenu = ({ menu }) => {
       <div className="client-menu__items">{menuItems}</div>
       <div className="client-menu__nav">
         {orderLink}
+        <p className="client-menu__total">
+          <span style={{ color: "white" }}>{total} DT</span>
+          <span style={{ color: "white" }}>({numberOfItems} élements)</span>
+        </p>
         <button onClick={() => handleButton()}>Commander</button>
       </div>
     </div>

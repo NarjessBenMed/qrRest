@@ -61,8 +61,9 @@ const ClientPage = () => {
         <Route exact path="/client-page">
           <div className="client-section__info">
             <h2>Menu</h2>
-
-            <img src={"/" + (menu && menu.menu.restaurant.logo)} alt="logo" />
+            <div className="client-section__info__image">
+              <img src={"/" + (menu && menu.menu.restaurant.logo)} alt="logo" />
+            </div>
             <h2>{menu && menu.menu.restaurant.name}</h2>
           </div>
           {clientMenu}

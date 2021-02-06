@@ -11,20 +11,24 @@
   margin: 30px 0 20px;
   display: flex;
   justify-content: space-between;
-  width: 250px;
+  width: 300px;
   border-bottom: 1px solid #020a15;
   align-items: center;
 }
 .client-section__info > h2 {
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  flex: 1;
 }
-
-.client-section__info > img {
+.client-section__info__image {
+  flex: 1;
+}
+.client-section__info__image > img {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  /* margin: 0 10px; */
 }
 @media (min-width: 480px) {
   .client-section__info {
@@ -34,8 +38,8 @@
 }
 
 @media (min-width: 768px) {
-  .client-section {
-    /* background-color: blue; */
+  .client-section__info {
+    width: 600px;
   }
 }
 

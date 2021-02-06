@@ -126,6 +126,9 @@ export const orderSlice = createSlice({
       newList[itemIndex] = { ...newList[itemIndex], comment };
       return { ...state, preOrder: newList };
     },
+    deletePreOrder: (state) => {
+      return { ...state, preOrder: [] };
+    },
   },
   extraReducers: {
     [createOrder.pending]: (state, action) => {
@@ -244,5 +247,10 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { addToOrder, removeFromOrder, addComment } = orderSlice.actions;
+export const {
+  addToOrder,
+  removeFromOrder,
+  addComment,
+  deletePreOrder,
+} = orderSlice.actions;
 export default orderSlice.reducer;

@@ -40,7 +40,7 @@ const MyOrder = () => {
         <h5>somthing went wrong..</h5>
       )}
       <div className="order__item__total">
-        <p>total:</p>
+        <p>total</p>
         <p>
           {orderStatus.getOne === "loading" ? (
             <span>loading..</span>

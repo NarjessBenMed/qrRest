@@ -9,7 +9,7 @@
 
 .client-menu__nav > button {
   background: var(--primary-color);
-  padding: 10px 20px;
+  padding: 10px;
   border: 2px solid var(--primary-color);
   font-size: 0.9rem;
   /* border: none; */
@@ -37,7 +37,7 @@
   text-decoration: none;
   background: #020a15;
   border: 2px solid var(--primary-color);
-  padding: 10px 20px;
+  padding: 10px;
   font-size: 0.9rem;
   color: white;
   border-radius: 5px;
@@ -83,6 +83,12 @@
 .inactive-categorie {
   color: black;
   background-color: rgb(219, 219, 219);
+}
+.client-menu__total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
 }
 
 @media (min-width: 480px) {

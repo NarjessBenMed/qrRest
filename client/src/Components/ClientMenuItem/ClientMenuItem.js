@@ -52,55 +52,55 @@ const ClientMenuItem = ({ item }) => {
   return (
     <div className="client-menu-item">
       <div className="client-menu-item__group">
-        <img src={item.image} alt="food" />
         <div className="client-menu-item__info">
           <p>{item.name}</p>
           <p>{item.price} dt</p>
-          <span className="client-menu-item__price">
-            Total: {price > 0 ? price : 0}
-          </span>
         </div>
+        <img src={item.image} alt="food" />
       </div>
-
       <p className="client-menu-item__desc">{item.description}</p>
-
-      <div className="client-menu-item__buttons">
-        <button
-          className="client-menu-item__button"
-          onClick={() => {
-            if (quantity > 0) {
-              handleRemove(item.price);
+      <div className="client-menu-item__footer">
+        <span className="client-menu-item__price">
+          Total: {price > 0 ? price : 0} DT
+        </span>
+        <div className="client-menu-item__buttons">
+          <button
+            className="client-menu-item__button"
+            onClick={() => {
+              if (quantity > 0) {
+                handleRemove(item.price);
+                let createdAt = moment().format();
+                dispatch(
+                  removeFromOrder({
+                    name: item.name,
+                    price: item.price,
+                    createdAt,
+                  })
+                );
+              }
+            }}
+          >
+            -
+          </button>
+          <span>{quantity}</span>
+          <button
+            className="client-menu-item__button"
+            onClick={() => {
+              handleAdd(item.price);
               let createdAt = moment().format();
               dispatch(
-                removeFromOrder({
+                addToOrder({
                   name: item.name,
                   price: item.price,
+                  comment,
                   createdAt,
                 })
               );
-            }
-          }}
-        >
-          -
-        </button>
-        <span>{quantity}</span>
-        <button
-          className="client-menu-item__button"
-          onClick={() => {
-            handleAdd(item.price);
-            let createdAt = moment().format();
-            dispatch(
-              addToOrder({
-                name: item.name,
-                price: item.price,
-                comment,
-                createdAt,
-              })
-            );
-          }}
-        >
-          +
-        </button>
+            }}
+          >
+            +
+          </button>
+        </div>
       </div>
       <div className="client-menu-item__comment">
         {quantity > 0 ? (

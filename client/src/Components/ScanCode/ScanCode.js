@@ -12,7 +12,7 @@ const ScanCode = () => {
   const history = useHistory();
   const { authStatus } = useSelector((state) => state.auth);
   const [values, setValues] = useState({
-    delay: 100,
+    delay: 500,
     result: null,
     code: "",
   });
@@ -24,15 +24,15 @@ const ScanCode = () => {
     console.error(err);
   };
   const previewStyle = {
-    height: 240,
-    width: 320,
+    height: 250,
+    width: 200,
   };
-  const handleInput = (e) => {
-    setValues({ ...values, code: e.target.value });
-  };
-  const handleSubmit = () => {
-    setValues({ ...values, result: code });
-  };
+  // const handleInput = (e) => {
+  //   setValues({ ...values, code: e.target.value });
+  // };
+  // const handleSubmit = () => {
+  //   setValues({ ...values, result: code });
+  // };
   useEffect(() => {
     if (result)
       dispatch(
@@ -58,15 +58,15 @@ const ScanCode = () => {
       ) : (
         <Fragment>
           <div className="reader">
-            {/* <QrReader
-              className='qr-reader'
+            <QrReader
+              className="qr-reader"
               delay={delay}
               style={previewStyle}
               onError={handleError}
               onScan={handleScan}
-            /> */}
+            />
           </div>
-          <input
+          {/* <input
             size="50"
             className="test"
             type="text"
@@ -75,7 +75,7 @@ const ScanCode = () => {
             onChange={handleInput}
           />
           <button onClick={handleSubmit}>confirm</button>
-          <h1>{result}</h1>
+          <h1>{result}</h1> */}
         </Fragment>
       )}
     </div>
