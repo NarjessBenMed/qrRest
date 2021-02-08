@@ -1,12 +1,17 @@
 .orders {
   width: 100%;
-  /* border: 1px solid red; */
   display: flex;
+
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  /* padding-top: 70px; */
   margin-top: 30px;
+  height: 100%;
+}
+.orders > h4 {
+  color: var(--primary-color);
+  font-weight: 400;
+  padding-top: 20px;
+  text-align: center;
 }
 .order__comment {
   display: none;
@@ -39,6 +44,7 @@
   /* border: 1px solid blue; */
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  background-color: white;
   width: 300px;
   margin: 10px;
   display: flex;

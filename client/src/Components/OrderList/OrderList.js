@@ -59,7 +59,7 @@ const OrderList = () => {
 
   return (
     <div className="orders">
-      <h2>List of Orders</h2>
+      <h2>Liste des commandes</h2>
       <div className="orders__buttons">
         <button
           className={
@@ -83,7 +83,7 @@ const OrderList = () => {
           }
           onClick={handleDate}
         >
-          Today's orders
+          Cmdes de jour
         </button>
       </div>
 
@@ -103,26 +103,31 @@ const OrderList = () => {
                 ? moment(order.createdAt).isSame(today, "day")
                 : moment(order.createdAt).isBefore(today, "day"))
           )
+          .slice(0)
+          .reverse()
           .map((order) => (
             <div className="orders__items" key={order._id}>
               <p>Table {order.tableNumber}</p>
-              {order.items.map((item) => (
-                <div className="orders__items__single" key={item._id}>
-                  <div className="orders__items__info">
-                    <p>{item.name}</p>
-                    <p>{item.quantity}</p>
-                    <p className="order__comment">{item.comment}</p>
+              {order.items
+                .slice(0)
+                .reverse()
+                .map((item) => (
+                  <div className="orders__items__single" key={item._id}>
+                    <div className="orders__items__info">
+                      <p>{item.name}</p>
+                      <p>{item.quantity}</p>
+                      <p className="order__comment">{item.comment}</p>
+                    </div>
+                    <p className="orders__items__time">
+                      {moment(item.createdAt).fromNow()}
+                    </p>
                   </div>
-                  <p className="orders__items__time">
-                    {moment(item.createdAt).fromNow()}
-                  </p>
-                </div>
-              ))}
+                ))}
               <p>Total : {order.total}</p>
             </div>
           ))
       ) : (
-        <h5>Something went wrong..</h5>
+        <h4>un probléme est survenu..Veuillez réessayer SVP</h4>
       )}
     </div>
   );

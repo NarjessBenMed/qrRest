@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 import { ImSpinner9 } from "react-icons/im";
 import { IconContext } from "react-icons";
@@ -18,7 +18,7 @@ const MyOrder = () => {
   const { order, orderStatus } = useSelector((state) => state.order);
   return (
     <div className="order">
-      <h1>A Payer</h1>
+      <h2>A Payer</h2>
       {orderStatus.getOne === "loading" ? (
         <IconContext.Provider value={{ className: "spinner--large" }}>
           <div>
@@ -49,6 +49,11 @@ const MyOrder = () => {
           ) : null}
           DT
         </p>
+      </div>
+      <div className="client-menu__nav">
+        <Link to="/client-page">
+          <button className="client-menu__nav__back">retour au menu </button>
+        </Link>
       </div>
     </div>
   );

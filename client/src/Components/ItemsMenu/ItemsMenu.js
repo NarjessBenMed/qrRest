@@ -91,7 +91,7 @@ const ItemsMenu = ({ item }) => {
         )}
       </div>
       <div className="menu-item__edit-group">
-        <h5>description : </h5>
+        <h5>description:</h5>
         <span>
           {edit &&
             menuStatus.edit === "failed" &&

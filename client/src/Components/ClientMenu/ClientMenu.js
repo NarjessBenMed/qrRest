@@ -23,6 +23,9 @@ const ClientMenu = ({ menu }) => {
   const { preOrder, order, orderStatus } = useSelector((state) => state.order);
   useEffect(() => {
     dispatch(deletePreOrder());
+    return () => {
+      dispatch(deletePreOrder());
+    };
   }, []);
   useEffect(() => {
     setValues({ ...values, items: preOrder });

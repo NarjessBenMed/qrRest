@@ -1,10 +1,11 @@
 .client-section {
-  background-color: var(--bg-light);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   padding-top: 60px;
+
+  background-color: var(--bg-light);
 }
 
 .client-section__info {

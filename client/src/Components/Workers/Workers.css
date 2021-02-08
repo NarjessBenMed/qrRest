@@ -14,7 +14,8 @@
   text-align: center;
 }
 .workerlist__item {
-  /* border: 1px solid blue; */
+  width: 300px;
+
   border-bottom: 1px solid #1b24318c;
   padding-bottom: 5px;
   display: flex;

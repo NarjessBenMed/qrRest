@@ -1,12 +1,12 @@
-import React, { Fragment, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../../features/authSlice';
-import { HiMenuAlt3 } from 'react-icons/hi';
-import { MdRestaurantMenu } from 'react-icons/md';
-import { IconContext } from 'react-icons';
-import ScrollComponent from '../../utils/scroll';
-import './Navbar.css';
+import React, { Fragment, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../../features/authSlice";
+import { HiMenuAlt3 } from "react-icons/hi";
+import { MdRestaurantMenu } from "react-icons/md";
+import { IconContext } from "react-icons";
+import ScrollComponent from "../../utils/scroll";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -23,11 +23,18 @@ const Navbar = () => {
 
   const adminMenu = (
     <Fragment>
-      <Link to='/admin-section'>
-        <span className='navbar__link'>Home</span>
+      <Link to="/admin-section">
+        <span className="navbar__link__logo">
+          <img
+            className="navbar__link--logo"
+            src="images/logo/digitmenu-logo.svg"
+            alt="logo"
+            onClick={closeMobileMenu}
+          />
+        </span>
       </Link>
-      <Link to='/'>
-        <span className='navbar__link' onClick={handleLog}>
+      <Link to="/">
+        <span className="navbar__link" onClick={handleLog}>
           Déconnexion
         </span>
       </Link>
@@ -35,11 +42,18 @@ const Navbar = () => {
   );
   const ownerMenu = (
     <Fragment>
-      <Link to='/owner-section'>
-        <span className='navbar__link'>Home</span>
+      <Link to="/owner-section">
+        <span className="navbar__link__logo">
+          <img
+            className="navbar__link--logo"
+            src="images/logo/digitmenu-logo.svg"
+            alt="logo"
+            onClick={closeMobileMenu}
+          />
+        </span>
       </Link>
-      <Link to='/'>
-        <span className='navbar__link' onClick={handleLog}>
+      <Link to="/">
+        <span className="navbar__link" onClick={handleLog}>
           Déconnexion
         </span>
       </Link>
@@ -47,49 +61,55 @@ const Navbar = () => {
   );
   const homeMenu = (
     <Fragment>
-      <Link to='/'>
-        <span className='navbar__link' onClick={closeMobileMenu}>
-          Home
+      <Link to="/">
+        <span className="navbar__link__logo">
+          <img
+            className="navbar__link--logo"
+            src="images/logo/digitmenu-logo.svg"
+            alt="logo"
+            onClick={closeMobileMenu}
+          />
         </span>
       </Link>
       <div
-        className={click ? 'navbar__first-menu active' : 'navbar__first-menu'}
-        onClick={closeMobileMenu}>
-        <ScrollComponent section='sect1'>
-          <span className='navbar__link' onClick={closeMobileMenu}>
+        className={click ? "navbar__first-menu active" : "navbar__first-menu"}
+        onClick={closeMobileMenu}
+      >
+        <ScrollComponent section="sect1">
+          <span className="navbar__link" onClick={closeMobileMenu}>
             fonctionnement
           </span>
         </ScrollComponent>
 
-        <ScrollComponent section='sect2'>
-          <span className='navbar__link' onClick={closeMobileMenu}>
+        <ScrollComponent section="sect2">
+          <span className="navbar__link" onClick={closeMobileMenu}>
             avantages
           </span>
         </ScrollComponent>
-        <ScrollComponent section='sect3'>
-          <span className='navbar__link' onClick={closeMobileMenu}>
+        <ScrollComponent section="sect3">
+          <span className="navbar__link" onClick={closeMobileMenu}>
             adhérents
           </span>
         </ScrollComponent>
-        <ScrollComponent section='sect1'>
-          <span className='navbar__link' onClick={closeMobileMenu}>
+        <ScrollComponent section="sect1">
+          <span className="navbar__link" onClick={closeMobileMenu}>
             Nous contacter
           </span>
         </ScrollComponent>
       </div>
-      <div className='navbar__second-menu'>
-        <Link to='/signin' onClick={closeMobileMenu}>
-          <span className='navbar__link'>se connecter</span>
+      <div className="navbar__second-menu">
+        <Link to="/signin" onClick={closeMobileMenu}>
+          <span className="navbar__link">se connecter</span>
         </Link>
-        <div className='mobile-menu' onClick={handleClick}>
+        <div className="mobile-menu" onClick={handleClick}>
           {click ? (
-            <IconContext.Provider value={{ className: 'menu-icon' }}>
+            <IconContext.Provider value={{ className: "menu-icon" }}>
               <div>
                 <MdRestaurantMenu />
               </div>
             </IconContext.Provider>
           ) : (
-            <IconContext.Provider value={{ className: 'menu-icon' }}>
+            <IconContext.Provider value={{ className: "menu-icon" }}>
               <div>
                 <HiMenuAlt3 />
               </div>
@@ -101,37 +121,51 @@ const Navbar = () => {
   );
   const clientMenu = (
     <Fragment>
-      <Link to='/client-page'>
-        <span className='navbar__link'>Menu</span>
+      <Link to="/client-page">
+        <span className="navbar__link__logo">
+          <img
+            className="navbar__link--logo"
+            src="images/logo/digitmenu-logo.svg"
+            alt="logo"
+            onClick={closeMobileMenu}
+          />
+        </span>
       </Link>
-      <Link to='/'>
-        <span className='navbar__link'>Deconnexion</span>
+      <Link to="/">
+        <span className="navbar__link">Deconnexion</span>
       </Link>
     </Fragment>
   );
   const workerMenu = (
     <Fragment>
-      <Link to='/worker-section'>
-        <span className='navbar__link active'>Home</span>
+      <Link to="/worker-section">
+        <span className="navbar__link__logo">
+          <img
+            className="navbar__link--logo"
+            src="images/logo/digitmenu-logo.svg"
+            alt="logo"
+            onClick={closeMobileMenu}
+          />
+        </span>
       </Link>
-      <Link to='/'>
-        <span className='navbar__link' onClick={handleLog}>
+      <Link to="/">
+        <span className="navbar__link" onClick={handleLog}>
           Déconnexion
         </span>
       </Link>
     </Fragment>
   );
   const navMenu = isAuth
-    ? user.role === 'owner'
+    ? user.role === "owner"
       ? ownerMenu
-      : user.role === 'admin'
+      : user.role === "admin"
       ? adminMenu
       : workerMenu
     : isClient
     ? clientMenu
     : homeMenu;
 
-  return <div className='navbar'>{navMenu}</div>;
+  return <div className="navbar">{navMenu}</div>;
 };
 
 export default Navbar;

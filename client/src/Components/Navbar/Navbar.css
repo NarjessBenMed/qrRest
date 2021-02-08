@@ -54,6 +54,16 @@
 .navbar__link:hover {
   color: #c42012;
 }
+.navbar__link--logo {
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+.navbar__link__logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 /* .active {
   color: #c42012;
 } */
