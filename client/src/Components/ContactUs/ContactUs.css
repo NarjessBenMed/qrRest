@@ -1,0 +1,48 @@
+.contact__Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 20px;
+}
+.Butt__send {
+  margin-top: 10px;
+  width: 100%;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 400;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.contact__Form input {
+  height: 30px;
+  margin-bottom: 20px;
+  width: 98%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #1b2431;
+  background-color: white;
+}
+.contact__Form textarea {
+  outline: none;
+  padding: 5px;
+  border-color: lightgray;
+}
+.contact__Form span {
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  text-align: right;
+}
+@media (min-width: 480px) {
+  .contact__Form {
+    width: 400px;
+    padding: 20px 30px;
+  }
+}

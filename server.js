@@ -8,6 +8,7 @@ const connectDB = require("./db");
 const createAdmin = require("./utils/seed");
 const createCode = require("./utils/qrCode");
 const authRoutes = require("./routes/auth");
+const emailRoutes = require("./routes/sendEmail");
 const restaurantRoutes = require("./routes/restaurant");
 const ownerRoutes = require("./routes/owner");
 const tableRoutes = require("./routes/table");
@@ -62,6 +63,7 @@ app.use("/table", tableRoutes);
 app.use("/menu", menuRoutes);
 app.use("/order", orderRoutes);
 app.use("/worker", workerRoutes);
+app.use("/contact", emailRoutes);
 
 //serve static assets in productiion
 if (process.env.NODE_ENV === "production") {

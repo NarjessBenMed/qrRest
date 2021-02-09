@@ -1,11 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '../features/authSlice';
-import adminReducer from '../features/adminSlice';
-import ownerReducer from '../features/ownerSlice';
-import menuReducer from '../features/menuSlice';
-import tableReducer from '../features/tableSlice';
-import orderReducer from '../features/orderSlice';
-import staffReducer from '../features/staffSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../features/authSlice";
+import adminReducer from "../features/adminSlice";
+import ownerReducer from "../features/ownerSlice";
+import menuReducer from "../features/menuSlice";
+import tableReducer from "../features/tableSlice";
+import orderReducer from "../features/orderSlice";
+import staffReducer from "../features/staffSlice";
+import contactReducer from "../features/contactSlice";
 export default configureStore({
   reducer: {
     auth: authReducer,
@@ -15,5 +16,6 @@ export default configureStore({
     table: tableReducer,
     order: orderReducer,
     staff: staffReducer,
+    contact: contactReducer,
   },
 });

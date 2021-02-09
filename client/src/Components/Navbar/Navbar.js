@@ -91,7 +91,7 @@ const Navbar = () => {
             adhérents
           </span>
         </ScrollComponent>
-        <ScrollComponent section="sect1">
+        <ScrollComponent section="sect4">
           <span className="navbar__link" onClick={closeMobileMenu}>
             Nous contacter
           </span>
