@@ -68,6 +68,14 @@ const ContactUs = () => {
           name="message"
           onChange={handleChange}
         ></textarea>
+
+        <h5
+          className={
+            contactStatus === "succeded" ? "msg__sented" : "msg__sented__hidden"
+          }
+        >
+          votre message a été envoyé avec succes{" "}
+        </h5>
         <button className="Butt__send" type="submit" onClick={handleSubmit}>
           envoyer
         </button>

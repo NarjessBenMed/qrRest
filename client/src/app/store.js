@@ -7,6 +7,7 @@ import tableReducer from "../features/tableSlice";
 import orderReducer from "../features/orderSlice";
 import staffReducer from "../features/staffSlice";
 import contactReducer from "../features/contactSlice";
+import adherentReducer from "../features/adherentSlice.js";
 export default configureStore({
   reducer: {
     auth: authReducer,
@@ -17,5 +18,6 @@ export default configureStore({
     order: orderReducer,
     staff: staffReducer,
     contact: contactReducer,
+    adherent: adherentReducer,
   },
 });

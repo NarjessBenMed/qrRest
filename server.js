@@ -15,7 +15,7 @@ const tableRoutes = require("./routes/table");
 const menuRoutes = require("./routes/menu");
 const orderRoutes = require("./routes/order");
 const workerRoutes = require("./routes/worker");
-
+const adherentRoute = require("./routes/adherent");
 const app = express();
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -64,6 +64,7 @@ app.use("/menu", menuRoutes);
 app.use("/order", orderRoutes);
 app.use("/worker", workerRoutes);
 app.use("/contact", emailRoutes);
+app.use("/adherent", adherentRoute);
 
 //serve static assets in productiion
 if (process.env.NODE_ENV === "production") {

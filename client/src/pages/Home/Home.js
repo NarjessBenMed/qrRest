@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
 import { initState } from "../../features/authSlice";
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaPlusCircle } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import { useDispatch, useSelector } from "react-redux";
 
 import ContactUs from "../../Components/ContactUs/ContactUs.js";
+import { getRestInfo } from "../../features/adherentSlice.js";
 import "./Home.css";
 
 const Home = () => {
@@ -14,6 +16,13 @@ const Home = () => {
   useEffect(() => {
     dispatch(initState());
   }, []);
+  const { adherentStatus, errors, adherents } = useSelector(
+    (state) => state.adherent
+  );
+  useEffect(() => {
+    dispatch(getRestInfo());
+  }, []);
+
   return (
     <div className="home">
       <div className="home__content">
@@ -124,18 +133,17 @@ const Home = () => {
         <h1> Les adhérents </h1>
 
         <div className="home__adher__items">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6bMxzzhbJr9D94CZ-WUGbxptM9EAHmLmmnA&usqp=CAU"
-            alt=""
-          />
-          <img
-            src="https://dozane-studio.com/bundles/framework/images/clients/dozane-client-sultan-ahmet.png"
-            alt=""
-          />
-          <img
-            src="https://scontent.ftun7-1.fna.fbcdn.net/v/t1.0-9/21752455_1605310829489573_1413294409926454312_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=hWNGwNDsNe4AX-2Qdii&_nc_ht=scontent.ftun7-1.fna&oh=3859edb4b4b56564621a835cb8839ba7&oe=602BA403"
-            alt=""
-          />
+          {adherentStatus === "loading" ? (
+            <span>Loading...</span>
+          ) : adherentStatus === "succeded" ? (
+            adherents && adherents.length > 0 ? (
+              adherents.map((adher) => <img src={adher.logo} alt="adherent" />)
+            ) : (
+              <span>soyer le premier ..</span>
+            )
+          ) : (
+            adherentStatus === "failed" && <span>une erreur est survenue</span>
+          )}
         </div>
       </section>
 
