@@ -93,6 +93,7 @@
 .home__fonct {
   padding: 20px;
 }
+
 .home__fonct > h4 {
   text-align: center;
   margin-bottom: 20px;
@@ -185,13 +186,13 @@
   align-items: center;
   width: 100%;
 }
-.home__adher__items {
-  /* border: 1px solid blue; */
+/* .home__adher__items {
+  
   display: flex;
   margin-bottom: 50px;
   justify-content: space-evenly;
   width: 100%;
-}
+} */
 .home__adher h1 {
   margin-bottom: 30px;
   text-align: center;
@@ -251,6 +252,57 @@
   font-size: 0.8rem;
   margin-bottom: 5px;
 }
+
+/* ----------------------------animation test------------------ */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+/* styling */
+.slider {
+  background: white;
+  /* box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125); */
+  height: 100px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 50px;
+  width: 100%;
+}
+.slider::before,
+.slider::after {
+  content: "";
+  height: 100px;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+.slider::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+.slider::before {
+  left: 0;
+  top: 0;
+}
+.slide-track {
+  animation: scroll 10s linear infinite;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.slide {
+  height: 100px;
+  width: 250px;
+}
+/* ------------------------------------------------------------------ */
 @media (min-width: 480px) {
   .home__content {
     margin-top: 100px;

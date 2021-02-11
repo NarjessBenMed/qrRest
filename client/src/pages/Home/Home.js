@@ -132,18 +132,26 @@ const Home = () => {
       <section className="home__adher" id="sect3">
         <h1> Les adhérents </h1>
 
-        <div className="home__adher__items">
-          {adherentStatus === "loading" ? (
-            <span>Loading...</span>
-          ) : adherentStatus === "succeded" ? (
-            adherents && adherents.length > 0 ? (
-              adherents.map((adher) => <img src={adher.logo} alt="adherent" />)
+        <div className="home__adher__items slider">
+          <div class="slide-track">
+            {adherentStatus === "loading" ? (
+              <span>Loading...</span>
+            ) : adherentStatus === "succeded" ? (
+              adherents && adherents.length > 0 ? (
+                adherents.map((adher) => (
+                  <div class="slide">
+                    <img src={adher.logo} alt="adherent" />
+                  </div>
+                ))
+              ) : (
+                <span>soyer le premier ..</span>
+              )
             ) : (
-              <span>soyer le premier ..</span>
-            )
-          ) : (
-            adherentStatus === "failed" && <span>une erreur est survenue</span>
-          )}
+              adherentStatus === "failed" && (
+                <span>une erreur est survenue</span>
+              )
+            )}
+          </div>
         </div>
       </section>
 
