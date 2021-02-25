@@ -22,9 +22,22 @@ const orderSchema = new Schema(
           price: { type: Number },
           createdAt: { type: String },
           comment: { type: String },
+          confirmed: { type: Boolean, default: true },
         },
       ],
       required: true,
+    },
+    preOrder: {
+      type: [
+        {
+          itemId: { type: String },
+          newQuantity: { type: Number },
+          newPrice: { type: Number },
+          newComment: { type: String },
+          confirmed: { type: Boolean, default: false },
+          requestedAction: { type: String, default: "cancel" },
+        },
+      ],
     },
 
     total: {

@@ -60,6 +60,17 @@ export const checkoutOrder = createAsyncThunk(
     }
   }
 );
+export const cancelOrder = createAsyncThunk(
+  "order/cancel-order",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.put("/order/cancel-order", data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const orderSlice = createSlice({
   name: "order",
@@ -72,6 +83,7 @@ export const orderSlice = createSlice({
       getOne: "idle",
       getAll: "idle",
       checkout: "idle",
+      cancel: "idle",
     },
     orderErrors: {
       create: null,
@@ -79,6 +91,7 @@ export const orderSlice = createSlice({
       getOne: null,
       getAll: null,
       checkout: null,
+      cancel: null,
     },
     orders: null,
   },
@@ -242,6 +255,28 @@ export const orderSlice = createSlice({
         ...state,
         orderStatus: { ...state.orderStatus, checkout: "failed" },
         orderErrors: { ...state.orderErrors, checkout: action.payload },
+      };
+    },
+
+    [cancelOrder.pending]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, cancel: "loading" },
+      };
+    },
+    [cancelOrder.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        order: action.payload,
+        orderStatus: { ...state.orderStatus, cancel: "succeded" },
+        orderErrors: { ...state.orderErrors, cancel: null },
+      };
+    },
+    [cancelOrder.rejected]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, cancel: "failed" },
+        orderErrors: { ...state.orderErrors, cancel: action.payload },
       };
     },
   },

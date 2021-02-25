@@ -4,6 +4,9 @@ import { initState } from "../../features/authSlice";
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaPlusCircle } from "react-icons/fa";
+import { RiFacebookCircleFill } from "react-icons/ri";
+import { FaInstagram } from "react-icons/fa";
+import { ImWhatsapp } from "react-icons/im";
 import { IconContext } from "react-icons";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -140,7 +143,7 @@ const Home = () => {
               adherents && adherents.length > 0 ? (
                 adherents.map((adher) => (
                   <div class="slide">
-                    <img src={adher.logo} alt="adherent" />
+                    <img className="images" src={adher.logo} alt="adherent" />
                   </div>
                 ))
               ) : (
@@ -158,9 +161,30 @@ const Home = () => {
       <footer className="footer" id="sect4">
         <ContactUs />
         <div className="footer__content">
-          <div className="contact__us__left contact__us__border">
-            <p className="c">Nous contacter</p>
+          <div className="social__contact">
+            <div className="contact__us__left contact__us__border">
+              <p>Nous contacter</p>
+            </div>
+            <div className="social__icons">
+              <IconContext.Provider
+                value={{ className: "social__icons__style" }}
+              >
+                <RiFacebookCircleFill />
+              </IconContext.Provider>
+
+              <IconContext.Provider
+                value={{ className: "social__icons__style" }}
+              >
+                <FaInstagram />
+              </IconContext.Provider>
+              <IconContext.Provider
+                value={{ className: "social__icons__style" }}
+              >
+                <ImWhatsapp />
+              </IconContext.Provider>
+            </div>
           </div>
+
           <p className="copy-right">
             &copy; 2021 Copyright all right reserved.
           </p>

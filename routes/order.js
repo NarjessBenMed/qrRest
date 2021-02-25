@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const isAuth = require("../middleware/is-client");
+const order = require("../models/order");
 const Order = require("../models/order");
 
 // must be authenticated and client
@@ -48,6 +49,49 @@ router.put("/update-order", isAuth, async (req, res, next) => {
     next(error);
   }
 });
+// cancel order request
+router.put(
+  "/cancel-order",
+  //  isAuth,
+  async (req, res, next) => {
+    try {
+      const { itemId, orderId } = req.body;
+      let orderToUpdate = await Order.findOne({ _id: orderId });
+      orderToUpdate.items = orderToUpdate.items.map((item) => {
+        if (item._id == itemId) item.confirmed = false;
+        return item;
+      });
+      orderToUpdate.preOrder.push({ itemId });
+      await orderToUpdate.save();
+      res.status(200).json({ order: orderToUpdate });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+// confirm cancel request
+router.put(
+  "/confirm-cancel",
+  // isAuth,
+  async (req, res, next) => {
+    try {
+      const { itemId, orderId } = req.body;
+      let orderToUpdate = await Order.findOne({ _id: orderId });
+      orderToUpdate.items = orderToUpdate.items.filter(
+        (item) => item._id.toString() !== itemId
+      );
+
+      orderToUpdate.preOrder = orderToUpdate.preOrder.map((item) => {
+        if (item.itemId == itemId) item.confirmed = true;
+        return item;
+      });
+      await orderToUpdate.save();
+      res.status(201).json({ order: orderToUpdate });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 // get command by id
 
