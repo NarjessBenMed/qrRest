@@ -50,32 +50,69 @@ router.put("/update-order", isAuth, async (req, res, next) => {
   }
 });
 //edit order after confirm
-router.put("/edit-reorder", async (req, res, next) => {
+router.put("/edit-preorder", async (req, res, next) => {
   try {
     const { itemId, orderId, newValues } = req.body;
     let orderToUpdate = await Order.findOne({ _id: orderId });
     orderToUpdate.items = orderToUpdate.items.map((item) => {
-      if (item._id == itemId) {
-        item.quantity = newValues;
-        item.confirmed = false;
-      }
+      if (item._id == itemId) item.confirmed = false;
       return item;
     });
-
-    orderToUpdate.preOrder = orderToUpdate.preOrder.map((item) => {
-      if (item._id == itemId) {
-        item.quantity = newValues;
-        item.confirmed = false;
-      }
+    const { newQuantity, newPrice, newComment } = newValues;
+    orderToUpdate.preOrder.push({
+      itemId,
+      newQuantity,
+      newPrice,
+      newComment,
+      requestedAction: "edit",
     });
-
-    orderToUpdate.preOrder.push({ itemId });
     await orderToUpdate.save();
     req.io
       .of("/restaurant-space")
       .to(orderToUpdate.restId.toString())
       .emit("message", {
         msg: "order edit  req",
+      });
+    res.status(200).json({ order: orderToUpdate });
+  } catch (error) {
+    next(error);
+  }
+});
+// confirm edit preorder
+router.put("/confirm-edit-preorder", async (req, res, next) => {
+  try {
+    const { itemId, orderId } = req.body;
+    let newValues;
+    let orderToUpdate = await Order.findOne({ _id: orderId });
+    orderToUpdate.preOrder = orderToUpdate.preOrder.map((el) => {
+      if (el.itemId === itemId) {
+        el.confirmed = true;
+        newValues = el;
+      }
+      return el;
+    });
+    const { newQuantity, newPrice, newComment } = newValues;
+    orderToUpdate.items = orderToUpdate.items.map((item) => {
+      if (item._id == itemId) {
+        item.confirmed = true;
+        item.quantity = newQuantity;
+        item.price = newPrice;
+        item.comment = newComment;
+      }
+      return item;
+    });
+    let totalCost = orderToUpdate.items.reduce(
+      (acc, curv) => Number(acc) + Number(curv.price),
+      0
+    );
+    orderToUpdate.total = totalCost;
+
+    await orderToUpdate.save();
+    req.io
+      .of("/restaurant-space")
+      .to(orderToUpdate.restId.toString())
+      .emit("message", {
+        msg: "confirm edit  req",
       });
     res.status(200).json({ order: orderToUpdate });
   } catch (error) {

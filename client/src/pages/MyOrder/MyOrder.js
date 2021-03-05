@@ -2,9 +2,13 @@ import React, { useState, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
 
-import { ImSpinner9 } from "react-icons/im";
+import { ImInsertTemplate, ImSpinner9 } from "react-icons/im";
 import { IconContext } from "react-icons";
-import { getOrderById, cancelOrder } from "../../features/orderSlice";
+import {
+  getOrderById,
+  cancelOrder,
+  editPreOrder,
+} from "../../features/orderSlice";
 import "./MyOrder.css";
 
 const MyOrder = ({ channel }) => {
@@ -36,19 +40,28 @@ const MyOrder = ({ channel }) => {
     dispatch(cancelOrder({ itemId, orderId }));
   };
   const handleEdit = (item) => {
-    editStatus.toEdit
-      ? setEditFields({
-          ...editFields,
-          editStatus: { toEdit: false, itemId: null },
-        })
-      : setEditFields({
-          ...editFields,
-          editStatus: {
-            toEdit: true,
-            itemId: item._id,
-            unitPrice: Number(item.price) / Number(item.quantity),
-          },
-        });
+    if (editStatus.toEdit) {
+      const itemToEdit = editOrder.filter((el) => el._id === item._id)[0];
+      const newValues = {
+        newQuantity: itemToEdit.quantity,
+        newPrice: itemToEdit.price,
+        newComment: "",
+      };
+      dispatch(editPreOrder({ itemId: editStatus.itemId, orderId, newValues }));
+      setEditFields({
+        ...editFields,
+        editStatus: { toEdit: false, itemId: null },
+      });
+    } else {
+      setEditFields({
+        ...editFields,
+        editStatus: {
+          toEdit: true,
+          itemId: item._id,
+          unitPrice: Number(item.price) / Number(item.quantity),
+        },
+      });
+    }
   };
   const handleAdd = (id) => {
     let itemIndex = editOrder.findIndex((item) => item._id === id);
@@ -100,7 +113,14 @@ const MyOrder = ({ channel }) => {
               order.order.preOrder.filter(
                 (order) => order.itemId === item._id
               )[0].confirmed && (
-                <p style={{ background: "green" }}>cancel request refused</p>
+                <p style={{ background: "green" }}>
+                  {
+                    order.order.preOrder.filter(
+                      (order) => order.itemId === item._id
+                    )[0].requestedAction
+                  }
+                  request accepted
+                </p>
               )}
             {!item.confirmed && (
               <p>

@@ -11,6 +11,7 @@ import {
   checkoutOrder,
   confirmCancelOrder,
   refuseCancelOrder,
+  confirmEditPreOrder,
 } from "../../features/orderSlice";
 import { getTables } from "../../features/tableSlice";
 const socketURL =
@@ -65,6 +66,9 @@ const WorkerSection = () => {
   };
   const handleConfirm = (itemId, orderId) => {
     dispatch(confirmCancelOrder({ itemId, orderId }));
+  };
+  const handleConfirmEdit = (itemId, orderId) => {
+    dispatch(confirmEditPreOrder({ itemId, orderId }));
   };
   const handleRefuse = (itemId, orderId) => {
     dispatch(refuseCancelOrder({ itemId, orderId }));
@@ -153,6 +157,14 @@ const WorkerSection = () => {
                                 style={{ width: 100, background: "green" }}
                               >
                                 refuse
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleConfirmEdit(item._id, order._id)
+                                }
+                                style={{ width: 100, background: "blue" }}
+                              >
+                                confirmedit
                               </button>
                             </Fragment>
                           )}

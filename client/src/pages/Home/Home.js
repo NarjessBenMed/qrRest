@@ -136,13 +136,13 @@ const Home = () => {
         <h1> Les adhérents </h1>
 
         <div className="home__adher__items slider">
-          <div class="slide-track">
+          <div className="slide-track">
             {adherentStatus === "loading" ? (
               <span>Loading...</span>
             ) : adherentStatus === "succeded" ? (
               adherents && adherents.length > 0 ? (
                 adherents.map((adher) => (
-                  <div class="slide">
+                  <div className="slide" key={adher._id}>
                     <img className="images" src={adher.logo} alt="adherent" />
                   </div>
                 ))
