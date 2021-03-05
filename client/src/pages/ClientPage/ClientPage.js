@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import openSocket from "socket.io-client";
 import { Route, Switch } from "react-router-dom";
@@ -14,6 +14,7 @@ const socketURL =
     : "http://localhost:5000";
 
 const ClientPage = () => {
+  const [channel, setChannel] = useState(null);
   const dispatch = useDispatch();
   const restId = localStorage.getItem("restId");
   useEffect(() => {
@@ -24,6 +25,7 @@ const ClientPage = () => {
       transports: ["websocket", "polling"],
       // secure: true,
     });
+    setChannel(socket);
     socket.on("connect", () => {
       console.log(socket.id);
     });
@@ -69,7 +71,7 @@ const ClientPage = () => {
           {clientMenu}
         </Route>
         <Route exact path="/client-page/order">
-          <MyOrder />
+          <MyOrder channel={channel} />
         </Route>
       </Switch>
     </div>

@@ -6,7 +6,12 @@ import moment from "moment";
 import "./WorkerSection.css";
 import { ImSpinner9 } from "react-icons/im";
 import { IconContext } from "react-icons";
-import { getAllOrders, checkoutOrder } from "../../features/orderSlice";
+import {
+  getAllOrders,
+  checkoutOrder,
+  confirmCancelOrder,
+  refuseCancelOrder,
+} from "../../features/orderSlice";
 import { getTables } from "../../features/tableSlice";
 const socketURL =
   process.env.NODE_ENV === "production"
@@ -58,6 +63,12 @@ const WorkerSection = () => {
     await dispatch(checkoutOrder({ orderId: id }));
     await dispatch(getAllOrders(user.restaurantId));
   };
+  const handleConfirm = (itemId, orderId) => {
+    dispatch(confirmCancelOrder({ itemId, orderId }));
+  };
+  const handleRefuse = (itemId, orderId) => {
+    dispatch(refuseCancelOrder({ itemId, orderId }));
+  };
   return (
     <div className="worker">
       <h2>List of orders</h2>
@@ -108,9 +119,44 @@ const WorkerSection = () => {
                     .slice(0)
                     .reverse()
                     .map((item) => (
-                      <div className="worker__orders__items" key={item._id}>
+                      <div
+                        className="worker__orders__items"
+                        key={item._id}
+                        style={{ background: item.confirmed ? "white" : "red" }}
+                      >
                         <div className="worker__orders__items__info">
                           <p>{item.name}</p>
+
+                          {!item.confirmed && (
+                            <Fragment>
+                              <p>
+                                waiting for
+                                {
+                                  order.preOrder.filter(
+                                    (el) => el.itemId === item._id
+                                  )[0].requestedAction
+                                }
+                                confirmation
+                              </p>
+                              <button
+                                onClick={() =>
+                                  handleConfirm(item._id, order._id)
+                                }
+                                style={{ width: 100, background: "green" }}
+                              >
+                                confirm
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleRefuse(item._id, order._id)
+                                }
+                                style={{ width: 100, background: "green" }}
+                              >
+                                refuse
+                              </button>
+                            </Fragment>
+                          )}
+
                           <p>{item.quantity}</p>
                         </div>
                         {item.comment && (

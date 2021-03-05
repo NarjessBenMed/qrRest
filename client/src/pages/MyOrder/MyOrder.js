@@ -7,7 +7,7 @@ import { IconContext } from "react-icons";
 import { getOrderById, cancelOrder } from "../../features/orderSlice";
 import "./MyOrder.css";
 
-const MyOrder = () => {
+const MyOrder = ({ channel }) => {
   const [editFields, setEditFields] = useState({
     editStatus: { toEdit: false, itemId: null, unitPrice: 0 },
     editOrder: null,
@@ -17,9 +17,16 @@ const MyOrder = () => {
   const location = useLocation();
   const { orderId } = location.state;
   useEffect(() => {
-    console.log("orederid", orderId);
     dispatch(getOrderById(orderId));
   }, [orderId]);
+  useEffect(() => {
+    if (channel) {
+      channel.on("message", (data) => {
+        dispatch(getOrderById(orderId));
+      });
+    }
+  }, [channel]);
+
   const { order, orderStatus } = useSelector((state) => state.order);
   useEffect(() => {
     order.order.items &&
@@ -77,9 +84,35 @@ const MyOrder = () => {
         </IconContext.Provider>
       ) : orderStatus.getOne === "succeded" ? (
         editOrder &&
+        editOrder.length > 0 &&
         editOrder.map((item) => (
-          <div className="order__item" key={item._id}>
+          <div
+            className="order__item"
+            style={{ background: item.confirmed ? "white" : "red" }}
+            key={item._id}
+          >
             <p>{item.name}</p>
+            {item.confirmed &&
+              order.order.preOrder.length > 0 &&
+              order.order.preOrder.filter(
+                (order) => order.itemId === item._id
+              )[0] &&
+              order.order.preOrder.filter(
+                (order) => order.itemId === item._id
+              )[0].confirmed && (
+                <p style={{ background: "green" }}>cancel request refused</p>
+              )}
+            {!item.confirmed && (
+              <p>
+                waiting for
+                {order.order.preOrder.length > 0 &&
+                  order.order.preOrder.filter(
+                    (order) => order.itemId === item._id
+                  )[0].requestedAction}{" "}
+                confirmation
+              </p>
+            )}
+
             <div className="order__item__info">
               <p>{item.quantity}</p>
               {editStatus.toEdit && item._id === editStatus.itemId && (

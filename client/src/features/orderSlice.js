@@ -71,6 +71,28 @@ export const cancelOrder = createAsyncThunk(
     }
   }
 );
+export const confirmCancelOrder = createAsyncThunk(
+  "order/confirm-cancel",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.put("/order/confirm-cancel", data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+export const refuseCancelOrder = createAsyncThunk(
+  "order/refuse-cancel",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.put("/order/refuse-cancel", data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const orderSlice = createSlice({
   name: "order",

@@ -49,6 +49,71 @@ router.put("/update-order", isAuth, async (req, res, next) => {
     next(error);
   }
 });
+//edit order after confirm
+router.put("/edit-reorder", async (req, res, next) => {
+  try {
+    const { itemId, orderId, newValues } = req.body;
+    let orderToUpdate = await Order.findOne({ _id: orderId });
+    orderToUpdate.items = orderToUpdate.items.map((item) => {
+      if (item._id == itemId) {
+        item.quantity = newValues;
+        item.confirmed = false;
+      }
+      return item;
+    });
+
+    orderToUpdate.preOrder = orderToUpdate.preOrder.map((item) => {
+      if (item._id == itemId) {
+        item.quantity = newValues;
+        item.confirmed = false;
+      }
+    });
+
+    orderToUpdate.preOrder.push({ itemId });
+    await orderToUpdate.save();
+    req.io
+      .of("/restaurant-space")
+      .to(orderToUpdate.restId.toString())
+      .emit("message", {
+        msg: "order edit  req",
+      });
+    res.status(200).json({ order: orderToUpdate });
+  } catch (error) {
+    next(error);
+  }
+});
+// confirm cancel request
+router.put(
+  "/confirm-cancel",
+  // isAuth,
+  async (req, res, next) => {
+    try {
+      const { itemId, orderId } = req.body;
+      let orderToUpdate = await Order.findOne({ _id: orderId });
+
+      let { price } = orderToUpdate.items.filter(
+        (item) => item._id.toString() === itemId
+      )[0];
+      orderToUpdate.items = orderToUpdate.items.filter(
+        (item) => item._id.toString() !== itemId
+      );
+      orderToUpdate.total = Number(orderToUpdate.total) - Number(price);
+      orderToUpdate.preOrder = orderToUpdate.preOrder.filter(
+        (item) => item.itemId !== itemId
+      );
+      await orderToUpdate.save();
+      req.io
+        .of("/restaurant-space")
+        .to(orderToUpdate.restId.toString())
+        .emit("message", {
+          msg: "order cancel confirmed",
+        });
+      res.status(201).json({ order: orderToUpdate });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 // cancel order request
 router.put(
   "/cancel-order",
@@ -63,6 +128,12 @@ router.put(
       });
       orderToUpdate.preOrder.push({ itemId });
       await orderToUpdate.save();
+      req.io
+        .of("/restaurant-space")
+        .to(orderToUpdate.restId.toString())
+        .emit("message", {
+          msg: "order cancel req",
+        });
       res.status(200).json({ order: orderToUpdate });
     } catch (error) {
       next(error);
@@ -77,15 +148,55 @@ router.put(
     try {
       const { itemId, orderId } = req.body;
       let orderToUpdate = await Order.findOne({ _id: orderId });
+
+      let { price } = orderToUpdate.items.filter(
+        (item) => item._id.toString() === itemId
+      )[0];
       orderToUpdate.items = orderToUpdate.items.filter(
         (item) => item._id.toString() !== itemId
       );
+      orderToUpdate.total = Number(orderToUpdate.total) - Number(price);
+      orderToUpdate.preOrder = orderToUpdate.preOrder.filter(
+        (item) => item.itemId !== itemId
+      );
+      await orderToUpdate.save();
+      req.io
+        .of("/restaurant-space")
+        .to(orderToUpdate.restId.toString())
+        .emit("message", {
+          msg: "order cancel confirmed",
+        });
+      res.status(201).json({ order: orderToUpdate });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+// refuse cancel request
+router.put(
+  "/refuse-cancel",
+  // isAuth,
+  async (req, res, next) => {
+    try {
+      const { itemId, orderId } = req.body;
+      let orderToUpdate = await Order.findOne({ _id: orderId });
 
+      orderToUpdate.items = orderToUpdate.items.map((item) => {
+        if (item._id == itemId) item.confirmed = true;
+        return item;
+      });
       orderToUpdate.preOrder = orderToUpdate.preOrder.map((item) => {
         if (item.itemId == itemId) item.confirmed = true;
         return item;
       });
+
       await orderToUpdate.save();
+      req.io
+        .of("/restaurant-space")
+        .to(orderToUpdate.restId.toString())
+        .emit("message", {
+          msg: "order cancel refused",
+        });
       res.status(201).json({ order: orderToUpdate });
     } catch (error) {
       next(error);
