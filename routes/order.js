@@ -59,13 +59,31 @@ router.put("/edit-preorder", async (req, res, next) => {
       return item;
     });
     const { newQuantity, newPrice, newComment } = newValues;
-    orderToUpdate.preOrder.push({
-      itemId,
-      newQuantity,
-      newPrice,
-      newComment,
-      requestedAction: "edit",
-    });
+
+    const indexItem = orderToUpdate.preOrder.findIndex(
+      (item) => item.itemId == itemId
+    );
+    console.log("indexitme", indexItem);
+    if (indexItem !== -1) {
+      orderToUpdate.preOrder = orderToUpdate.preOrder.map((el) => {
+        if (el.itemId == itemId) {
+          el.newQuantity = Number(newQuantity);
+          el.newPrice = Number(newPrice);
+          el.newComment = newComment;
+          el.requestedAction = "edit";
+          el.confirmed = "false";
+        }
+        return el;
+      });
+    } else {
+      orderToUpdate.preOrder.push({
+        itemId,
+        newQuantity,
+        newPrice,
+        newComment,
+        requestedAction: "edit",
+      });
+    }
     await orderToUpdate.save();
     req.io
       .of("/restaurant-space")
@@ -85,7 +103,7 @@ router.put("/confirm-edit-preorder", async (req, res, next) => {
     let newValues;
     let orderToUpdate = await Order.findOne({ _id: orderId });
     orderToUpdate.preOrder = orderToUpdate.preOrder.map((el) => {
-      if (el.itemId === itemId) {
+      if (el.itemId == itemId) {
         el.confirmed = true;
         newValues = el;
       }
@@ -163,7 +181,20 @@ router.put(
         if (item._id == itemId) item.confirmed = false;
         return item;
       });
-      orderToUpdate.preOrder.push({ itemId });
+      const indexItem = orderToUpdate.preOrder.findIndex(
+        (item) => item.itemId === itemId
+      );
+      if (indexItem !== -1) {
+        orderToUpdate.preOrder = orderToUpdate.preOrder.map((el) => {
+          if (el.itemId === itemId) {
+            el.confirmed = "false";
+            el.requestedAction = "cancel";
+          }
+          return el;
+        });
+      } else {
+        orderToUpdate.preOrder.push({ itemId });
+      }
       await orderToUpdate.save();
       req.io
         .of("/restaurant-space")
@@ -223,7 +254,7 @@ router.put(
         return item;
       });
       orderToUpdate.preOrder = orderToUpdate.preOrder.map((item) => {
-        if (item.itemId == itemId) item.confirmed = true;
+        if (item.itemId == itemId) item.confirmed = false;
         return item;
       });
 
@@ -283,9 +314,12 @@ router.put("/checkout-order", async (req, res, next) => {
     const order = await Order.findById(orderId);
     order.paid = true;
     const response = await order.save();
-    req.io.of("/restaurant-space").to(order.restId.toString()).emit("message", {
-      msg: "a new order passed",
-    });
+    req.io
+      .of("/restaurant-space")
+      .to(order.restId.toString())
+      .emit("checkout", {
+        msg: "order checked",
+      });
 
     res.status(200).json({ data: response });
   } catch (error) {

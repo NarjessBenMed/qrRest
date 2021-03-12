@@ -7,7 +7,11 @@ import openSocket from "socket.io-client";
 import { ImSpinner9 } from "react-icons/im";
 import { IconContext } from "react-icons";
 import { getAllOrders } from "../../features/orderSlice";
+
 import "./OrderList.css";
+
+import "moment/locale/fr";
+moment.locale("fr");
 const socketURL =
   process.env.NODE_ENV === "production"
     ? window.location.hostname

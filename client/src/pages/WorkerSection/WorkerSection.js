@@ -2,10 +2,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import openSocket from "socket.io-client";
 import moment from "moment";
-
-import "./WorkerSection.css";
 import { ImSpinner9 } from "react-icons/im";
 import { IconContext } from "react-icons";
+import "./WorkerSection.css";
+
 import {
   getAllOrders,
   checkoutOrder,
@@ -14,6 +14,10 @@ import {
   confirmEditPreOrder,
 } from "../../features/orderSlice";
 import { getTables } from "../../features/tableSlice";
+
+import "moment/locale/fr";
+moment.locale("fr");
+
 const socketURL =
   process.env.NODE_ENV === "production"
     ? window.location.hostname
@@ -77,7 +81,7 @@ const WorkerSection = () => {
     <div className="worker">
       <h2>List of orders</h2>
       <div className="worker__tables">
-        <p>Select Your Table</p>
+        <p> Selectionnez une table </p>
         {tableStatus.getAll === "loading" ? (
           <IconContext.Provider value={{ className: "spinner" }}>
             <div>
@@ -93,11 +97,11 @@ const WorkerSection = () => {
                 </option>
               ))
             ) : (
-              <option>no table</option>
+              <option>aucune table trouvé</option>
             )}
           </select>
         ) : (
-          <h5>Something went wrong..</h5>
+          <h5>un probléme est survenue .. veuillez réessayer </h5>
         )}
       </div>
       <div className="worker__content">
@@ -123,74 +127,100 @@ const WorkerSection = () => {
                     .slice(0)
                     .reverse()
                     .map((item) => (
-                      <div
-                        className="worker__orders__items"
-                        key={item._id}
-                        style={{ background: item.confirmed ? "white" : "red" }}
-                      >
+                      <div className="worker__orders__items" key={item._id}>
                         <div className="worker__orders__items__info">
-                          <p>{item.name}</p>
-
-                          {!item.confirmed && (
-                            <Fragment>
-                              <p>
-                                waiting for
-                                {
-                                  order.preOrder.filter(
+                          <div className="req__info">
+                            <p>{item.name}</p>
+                            <p> quantité :{item.quantity}</p>
+                            {/* {order.preOrder.filter(
+                              (el) => el.itemId === item._id
+                            )[0].newQuantity && ( */}
+                          </div>
+                          <div className="req__info">
+                            {!item.confirmed && (
+                              <Fragment>
+                                <p className="req__dmd">
+                                  demande
+                                  {order.preOrder.filter(
                                     (el) => el.itemId === item._id
-                                  )[0].requestedAction
-                                }
-                                confirmation
-                              </p>
-                              <button
-                                onClick={() =>
-                                  handleConfirm(item._id, order._id)
-                                }
-                                style={{ width: 100, background: "green" }}
-                              >
-                                confirm
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleRefuse(item._id, order._id)
-                                }
-                                style={{ width: 100, background: "green" }}
-                              >
-                                refuse
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleConfirmEdit(item._id, order._id)
-                                }
-                                style={{ width: 100, background: "blue" }}
-                              >
-                                confirmedit
-                              </button>
-                            </Fragment>
+                                  )[0].requestedAction === "cancel" ? (
+                                    <span> d'annulation </span>
+                                  ) : (
+                                    <p>
+                                      de modification du quantité
+                                      <span>
+                                        (nouvelle quantité :
+                                        {order.preOrder.length > 0 &&
+                                          order.preOrder.filter(
+                                            (el) => el.itemId === item._id
+                                          )[0].newQuantity}
+                                        )
+                                      </span>
+                                    </p>
+                                  )}
+                                </p>
+                                <div className="butt__response">
+                                  {order.preOrder.filter(
+                                    (el) => el.itemId === item._id
+                                  )[0].requestedAction === "cancel" && (
+                                    <button
+                                      className="button__req__valid"
+                                      onClick={() =>
+                                        handleConfirm(item._id, order._id)
+                                      }
+                                    >
+                                      valider
+                                    </button>
+                                  )}
+                                  <button
+                                    className="button__req__reject"
+                                    onClick={() =>
+                                      handleRefuse(item._id, order._id)
+                                    }
+                                  >
+                                    refuser
+                                  </button>
+                                  {order.preOrder.filter(
+                                    (el) => el.itemId === item._id
+                                  )[0].requestedAction === "edit" && (
+                                    <button
+                                      className="button__req__valid"
+                                      onClick={() =>
+                                        handleConfirmEdit(item._id, order._id)
+                                      }
+                                    >
+                                      confirmer
+                                    </button>
+                                  )}
+                                </div>
+                              </Fragment>
+                            )}
+                          </div>
+                          {item.comment && (
+                            <p className="comment">
+                              <span>preferences: </span>
+                              {item.comment}
+                            </p>
                           )}
 
-                          <p>{item.quantity}</p>
+                          <span className="timeline">
+                            {moment(item.createdAt).fromNow()}
+                          </span>
                         </div>
-                        {item.comment && (
-                          <p className="comment">
-                            <span>preferences: </span>
-                            {item.comment}
-                          </p>
-                        )}
-
-                        <span className="timeline">
-                          {moment(item.createdAt).fromNow()}
-                        </span>
                       </div>
                     ))}
-                  <button onClick={() => handleClick(order._id)}>
-                    Checkout order
+                  <p>Total : {order.total}</p>
+                  <button
+                    className="butt-pay"
+                    onClick={() => handleClick(order._id)}
+                  >
+                    Confirmer le paiement
                   </button>
                 </div>
               );
             })
         ) : (
-          <h5>something went wrong..</h5>
+          <h5>un probléme est survenu..</h5>
         )}
       </div>
     </div>

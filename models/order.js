@@ -31,9 +31,9 @@ const orderSchema = new Schema(
       type: [
         {
           itemId: { type: String },
-          newQuantity: { type: Number },
-          newPrice: { type: Number },
-          newComment: { type: String },
+          newQuantity: { type: Number, default: 0 },
+          newPrice: { type: Number, default: 0 },
+          newComment: { type: String, default: "" },
           confirmed: { type: Boolean, default: false },
           requestedAction: { type: String, default: "cancel" },
         },

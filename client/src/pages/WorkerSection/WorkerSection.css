@@ -9,6 +9,10 @@
 .worker > h2 {
   font-weight: 400;
 }
+.butt-pay {
+  color: #c42012;
+}
+
 .worker__tables {
   margin: 20px 0;
   display: flex;
@@ -35,7 +39,7 @@
   display: flex;
   flex-direction: column;
 }
-.worker__orders button {
+/* .worker__orders button {
   background: #c42012;
   width: 100%;
   height: 40px;
@@ -44,16 +48,66 @@
   color: white;
   outline: none;
   cursor: pointer;
+} */
+.button__req__reject {
+  color: white;
+  background-color: red;
+  border-radius: 5px;
+  height: 40px;
+  width: 80px;
+  margin-left: 30px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.req__dmd {
+  color: red;
+}
+
+.button__req__valid {
+  color: red;
+  background-color: white;
+  border-color: red;
+  border-radius: 5px;
+  height: 40px;
+  width: 80px;
+  margin-left: 30px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.req__info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.req__info__msg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: indianred;
 }
 .worker__orders__items {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #48b9a0;
+  /* background-color: green; */
   margin-bottom: 20px;
   padding: 10px;
 }
 .worker__orders__items p {
-  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+
+.butt__response {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  height: 90px;
 }
 .timeline {
   margin-top: 10px;
@@ -77,6 +131,7 @@
 .worker__orders__items__info {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 @media (min-width: 480px) {
@@ -92,6 +147,13 @@
   .comment {
     display: block;
   }
+
+  .butt__response {
+    flex-direction: row;
+  }
+
+  .req__dmd {
+  }
 }
 
 @media (min-width: 1024px) {
@@ -100,7 +162,4 @@
 }
 
 @media (min-width: 1280px) {
-  .worker {
-    /* background-color: orange; */
-  }
 }
